@@ -1,0 +1,19 @@
+﻿<Window x:Class="MuseDB_Desktop.Windows.AddArtist"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MuseDB_Desktop.Windows"
+        mc:Ignorable="d"
+        Title="AddArtist" Height="1000" Width="800">
+    <Grid>
+        <StackPanel>
+            <Label Content="Artist Pic Url" FontSize="25"/>
+            <TextBox x:Name="TextBox_ArtistPfp" Height="60" FontSize="25"/>
+            <Label Content="Artist Name" FontSize="25"/>
+            <TextBox x:Name="TextBox_ArtistName" Height="60" FontSize="25"/>
+            <Button Name="Button_AddArtist" Height="30" Content="Add Artist" Click="Button_AddArtistOnClick"/>
+            <Label Name="Label_Result" Content="Result" FontSize="26"/>
+        </StackPanel>
+    </Grid>
+</Window>

@@ -1,0 +1,21 @@
+﻿<Window x:Class="MuseDB_Desktop.Windows.AddAlbum"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MuseDB_Desktop.Windows"
+        mc:Ignorable="d"
+        Title="AddArtist" Height="1000" Width="800">
+    <Grid>
+        <StackPanel>
+            <Label Content="Album Art Url" FontSize="25"/>
+            <TextBox x:Name="TextBox_AlbumPfp" Height="60" FontSize="25"/>
+            <Label Content="Album Name" FontSize="25"/>
+            <TextBox x:Name="TextBox_AlbumName" Height="60" FontSize="25"/>
+            <Label Content="Album Artist ID" FontSize="25"/>
+            <TextBox x:Name="TextBox_ArtistID" Height="60" FontSize="25"/>
+            <Button Name="Button_AddAlbum" Height="30" Content="Add Album" Click="Button_AddAlbumOnClick"/>
+            <Label Name="Label_Result" Content="Result" FontSize="26"/>
+        </StackPanel>
+    </Grid>
+</Window>
