@@ -43,10 +43,13 @@ namespace MuseDB_Desktop.Windows
             this.Label_PageTitle.Content = "Albums";
             Load_Page(new Page_Albums());
         }
+
         private void Load_Tracks(object sender, RoutedEventArgs e)
         {
-
+            this.Label_PageTitle.Content = "Tracks";
+            Load_Page(new Page_Tracks());
         }
+
         private void Load_Submissions(object sender, RoutedEventArgs e)
         {
 
@@ -71,11 +74,6 @@ namespace MuseDB_Desktop.Windows
                     break;
                 }
             }
-        }
-
-        private void Load_Tracks(object sender, MouseButtonEventArgs e)
-        {
-            Load_Page(new Page_Tracks());
         }
     }
 }

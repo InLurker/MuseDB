@@ -27,7 +27,7 @@ namespace MuseDB_Desktop.Pages
         private bool DeleteButtonEnabled = false;
 
         private string SortParam = "album_name";
-        private string SortOrder = "ASC";
+        private string SortOrder = "DESC";
         private string SearchQuery = "";
 
         public Page_Albums()
@@ -76,17 +76,17 @@ namespace MuseDB_Desktop.Pages
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             /*
-            0 - Alphabetical
-            1 - Recently Added
+            0 - Recently Added
+            1 - Alphabetical
             2 - Album Count
             */
             switch (this.ComboBox_SortParam.SelectedIndex)
             {
                 case 0:
-                    SortParam = "album.album_name";
+                    SortParam = "album.album_id";
                     break;
                 case 1:
-                    SortParam = "album.album_id";
+                    SortParam = "album.album_name";
                     break;
                 case 2:
                     SortParam = "artist.artist_name";

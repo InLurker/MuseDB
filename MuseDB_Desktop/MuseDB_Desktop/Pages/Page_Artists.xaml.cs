@@ -24,7 +24,7 @@ namespace MuseDB_Desktop.Pages
     public partial class Page_Artists : Page
     {
         private string SortParam = "artist_name";
-        private string SortOrder = "ASC";
+        private string SortOrder = "DESC";
         private bool DeleteButtonEnabled = false;
         private string SearchQuery = "";
 
@@ -38,7 +38,7 @@ namespace MuseDB_Desktop.Pages
             LoadArtists();
         }
 
-        private void LoadArtists() //search query is optional
+        private void LoadArtists()
         {
             if (this.ListBox_Artists == null)
                 return;
@@ -72,17 +72,17 @@ namespace MuseDB_Desktop.Pages
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             /*
-            0 - Alphabetical
-            1 - Recently Added
+            0 - Recently Added
+            1 - Alphabetical
             2 - Album Count
             */
             switch (this.ComboBox_SortParam.SelectedIndex)
             {
                 case 0:
-                    SortParam = "artist_name";
+                    SortParam = "artist_id";
                     break;
                 case 1:
-                    SortParam = "artist_id";
+                    SortParam = "artist_name";
                     break;
                 case 2:
                     SortParam = "COUNT(album_id)";

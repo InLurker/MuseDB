@@ -25,7 +25,7 @@ namespace MuseDB_Desktop.Pages
         private bool DeleteButtonEnabled = false;
 
         private string SortParam = "album_name";
-        private string SortOrder = "ASC";
+        private string SortOrder = "DESC";
 
         private string SearchQuery = "";
 
@@ -39,7 +39,7 @@ namespace MuseDB_Desktop.Pages
             LoadTracks();
         }
 
-        private void LoadTracks() //search query is optional
+        private void LoadTracks()
         {
             if (this.ListBox_Tracks == null)
                 return;
@@ -52,6 +52,7 @@ namespace MuseDB_Desktop.Pages
                         "FROM track " +
                         "INNER JOIN album ON track.album_id = album.album_id " +
                         "INNER JOIN artist ON album.artist_id = artist.artist_id " +
+                        SearchQuery +
                         $"ORDER BY {SortParam} {SortOrder}", SQLConnection))
                 {
                     using (SqlDataReader SQLDataReader = command.ExecuteReader())
@@ -73,18 +74,18 @@ namespace MuseDB_Desktop.Pages
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             /*
-            0 - Alphabetical
-            1 - Recently Added
+            0 - Recently Added
+            1 - Alphabetical
             2 - Album Name
             3 - Artist Name
             */
             switch (this.ComboBox_SortParam.SelectedIndex)
             {
                 case 0:
-                    SortParam = "track_name";
+                    SortParam = "track_id";
                     break;
                 case 1:
-                    SortParam = "track_id";
+                    SortParam = "track_name";
                     break;
                 case 2:
                     SortParam = "album_name";

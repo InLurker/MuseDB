@@ -15,7 +15,7 @@
         <Grid HorizontalAlignment="Left" Width="720">
             <Grid.OpacityMask>
                 <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                    <GradientStop Color="#80FFFFFF"/>
+                    <GradientStop Color="#90FFFFFF"/>
                     <GradientStop Color="Transparent" Offset="1"/>
                 </LinearGradientBrush>
             </Grid.OpacityMask>

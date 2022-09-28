@@ -36,7 +36,7 @@ namespace MuseDB_Desktop.Controls
             this.Button_TrackPanel.Label_TrackDuration.FontSize = 15;
             this.Button_TrackPanel.TrackID = TrackID;
             this.Button_TrackPanel.TextBlock_TrackName.Text = TrackName;
-            this.Button_TrackPanel.TextBlock_TrackArtist.Text = TrackArtist;
+            this.Button_TrackPanel.TextBlock_TrackArtist.Text = TrackArtist + " - " + AlbumName;
             this.Button_TrackPanel.Label_TrackDuration.Content = TrackDuration;
             LoadImage(AlbumID);
         }
