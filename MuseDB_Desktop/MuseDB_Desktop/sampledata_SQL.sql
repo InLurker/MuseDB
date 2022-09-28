@@ -1,5 +1,5 @@
 ﻿
---Sample data for artists
+--Sample data for artists (17 total)
 INSERT INTO artist 
 	VALUES
 		(N'Moe Shop'),
@@ -21,7 +21,7 @@ INSERT INTO artist
 		(N'キノシタ');
 
 
---Sample data for albums
+--Sample data for albums (20 total)
 INSERT INTO album (album_name, artist_id) 
 	VALUES 
 		(N'Pure Pure', 10001),
@@ -47,9 +47,64 @@ INSERT INTO album (album_name, artist_id)
 		(N'Christmas of a Wandering Ghost', 10002),
 		(N'Biscuit Funk', 10002),
 		(N'PIXELIZE', 10002),
-		(N'ujbeats vol.2', 10002);
+		(N'ujbeats vol.2', 10002),
+		(N'ujbeats vol.2', 10002),
+		(N'Illusions of the Heart', 10003),
+		(N'Everlasting Summer', 10003),
+		(N'Sey​-​chan''s Waltz', 10003),
+		(N'Adore U', 10003),
+		(N'Honeycrisp (ft. Taobien)', 10003),
+		(N'If You Were Mine', 10003),
+		(N'Sey​-​chan''s Medieval Adventures', 10003),
+		(N'642 Ways', 10003),
+		(N'From Zero', 10004),
+		(N'SUMMER!', 10004),
+		(N'Reincarnation', 10004),
+		(N'Aimai Cyborg feat. Ugokuchan & JungMato', 10004),
+		(N'Isekai Travel', 10004),
+		(N'Sleep Tight feat. Macoto', 10004),
+		(N'After The Rain', 10004),
+		(N'ゆ​の​も​き​ゅ', 10005),
+		(N'ミ​ラ​ク​ル​シ​ュ​ガ​ー​ラ​ン​ド (feat. 桃​箱​)', 10005),
+		(N'リ​フ​レ​ク​シ​ョ​ン (feat. nicamoq)', 10005),
+		(N'Keep on lovin'' You', 10006),
+		(N'Shobon''s Daily Song Week Challenge', 10007),
+		(N'絶対にチョコミントを食べるアオイチャン', 10008),
+		(N'Seyana.', 10008),
+		(N'無限にホメてくれる桜乃そら先生', 10008),
+		(N'緑​の​手​紙', 10009),
+		(N'夢箱', 10009),
+		(N'ユ​メ​の​喫​茶​店', 10009),
+		(N'KMNVERSE', 10010),
+		(N'KMNROUND', 10010),
+		(N'KMNSKOOL', 10010),
+		(N'KMNSTREET', 10010),
+		(N'Popteen', 10011),
+		(N'Unbalance', 10011),
+		(N'オトモダチフィルム', 10012),
+		(N'Luv U 4ll ♡ver', 10013),
+		(N'PRESS START!', 10014),
+		(N'マリンスノー (feat. RANASOL)', 10014),
+		(N'スタートレイル (feat. RANASOL)', 10014),
+		(N'Shelter', 10015),
+		(N'Get Your Wish', 10015),
+		(N'Something Comforting', 10015),
+		(N'Mirror', 10015),
+		(N'Look at the Sky', 10015),
+		(N'P+', 10016),
+		(N'ラヴ', 10016),
+		(N'Oh my! Dreamer!', 10017),
+		(N'Watercolor', 10017),
+		(N'Starry Sky Parade', 10017),
+		(N'人間のくせになまいきだ', 10017),
+		(N'DAMELEON', 10018),
+		(N'Turing Love', 10018),
+		(N'Fiction e.p', 10019),
+		(N'キメラ (feat. 初音ミク)', 10020),
+		(N'ヴァンパイア', 10020),
+		(N'愛言葉Ⅳ feat. 初音ミク', 10020);
 
---Sample data for tracks
+--Sample data for tracks (78 total)
 INSERT INTO track (track_name, track_order, track_duration, album_id)
 	VALUES
 		(N'Intro', 1, '0:16', 100001),
