@@ -36,61 +36,67 @@ namespace MuseDB_Desktop.Pages
 
         private void OnLoad(object sender, RoutedEventArgs e)
         {
-            LoadArtists();
+            LoadTracks();
         }
 
-        private void LoadArtists() //search query is optional
+        private void LoadTracks() //search query is optional
         {
-            if (this.ListBox_Artists == null)
+            if (this.ListBox_Tracks == null)
                 return;
-            this.ListBox_Artists.Items.Clear();
+            this.ListBox_Tracks.Items.Clear();
             using (SqlConnection SQLConnection = new SqlConnection(SqlHelper.CnnVal("database")))
             {
                 SQLConnection.Open();
                 using (SqlCommand command = new SqlCommand($"SELECT " +
-                    $"COUNT(album_id) AS album_count, artist.artist_id, artist.artist_name " +
-                    $"FROM artist " +
-                    $"LEFT JOIN album ON artist.artist_id = album.artist_id " +
-                    SearchQuery +
-                    $"GROUP BY artist.artist_id, artist.artist_name " +
-                    $"ORDER BY {SortParam} {SortOrder}", SQLConnection))
+                        "track_id, track_name, artist_name, track.album_id, album_name, track_duration " +
+                        "FROM track " +
+                        "INNER JOIN album ON track.album_id = album.album_id " +
+                        "INNER JOIN artist ON album.artist_id = artist.artist_id " +
+                        $"ORDER BY {SortParam} {SortOrder}", SQLConnection))
                 {
                     using (SqlDataReader SQLDataReader = command.ExecuteReader())
                     {
                         for (int i = 0; SQLDataReader.Read(); ++i)
-                            this.ListBox_Artists.Items.Add(
-                                new Button_ArtistDetails(
-                                    SQLDataReader["artist_id"].ToString(),
+                            ListBox_Tracks.Items.Add(
+                                new Button_TrackDetails(
+                                    SQLDataReader["track_id"].ToString(),
+                                    SQLDataReader["track_name"].ToString(),
                                     SQLDataReader["artist_name"].ToString(),
-                                    SQLDataReader.GetInt32(0)));
+                                    SQLDataReader["album_id"].ToString(),
+                                    SQLDataReader["album_name"].ToString(),
+                                    SQLDataReader["track_duration"].ToString()
+                                    ));
                     }
                 }
             }
         }
-
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             /*
             0 - Alphabetical
             1 - Recently Added
-            2 - Album Count
+            2 - Album Name
+            3 - Artist Name
             */
             switch (this.ComboBox_SortParam.SelectedIndex)
             {
                 case 0:
-                    SortParam = "artist_name";
+                    SortParam = "track_name";
                     break;
                 case 1:
-                    SortParam = "artist_id";
+                    SortParam = "track_id";
                     break;
                 case 2:
-                    SortParam = "COUNT(album_id)";
+                    SortParam = "album_name";
                     break;
-                default:
+                case 3:
                     SortParam = "artist_name";
                     break;
+                default:
+                    SortParam = "track_name";
+                    break;
             }
-            LoadArtists();
+            LoadTracks();
         }
 
         private void Button_Sort_OnClick(object sender, RoutedEventArgs e)
@@ -108,7 +114,7 @@ namespace MuseDB_Desktop.Pages
                 this.Button_Sort_Image.RenderTransform = new ScaleTransform() { ScaleY = 1 };
                 this.Button_Sort_Image.UpdateLayout();
             }
-            LoadArtists();
+            LoadTracks();
         }
         private void Add_OnHover(object sender, RoutedEventArgs e)
         {
@@ -122,7 +128,7 @@ namespace MuseDB_Desktop.Pages
 
         private void Add_OnClick(object sender, RoutedEventArgs e)
         {
-            //TODO Add Artist Function
+            //TODO Add Track Function
         }
         private void Delete_OnHover(object sender, RoutedEventArgs e)
         {
@@ -137,14 +143,14 @@ namespace MuseDB_Desktop.Pages
         private void Delete_OnClick(object sender, RoutedEventArgs e)
         {
             DeleteButtonEnabled = !DeleteButtonEnabled;
-            foreach (Button_ArtistDetails artist in ListBox_Artists.Items)
-                artist.DeleteButton(DeleteButtonEnabled);
+            //foreach (Button_TrackDetails Track in ListBox_Tracks.Items)
+            //Track.DeleteButton(DeleteButtonEnabled);
         }
 
         private void Search_OnClick(object sender, RoutedEventArgs e)
         {
-            SearchQuery = String.IsNullOrWhiteSpace(TextBox_SearchQuery.Text) ? "" : $"WHERE artist_name LIKE N'%{TextBox_SearchQuery.Text.Replace("'", "''")}%'";
-            LoadArtists();
+            SearchQuery = String.IsNullOrWhiteSpace(TextBox_SearchQuery.Text) ? "" : $"WHERE Track_name LIKE N'%{TextBox_SearchQuery.Text.Replace("'", "''")}%'";
+            LoadTracks();
         }
 
         private void TextBox_SearchQuery_TextChanged(object sender, TextChangedEventArgs e)
@@ -152,7 +158,7 @@ namespace MuseDB_Desktop.Pages
             if (String.IsNullOrWhiteSpace(TextBox_SearchQuery.Text))
             {
                 SearchQuery = "";
-                LoadArtists();
+                LoadTracks();
             }
         }
     }

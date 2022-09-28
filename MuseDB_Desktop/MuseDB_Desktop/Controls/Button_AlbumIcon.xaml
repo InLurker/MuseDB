@@ -8,7 +8,7 @@
              d:DesignHeight="164" d:DesignWidth="160" Margin="12,5,12,8" HorizontalAlignment="Left" 
              Loaded="OnLoad">
     <Grid>
-        <Button Style="{DynamicResource ImageButtonStyle}" Width="150" Height="150" Margin="4,0,0,0" MouseDown="OnClick">
+        <Button x:Name="Button_Album" Style="{DynamicResource ImageButtonStyle}" Width="150" Height="150" Margin="4,0,0,0" MouseDown="OnClick">
             <Image x:Name="Button_Image" Source="/img/icon_albumloading.png" Stretch="UniformToFill"/>
             <Button.Effect>
                 <DropShadowEffect Color="#10B4B4B4" BlurRadius="10" ShadowDepth="4" Direction="225" />

@@ -20,13 +20,19 @@ namespace MuseDB_Desktop.Controls
     /// </summary>
     public partial class Button_Tracks : UserControl
     {
-        private string TrackID;
+        public string TrackID;
+
+        public Button_Tracks()
+        {
+            InitializeComponent();
+        }
+
         public Button_Tracks(string TrackID, string TrackName, string TrackArtist, string TrackAlbum, string TrackDuration)
         {
             InitializeComponent();
             this.TrackID = TrackID;
-            Label_TrackName.Content = TrackName;
-            Label_TrackArtist.Content = TrackArtist + " - " + TrackAlbum;
+            TextBlock_TrackName.Text = TrackName;
+            TextBlock_TrackArtist.Text = TrackArtist + " - " + TrackAlbum;
             Label_TrackDuration.Content = TrackDuration;
         }
 

@@ -48,8 +48,6 @@ namespace MuseDB_Desktop.Controls
             var uriSource = new Uri($"http://192.168.0.120:4040/album/{AlbumID}/cover.jpg", UriKind.Absolute);
             var imgTemp = new BitmapImage();
             imgTemp.BeginInit();
-            imgTemp.CacheOption = BitmapCacheOption.OnLoad;
-            imgTemp.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
             //Reduces memory usage
             imgTemp.DecodePixelWidth = 200;
             imgTemp.DecodePixelHeight = 200;

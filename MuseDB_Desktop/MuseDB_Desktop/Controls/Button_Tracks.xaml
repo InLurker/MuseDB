@@ -6,13 +6,11 @@
              xmlns:local="clr-namespace:MuseDB_Desktop.Controls"
              mc:Ignorable="d" 
              d:DesignHeight="55" d:DesignWidth="778" Background="#FFF5F5F5" >
-    <Grid Margin="17,11,17,11" MouseDown="OnClick">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="9*"/>
-            <ColumnDefinition Width="1*"/>
-        </Grid.ColumnDefinitions>
-        <Label Grid.Column="0" x:Name="Label_TrackName" Content="Track Name" Margin="-2,-3,0,0" FontFamily="Montserrat Medium" FontSize="13" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#FF8F8F8F" />
-        <Label Grid.Column="0" x:Name="Label_TrackArtist" Content="Track Artist" Margin="-2,13,0,-7" FontSize="9" HorizontalAlignment="Left" FontFamily="Montserrat Semibold" Foreground="#FF757575"/>
-        <Label Grid.Column="2" x:Name="Label_TrackDuration" Content="0:00" HorizontalAlignment="Right" VerticalAlignment="Center" FontFamily="Montserrat Semibold" Foreground="#FF8F8F8F" Margin="28,0,0,0"/>
-    </Grid>
+    <DockPanel Margin="17,11,17,11" MouseDown="OnClick">
+        <StackPanel VerticalAlignment="Center">
+            <TextBlock Name="TextBlock_TrackName" Text="Track Name" MaxWidth="600" FontFamily="Montserrat Medium" FontSize="13" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#FF8F8F8F" TextTrimming="CharacterEllipsis"  LineStackingStrategy="BlockLineHeight" TextWrapping="NoWrap"/>
+            <TextBlock Name="TextBlock_TrackArtist" Text="Track Artist" MaxWidth="500" FontSize="9" HorizontalAlignment="Left" FontFamily="Montserrat Semibold" Foreground="#FF757575" VerticalAlignment="Bottom" LineStackingStrategy="BlockLineHeight" TextTrimming="CharacterEllipsis"  TextWrapping="NoWrap"/>
+        </StackPanel>
+        <Label x:Name="Label_TrackDuration" Content="0:00" HorizontalAlignment="Right" VerticalAlignment="Center" FontFamily="Montserrat Semibold" Foreground="#FF8F8F8F"/>
+    </DockPanel>
 </UserControl>

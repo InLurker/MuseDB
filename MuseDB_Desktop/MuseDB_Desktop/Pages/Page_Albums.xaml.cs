@@ -44,6 +44,7 @@ namespace MuseDB_Desktop.Pages
         {
             if (this.ListBox_Albums == null)
                 return;
+            this.TextBlock_Loading.Text = "Loading...";
             this.ListBox_Albums.Items.Clear();
             using (SqlConnection SQLConnection = new SqlConnection(SqlHelper.CnnVal("database")))
             {
@@ -69,6 +70,7 @@ namespace MuseDB_Desktop.Pages
                     }
                 }
             }
+            this.TextBlock_Loading.Text = "";
         }
 
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)

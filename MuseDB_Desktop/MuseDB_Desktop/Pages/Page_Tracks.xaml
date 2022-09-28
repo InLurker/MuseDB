@@ -6,9 +6,10 @@
       xmlns:local="clr-namespace:MuseDB_Desktop.Pages"
       xmlns:Control="cle-namesace:MuseDB_Desktop.Controls"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      Title="Page_Tracks">
-
+      d:DesignHeight="773" d:DesignWidth="840"
+      Title="Page_Tracks"
+      Loaded="OnLoad" 
+      xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2">
 
     <Grid>
         <StackPanel>
@@ -16,7 +17,8 @@
                 <ComboBox Name="ComboBox_SortParam" Style="{DynamicResource TriangleDropDown}" VerticalContentAlignment="Center" HorizontalAlignment="Left" Width="137" SelectionChanged="ComboBox_SelectionChanged" Height="24" SelectedIndex="0" FontFamily="Montserrat Medium" Background="#FFF1F1F1" BorderBrush="#00000000" Margin="5,0,1,0" Padding="10,0,0,0" Foreground="#FF646464">
                     <ComboBoxItem Content="Alphabetical"/>
                     <ComboBoxItem Content="Recently Added"/>
-                    <ComboBoxItem Content="Track Count"/>
+                    <ComboBoxItem Content="Album Name"/>
+                    <ComboBoxItem Content="Artist Name"/>
                     <ComboBox.ItemContainerStyle>
                         <Style TargetType="ComboBoxItem">
                             <Setter Property="BorderBrush" Value="Transparent" />
@@ -25,10 +27,10 @@
                                 <Setter.Value>
                                     <ControlTemplate TargetType="{x:Type ComboBoxItem}">
                                         <Border x:Name="Bd"
-                                                BorderBrush="{TemplateBinding BorderBrush}"
-                                                BorderThickness="{TemplateBinding BorderThickness}"
-                                                Padding="{TemplateBinding Padding}"
-                                                SnapsToDevicePixels="true">
+                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                    Padding="{TemplateBinding Padding}"
+                                    SnapsToDevicePixels="true">
                                             <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                                   VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                                   SnapsToDevicePixels="True" />
@@ -55,6 +57,7 @@
                 <Button Width="25" Background="#FFF1F1F1" BorderBrush="Transparent" BorderThickness="0" Click="Search_OnClick">
                     <Image Width="18"  Source="/img/icon_search.png" Stretch="UniformToFill"/>
                 </Button>
+                <TextBlock Name="TextBlock_Loading" Text="" FontFamily="Monteserrat Medium" Foreground="DimGray" FontSize="15" VerticalAlignment="Center" Margin="5,0,0,0"/>
                 <Button Name="Button_Delete" DockPanel.Dock="Right" Style="{DynamicResource ImageButtonStyle}" Height="25" Width="25" Opacity="0.2" MouseEnter="Delete_OnHover" MouseLeave="Delete_OnLeave" Click="Delete_OnClick" HorizontalAlignment="Right">
                     <Image Source="/img/icon_trash.png" HorizontalAlignment="Right"/>
                 </Button>
@@ -63,11 +66,11 @@
                 </Button>
 
             </DockPanel>
-            <ListBox Name="ListBox_Artists" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.HorizontalScrollBarVisibility="Disabled" BorderBrush="#00000000" Background="Transparent" Margin="0,28,0,0" Height="720">
+            <ListBox Name="ListBox_Tracks" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.HorizontalScrollBarVisibility="Disabled" BorderBrush="#00000000" Background="Transparent" Margin="0,28,0,0" Height="720">
                 <ListBox.ItemContainerStyle>
                     <Style TargetType="ListBoxItem">
                         <Setter Property="Padding" Value="0"/>
-                        <Setter Property="Margin" Value="0,0,0,19"/>
+                        <Setter Property="Margin" Value="0,0,0,0"/>
                     </Style>
                 </ListBox.ItemContainerStyle>
                 <ListBox.ItemsPanel>

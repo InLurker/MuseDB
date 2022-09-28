@@ -72,5 +72,10 @@ namespace MuseDB_Desktop.Windows
                 }
             }
         }
+
+        private void Load_Tracks(object sender, MouseButtonEventArgs e)
+        {
+            Load_Page(new Page_Tracks());
+        }
     }
 }
