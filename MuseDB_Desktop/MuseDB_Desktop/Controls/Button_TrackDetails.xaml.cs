@@ -25,6 +25,7 @@ namespace MuseDB_Desktop.Controls
             InitializeComponent();
             this.Button_TrackPanel.TextBlock_TrackName.FontSize = 16;
             this.Button_TrackPanel.TextBlock_TrackArtist.FontSize = 13;
+            this.Button_TrackPanel.TextBlock_TrackName.Foreground = new SolidColorBrush(Color.FromRgb(60,60,60));
         }
 
         public Button_TrackDetails(string TrackID, string TrackName, string TrackArtist, string AlbumID, string AlbumName, string TrackDuration)
@@ -35,6 +36,7 @@ namespace MuseDB_Desktop.Controls
             this.Button_TrackPanel.TextBlock_TrackArtist.FontSize = 13;
             this.Button_TrackPanel.Label_TrackDuration.FontSize = 15;
             this.Button_TrackPanel.TrackID = TrackID;
+            this.Button_TrackPanel.TextBlock_TrackName.Foreground = new SolidColorBrush(Color.FromRgb(60,60,60));
             this.Button_TrackPanel.TextBlock_TrackName.Text = TrackName;
             this.Button_TrackPanel.TextBlock_TrackArtist.Text = TrackArtist + " - " + AlbumName;
             this.Button_TrackPanel.Label_TrackDuration.Content = TrackDuration;
@@ -55,6 +57,16 @@ namespace MuseDB_Desktop.Controls
             imgTemp.EndInit();
             this.Image_Background.Source = imgTemp;
             this.Image_AlbumIcon.Source = imgTemp;
+        }
+        public void DeleteButton(bool reveal)
+        {
+            this.Button_Delete.Visibility = (reveal) ? Visibility.Visible : Visibility.Collapsed;
+        }
+
+        private void Delete_OnClick(object sender, MouseButtonEventArgs e)
+        {
+            if (this.Parent is ListBox)
+                (this.Parent as ListBox).Items.Remove(this);
         }
     }
 }

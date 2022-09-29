@@ -5,8 +5,9 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MuseDB_Desktop.Controls"
              mc:Ignorable="d" 
-             d:DesignHeight="55" d:DesignWidth="778" Background="#FFF5F5F5" >
-    <DockPanel Margin="17,11,17,11" MouseDown="OnClick">
+             d:DesignHeight="55" d:DesignWidth="778" Background="#FFF5F5F5" 
+             MouseDown="OnClick">
+    <DockPanel Margin="17,11,17,11">
         <StackPanel VerticalAlignment="Center">
             <TextBlock Name="TextBlock_TrackName" Text="Track Name" MaxWidth="600" FontFamily="Montserrat Medium" FontSize="13" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#FF8F8F8F" TextTrimming="CharacterEllipsis"  LineStackingStrategy="BlockLineHeight" TextWrapping="NoWrap"/>
             <TextBlock Name="TextBlock_TrackArtist" Text="Track Artist" MaxWidth="500" FontSize="9" HorizontalAlignment="Left" FontFamily="Montserrat Semibold" Foreground="#FF757575" VerticalAlignment="Bottom" LineStackingStrategy="BlockLineHeight" TextTrimming="CharacterEllipsis"  TextWrapping="NoWrap"/>

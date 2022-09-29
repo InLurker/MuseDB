@@ -144,8 +144,8 @@ namespace MuseDB_Desktop.Pages
         private void Delete_OnClick(object sender, RoutedEventArgs e)
         {
             DeleteButtonEnabled = !DeleteButtonEnabled;
-            //foreach (Button_TrackDetails Track in ListBox_Tracks.Items)
-            //Track.DeleteButton(DeleteButtonEnabled);
+            foreach (Button_TrackDetails Track in ListBox_Tracks.Items)
+                Track.DeleteButton(DeleteButtonEnabled);
         }
 
         private void Search_OnClick(object sender, RoutedEventArgs e)

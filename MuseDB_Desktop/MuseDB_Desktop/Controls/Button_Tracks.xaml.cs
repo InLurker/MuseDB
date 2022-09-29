@@ -38,7 +38,7 @@ namespace MuseDB_Desktop.Controls
 
         private void OnClick(object sender, EventArgs e)
         {
-
         }
+
     }
 }
