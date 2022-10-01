@@ -45,7 +45,7 @@ namespace MuseDB_Desktop.Controls
                 this.Button_Image.Source = new BitmapImage(new Uri("/img/icon_albumloading.png", UriKind.Relative));
                 return;
             }
-            var uriSource = new Uri($"http://192.168.0.120:4040/album/{AlbumID}/cover.jpg", UriKind.Absolute);
+            var uriSource = new Uri($"http://192.168.0.120:4040/album/{AlbumID}.jpg", UriKind.Absolute);
             var imgTemp = new BitmapImage();
             imgTemp.BeginInit();
             //Reduces memory usage

@@ -1,4 +1,6 @@
 ﻿using MuseDB_Desktop.Controls;
+using MuseDB_Desktop.Windows;
+using MuseDB_Desktop.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -123,7 +125,10 @@ namespace MuseDB_Desktop.Pages
 
         private void Add_OnClick(object sender, RoutedEventArgs e)
         {
-            //TODO Add Artist Function
+            var AddPopUp = new AddArtist();
+            AddPopUp.ShowDialog();
+            if (AddPopUp.Success)
+                LoadArtists();
         }
         private void Delete_OnHover(object sender, RoutedEventArgs e)
         {

@@ -1,4 +1,5 @@
 ﻿using MuseDB_Desktop.Controls;
+using MuseDB_Desktop.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -16,6 +17,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Xml.Linq;
+using static System.Net.WebRequestMethods;
 
 namespace MuseDB_Desktop.Windows
 {
@@ -24,36 +27,64 @@ namespace MuseDB_Desktop.Windows
     /// </summary>
     public partial class AddArtist : Window
     {
+        private string FilePath = "";
+        private bool success = false;
+        public bool Success => success;
+
         public AddArtist()
         {
             InitializeComponent();
         }
 
 
-        private void Button_AddArtistOnClick(object sender, RoutedEventArgs e)
+        private void Button_SelectOnClick(object sender, RoutedEventArgs e)
         {
+            Microsoft.Win32.OpenFileDialog FilePicker = new Microsoft.Win32.OpenFileDialog()
+            {
+                DefaultExt = "JPG Files (*.jpg)|*.jpg",
+                Filter = "JPG Files (*.jpg)|*.jpg"
+            };
+
+            Nullable<bool> result = FilePicker.ShowDialog();
+
+            if (result == true)
+            {
+                FilePath = FilePicker.FileName;
+                this.Image_Background.Source = this.Image_Icon.Source = new BitmapImage(new Uri(FilePath));
+            }
+        }
+
+        private void Button_ConfirmOnClick(object sender, RoutedEventArgs e)
+        {
+            if (String.IsNullOrWhiteSpace(this.TextBox_ArtistName.Text))
+            {
+                TextBlock_Error.Text = "Please provide the artist's name.";
+                return;
+            }
+            if (String.IsNullOrWhiteSpace(FilePath))
+            {
+                TextBlock_Error.Text = "Please select an image as artist's profile.";
+                return;
+            }
+
             using (SqlConnection SQLConnection = new SqlConnection(SqlHelper.CnnVal("database")))
             {
                 SQLConnection.Open();
-                using (SqlCommand command = new SqlCommand($"INSERT INTO artist OUTPUT INSERTED.ID VALUES N'{this.TextBox_ArtistName.Text.Replace("'", "''")}' "))
+                using (SqlCommand command = new SqlCommand($"INSERT INTO artist OUTPUT INSERTED.artist_id VALUES (N'{this.TextBox_ArtistName.Text.Replace("'", "''")}')", SQLConnection))
                 {
                     int NewID = (int)command.ExecuteScalar();
-                    if (NewID > 0)
+                    try
                     {
-                        this.Label_Result.Content = "sucess";
-                        using (var client = new HttpClient())
-                        {
-                            using (var s = client.GetStreamAsync(this.TextBox_ArtistPfp.Text))
-                            {
-                                using (var fs = new FileStream($"D:/大学/Projects/MuseDB/Data/artist/{NewID}.jpg", FileMode.OpenOrCreate))
-                                {
-                                    s.Result.CopyTo(fs);
-                                }
-                            }
-                        }
+                        _ = HttpHelper.UploadImage("http://192.168.0.120:4040/artist/", FilePath, NewID + ".jpg");
                     }
+                    catch (Exception exception)
+                    {
+                        TextBlock_Error.Text = exception.Message;
+                    }
+                    success = true;
                 }
             }
+            this.Close();
         }
     }
 

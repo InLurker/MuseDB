@@ -47,7 +47,7 @@ namespace MuseDB_Desktop.Controls
         {
             if (AlbumID == null)
                 return;
-            var uriSource = new Uri($"http://192.168.0.120:4040/album/{AlbumID}/cover.jpg", UriKind.Absolute);
+            var uriSource = new Uri($"http://192.168.0.120:4040/album/{AlbumID}.jpg", UriKind.Absolute);
             var imgTemp = new BitmapImage();
             imgTemp.BeginInit();
             //Reduces memory usage

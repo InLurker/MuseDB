@@ -1,4 +1,5 @@
-﻿using MuseDB_Desktop.Controls;
+﻿using MuseDB_Desktop.Helpers;
+using MuseDB_Desktop.Controls;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;

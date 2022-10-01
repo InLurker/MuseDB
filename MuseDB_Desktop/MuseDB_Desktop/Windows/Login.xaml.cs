@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MuseDB_Desktop.Helpers;
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
@@ -33,14 +34,14 @@ namespace MuseDB_Desktop.Windows
 
             using (SqlConnection SQLConnection = new SqlConnection(SqlHelper.CnnVal("database")))
             {
-                string Query = $"SELECT COUNT(username) FROM admins WHERE username = '{TextBox_Username.Text}'";
+                string Query = $"SELECT COUNT(username) FROM admins WHERE username COLLATE Latin1_General_CS_AS = '{TextBox_Username.Text}'";
                 SqlCommand command = new SqlCommand(Query, SQLConnection);
 
                 SQLConnection.Open();
                 int count = (int)command.ExecuteScalar();
                 if (count != 0)
                 {
-                    command.CommandText = $"SELECT COUNT(username) FROM admins WHERE username = '{TextBox_Username.Text}' AND password = '{PasswordBox_Password.Password}'";
+                    command.CommandText = $"SELECT COUNT(username) FROM admins WHERE username COLLATE Latin1_General_CS_AS = '{TextBox_Username.Text}' AND password COLLATE Latin1_General_CS_AS = '{PasswordBox_Password.Password}'";
                     count = (int)command.ExecuteScalar();
                     if (count != 0)
                     {

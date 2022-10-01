@@ -76,6 +76,7 @@
     <Compile Include="Controls\Button_Tracks.xaml.cs">
       <DependentUpon>Button_Tracks.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\HttpHelper.cs" />
     <Compile Include="Pages\Page_Albums.xaml.cs">
       <DependentUpon>Page_Albums.xaml</DependentUpon>
     </Compile>
@@ -100,7 +101,7 @@
     <Compile Include="Windows\Admin_MainMenu.xaml.cs">
       <DependentUpon>Admin_MainMenu.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SqlHelper.cs" />
+    <Compile Include="Helpers\SqlHelper.cs" />
     <Page Include="Controls\Button_AlbumDetails.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

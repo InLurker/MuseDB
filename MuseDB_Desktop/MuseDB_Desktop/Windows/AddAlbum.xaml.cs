@@ -1,4 +1,5 @@
-﻿using MuseDB_Desktop.Controls;
+﻿using MuseDB_Desktop.Helpers;
+using MuseDB_Desktop.Controls;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -25,43 +26,39 @@ namespace MuseDB_Desktop.Windows
     /// </summary>
     public partial class AddAlbum : Window
     {
+        private string FilePath = "";
         public AddAlbum()
         {
             InitializeComponent();
         }
 
 
-        private void Button_AddAlbumOnClick(object sender, RoutedEventArgs e)
+        private void Button_SelectOnClick(object sender, RoutedEventArgs e)
+        {
+            Microsoft.Win32.OpenFileDialog FilePicker = new Microsoft.Win32.OpenFileDialog()
+            {
+                DefaultExt = "JPG Files (*.jpg)|*.jpg",
+                Filter = "JPG Files (*.jpg)|*.jpg"
+            };
+
+            Nullable<bool> result = FilePicker.ShowDialog();
+
+            if (result == true)
+            {
+                FilePath = FilePicker.FileName;
+                this.Image_Background.Source = this.Image_Icon.Source = new BitmapImage(new Uri(FilePath));
+            }
+        }
+
+        private void Button_ConfirmOnClick(object sender, RoutedEventArgs e)
         {
             using (SqlConnection SQLConnection = new SqlConnection(SqlHelper.CnnVal("database")))
             {
                 SQLConnection.Open();
-                using (SqlCommand command = new SqlCommand($"INSERT INTO album (album_name, artist_id)  OUTPUT inserted.album_id VALUES (N'{this.TextBox_AlbumName.Text.Replace("'", "''")}', { this.TextBox_ArtistID.Text})", SQLConnection))
-                {
-                    int NewID = (int)command.ExecuteScalar();
-                    if (NewID > 0)
-                    {
-                        this.Label_Result.Content = "sucess";
-                        using (var client = new HttpClient())
-                        {
-                            using (var stream = client.GetStreamAsync(this.TextBox_AlbumPfp.Text))
-                            {
-                                string filedir = $"D:/大学/Projects/MuseDB/Data/album/{NewID}/cover.jpg";
-                                Directory.CreateDirectory(Path.GetDirectoryName(filedir));
-                                using (var filestream = new FileStream(filedir, FileMode.OpenOrCreate))
-                                {
-                                    stream.Result.CopyTo(filestream);
-                                }
-                            }
-                        }
-                        this.TextBox_AlbumName.Text = NewID.ToString();
-                        this.TextBox_AlbumPfp.Text = "";
-
-                    } else this.Label_Result.Content = "fail";
-                }
+                using (SqlCommand command = new SqlCommand($"INSERT INTO artist OUTPUT INSERTED.album_id  VALUES N'{this.TextBox_ArtistName.Text.Replace("'", "''")}' "))
+                    this.Close();
             }
         }
-
     }
 
-}
+    }
