@@ -76,6 +76,9 @@
     <Compile Include="Controls\Button_Tracks.xaml.cs">
       <DependentUpon>Button_Tracks.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\TrackListItem.xaml.cs">
+      <DependentUpon>TrackListItem.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Helpers\HttpHelper.cs" />
     <Compile Include="Pages\Page_Albums.xaml.cs">
       <DependentUpon>Page_Albums.xaml</DependentUpon>
@@ -123,6 +126,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\Button_Tracks.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\TrackListItem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

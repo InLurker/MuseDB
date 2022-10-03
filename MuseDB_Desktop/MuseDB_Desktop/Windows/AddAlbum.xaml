@@ -4,26 +4,27 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MuseDB_Desktop.Windows"
+        xmlns:control="clr-namespace:MuseDB_Desktop.Controls"
         mc:Ignorable="d"
         Title="MuseDB - Add Album"
         Icon="/img/app_icon_mini.png" ResizeMode="NoResize"
-        Height="400" Width="550">
+        Height="650" Width="550">
+
 
     <Grid>
-        <StackPanel Margin="25,25,25,0" Panel.ZIndex="1" Grid.ColumnSpan="2">
+        <StackPanel Margin="25,25,25,0" Panel.ZIndex="1">
             <TextBlock Text="Album" Foreground="DimGray" FontFamily="Montserrat Medium" FontSize="36" HorizontalAlignment="Left"/>
             <DockPanel Margin="0,25,0,0">
                 <StackPanel HorizontalAlignment="Stretch">
                     <TextBlock Text="Name" Foreground="DimGray" FontSize="18" FontFamily="Montserrat Medium" HorizontalAlignment="Left"/>
-                    <TextBox Name="TextBox_ArtistName" Padding="5" VerticalContentAlignment="Center" Foreground="DimGray" Height="30" Width="270" VerticalAlignment="Center" Text="" FontSize="15" FontFamily="Montserrat Medium" HorizontalAlignment="Left" Background="#FFE8E8E8" BorderBrush="{x:Null}" BorderThickness="0" Margin="0,10,0,0" SelectionBrush="#FF4E4E4E" />
+                    <TextBox Name="TextBox_AlbumName" Padding="5" VerticalContentAlignment="Center" Foreground="DimGray" Height="30" Width="270" VerticalAlignment="Center" Text="" FontSize="15" FontFamily="Montserrat Medium" HorizontalAlignment="Left" Background="#FFE8E8E8" BorderBrush="{x:Null}" BorderThickness="0" Margin="0,10,0,0" />
+                    <TextBlock Name="TextBlock_Error" Margin="0,5,0,0"  Text="" Foreground="Red" FontFamily="Montserrat Regular" FontSize="10"/>
+                    <TextBlock Text="Artist" Foreground="DimGray" FontSize="18" FontFamily="Montserrat Medium" HorizontalAlignment="Left"/>
+                    <ComboBox Style="{StaticResource TriangleDropDown}" Name="ComboBox_Artist" Padding="5" VerticalContentAlignment="Center" Foreground="DimGray" Height="30" Width="210" VerticalAlignment="Center" Text="" FontSize="15" FontFamily="Montserrat Medium" HorizontalAlignment="Left" Background="#FFE8E8E8" BorderBrush="{x:Null}" BorderThickness="0" Margin="0,10,0,0" />
                 </StackPanel>
                 <StackPanel>
                     <Border>
-                        <Image Name="Image_Icon" Source="/img/icon_artistloading.png" Height="170" Width="170" Stretch="UniformToFill">
-                            <Image.Clip>
-                                <EllipseGeometry Center="85,85" RadiusX="85" RadiusY="85" />
-                            </Image.Clip>
-                        </Image>
+                        <Image Name="Image_Icon" Source="/img/icon_albumloading.png" Height="170" Width="170" Stretch="UniformToFill"/>
                         <Border.Effect>
                             <DropShadowEffect Color="#10B4B4B4" BlurRadius="15" ShadowDepth="4" Direction="225"/>
                         </Border.Effect>
@@ -37,6 +38,24 @@
                     </Button>
                 </StackPanel>
             </DockPanel>
+            <TextBlock Text="Track" Foreground="DimGray" FontSize="18" FontFamily="Montserrat Medium" HorizontalAlignment="Left"/>
+            <DockPanel Margin="0,0,0,0"  HorizontalAlignment="Left">
+                <Button Name="Button_Delete" Margin="5,0,0,0" DockPanel.Dock="Right" Style="{DynamicResource ImageButtonStyle}" Opacity="0.2" Height="20" Width="20" MouseEnter="Delete_OnHover" MouseLeave="Delete_OnLeave" Click="Delete_OnClick" HorizontalAlignment="Right">
+                    <Image Source="{StaticResource minus_DrawingImage_Red}" />
+                </Button>
+                <Button Name="Button_Add" DockPanel.Dock="Right" Style="{DynamicResource ImageButtonStyle}" Opacity="0.2" Height="20" Width="20" HorizontalAlignment="Right" MouseEnter="Add_OnHover" MouseLeave="Add_OnLeave" Click="Add_OnClick">
+                    <Image Source="/img/icon_add.png" />
+                </Button>
+            </DockPanel>
+            <ListBox Name="ListBox_Tracks" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.HorizontalScrollBarVisibility="Disabled" BorderBrush="#00000000" Background="Transparent" Height="200">
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="Padding" Value="0"/>
+                        <Setter Property="Margin" Value="0,0,0,0"/>
+                        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                    </Style>
+                </ListBox.ItemContainerStyle>
+            </ListBox>
             <Button Content="Confirm" Click="Button_ConfirmOnClick" BorderBrush="#FFDBDBDB" Margin="0,15,0,0" Width="130" Height="26" Background="#FFF1F1F1" Foreground="#FF646464" FontFamily="Montserrat Regular" HorizontalAlignment="Left" VerticalAlignment="Top">
                 <Button.Resources>
                     <Style TargetType="Border">
@@ -45,18 +64,22 @@
                 </Button.Resources>
             </Button>
         </StackPanel>
-
-        <Image Name="Image_Background" Height="400" Width="400" Source="/img/icon_artistloading.png" HorizontalAlignment="Right" Stretch="UniformToFill" Grid.Column="1" Margin="0,0,0,-16">
-            <Image.OpacityMask>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0,1" >
-                    <GradientStop Color="Transparent" />
-                    <GradientStop Color="#4CFFFFFF" Offset="1"/>
-                </LinearGradientBrush>
-            </Image.OpacityMask>
-            <Image.Effect>
-                <BlurEffect Radius="30"/>
-            </Image.Effect>
-        </Image>
+        <Grid Height="665" Width="550"  HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,-15,0">
+            <Grid.Effect>
+                <BlurEffect Radius="15"/>
+            </Grid.Effect>
+            <Image Name="Image_Background" Height="665" Width="665" Source="/img/icon_albumloading.png" HorizontalAlignment="Center" Stretch="UniformToFill">
+                <Image.OpacityMask>
+                    <LinearGradientBrush EndPoint="1,1" StartPoint="0.3,1" >
+                        <GradientStop Color="#30FFFFFF" />
+                        <GradientStop Color="White" Offset="1"/>
+                    </LinearGradientBrush>
+                </Image.OpacityMask>
+                <Image.Effect>
+                    <BlurEffect Radius="15"/>
+                </Image.Effect>
+            </Image>
+        </Grid>
     </Grid>
 </Window>
 

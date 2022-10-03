@@ -56,6 +56,15 @@
                     </DrawingGroup>
                 </DrawingImage.Drawing>
             </DrawingImage>
+            <DrawingImage x:Key="minus_DrawingImage_Red">
+                <DrawingImage.Drawing>
+                    <DrawingGroup ClipGeometry="M0,0 V49.859 H49.859 V0 H0 Z">
+                        <DrawingGroup Opacity="1">
+                            <GeometryDrawing Brush="Red" Geometry="F1 M49.859,49.859z M0,0z M45.964,21.034L3.896,21.034C1.744,21.034 0,22.778 0,24.93 0,27.082 1.743,28.825 3.896,28.825L45.964,28.825C48.115,28.825 49.859,27.081 49.859,24.93 49.859,22.779 48.116,21.034 45.964,21.034z" />
+                        </DrawingGroup>
+                    </DrawingGroup>
+                </DrawingImage.Drawing>
+            </DrawingImage>
             <Style x:Key="FocusVisual">
                 <Setter Property="Control.Template">
                     <Setter.Value>
@@ -65,7 +74,7 @@
                     </Setter.Value>
                 </Setter>
             </Style>
-            <SolidColorBrush x:Key="TextBox.Static.Background" Color="#FFFFFFFF"/>
+            <SolidColorBrush x:Key="TextBox.Static.Background" Color="#FFF1F1F1"/>
             <Style x:Key="ComboBoxEditableTextBox" TargetType="{x:Type TextBox}">
                 <Setter Property="OverridesDefaultStyle" Value="true"/>
                 <Setter Property="AllowDrop" Value="true"/>

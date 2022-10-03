@@ -40,13 +40,12 @@ namespace MuseDB_Desktop.Controls
             if (ArtistID == null)
             {
                 this.Button_Image.Source = new BitmapImage(new Uri("/img/profile_icon.png", UriKind.Relative));
+                InitializeComponent();
                 return;
             }
             var uriSource = new Uri($"http://192.168.0.120:4040/artist/{ArtistID}.jpg", UriKind.Absolute);
             var imgTemp = new BitmapImage();
             imgTemp.BeginInit();
-            imgTemp.CacheOption = BitmapCacheOption.OnLoad;
-            imgTemp.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
             //Reduces memory usage
             imgTemp.DecodePixelWidth = 160;
             imgTemp.DecodePixelHeight = 160;

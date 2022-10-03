@@ -43,6 +43,7 @@ namespace MuseDB_Desktop.Controls
             if(AlbumID == null)
             {
                 this.Button_Image.Source = new BitmapImage(new Uri("/img/icon_albumloading.png", UriKind.Relative));
+                InitializeComponent();
                 return;
             }
             var uriSource = new Uri($"http://192.168.0.120:4040/album/{AlbumID}.jpg", UriKind.Absolute);

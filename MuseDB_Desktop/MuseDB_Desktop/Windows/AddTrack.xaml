@@ -5,17 +5,71 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MuseDB_Desktop.Windows"
         mc:Ignorable="d"
-        Title="AddTrack" Height="1000" Width="800">
+        Title="MuseDB - Add Track"
+        Icon="/img/app_icon_mini.png" ResizeMode="NoResize"
+        Height="400" Width="550">
+
     <Grid>
-        <StackPanel>
-            <Label Content="Track Name" FontSize="25"/>
-            <TextBox x:Name="TextBox_TrackName" Height="60" FontSize="25"/>
-            <Label Content="Track Name" FontSize="25"/>
-            <TextBox x:Name="TextBox_TrackDuration" Height="60" FontSize="25"/>
-            <Label Content="Album ID" FontSize="25"/>
-            <TextBox x:Name="TextBox_AlbumID" Height="60" FontSize="25"/>
-            <Button Name="Button_AddTrack" Height="30" Content="Add Album" Click="Button_AddTrackOnClick"/>
-            <Label Name="Label_Result" Content="Result" FontSize="26"/>
+        <StackPanel Margin="25,20,25,0" Panel.ZIndex="1">
+            <TextBlock Text="Track" Foreground="DimGray" FontFamily="Montserrat Medium" FontSize="36" HorizontalAlignment="Left"/>
+            <StackPanel Margin="0,10,0,0">
+                <TextBlock Name="TextBlock_Error" Margin="0,5,0,0"  Text="" Foreground="Red" FontFamily="Montserrat Regular" FontSize="10"/>
+                <DockPanel>
+                    <StackPanel>
+                        <TextBlock Text="Name" Foreground="DimGray" FontSize="18" FontFamily="Montserrat Medium" HorizontalAlignment="Left"/>
+                        <TextBox Name="TextBox_TrackName" Padding="5" VerticalContentAlignment="Center" Foreground="DimGray" Height="30" Width="270" VerticalAlignment="Center" Text="" FontSize="15" FontFamily="Montserrat Medium" HorizontalAlignment="Left" Background="#FFE8E8E8" BorderBrush="{x:Null}" BorderThickness="0" Margin="0,10,0,0" />
+                    </StackPanel>
+                    <StackPanel Margin="35,0,0,0">
+                        <TextBlock Text="Duration" Foreground="DimGray" FontSize="18" FontFamily="Montserrat Medium" HorizontalAlignment="Left"/>
+                        <TextBox Name="TextBox_TrackDuration" Padding="5" VerticalContentAlignment="Center" Foreground="DimGray" Height="30" Width="120" VerticalAlignment="Center" Text="" FontSize="15" FontFamily="Montserrat Medium" HorizontalAlignment="Left" Background="#FFE8E8E8" BorderBrush="{x:Null}" BorderThickness="0" Margin="0,10,0,0" />
+                    </StackPanel>
+                </DockPanel>
+                <DockPanel Margin="0,10,0,0" >
+                    <StackPanel>
+                        <TextBlock Text="Album" Foreground="DimGray" FontSize="18" FontFamily="Montserrat Medium" HorizontalAlignment="Left"/>
+                        <ComboBox IsEnabled="True" Foreground="DimGray" Style="{StaticResource TriangleDropDown}" Name="ComboBox_Album" Padding="5" VerticalContentAlignment="Center" Height="30" Width="210" VerticalAlignment="Center" FontSize="15" FontFamily="Montserrat Medium" HorizontalAlignment="Left" Background="#FFE8E8E8" BorderBrush="{x:Null}" BorderThickness="0" Margin="0,10,0,0" SelectionChanged="ComboBox_Album_SelectionChanged" />
+                    </StackPanel>
+                    <StackPanel Margin="35,0,0,0">
+                        <TextBlock IsEnabled="True" Text="Track Order" Foreground="DimGray" FontSize="18" FontFamily="Montserrat Medium" HorizontalAlignment="Left"/>
+                        <TextBox Name="TextBox_TrackOrder" Padding="5" VerticalContentAlignment="Center" Foreground="DimGray" Height="30" Width="120" VerticalAlignment="Center" Text="" FontSize="15" FontFamily="Montserrat Medium" HorizontalAlignment="Left" Background="#FFE8E8E8" BorderBrush="{x:Null}" BorderThickness="0" Margin="0,10,0,0" />
+                    </StackPanel>
+                </DockPanel>
+                <TextBlock Margin="0,10,0,0"  Text="Track Audio" Foreground="DimGray" FontSize="18" FontFamily="Montserrat Medium" HorizontalAlignment="Left"/>
+                <DockPanel Margin="0,10,0,0">
+                    <TextBox IsEnabled="False" Name="TextBox_TrackAudio" Padding="5" VerticalContentAlignment="Center" Foreground="DimGray" Height="30" Width="250" VerticalAlignment="Center" Text="" FontSize="15" FontFamily="Montserrat Medium" HorizontalAlignment="Left" Background="#FFE8E8E8" BorderBrush="{x:Null}" BorderThickness="0" />
+                    <Button Content="Select Audio" Margin="25,0,0,0" Click="Button_SelectAudioOnClick" BorderBrush="#FFDBDBDB" Width="130" Height="30" Background="#FFF1F1F1" Foreground="#FF646464" FontFamily="Montserrat Regular" HorizontalAlignment="Left" VerticalAlignment="Top">
+                        <Button.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="5"/>
+                            </Style>
+                        </Button.Resources>
+                    </Button>
+                </DockPanel>
+
+            </StackPanel>
+            <Button Content="Confirm" Click="Button_ConfirmOnClick" BorderBrush="#FFDBDBDB" Margin="0,25,0,0" Width="130" Height="26" Background="#FFF1F1F1" Foreground="#FF646464" FontFamily="Montserrat Regular" HorizontalAlignment="Left" VerticalAlignment="Top">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="5"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
         </StackPanel>
+        <Grid Height="420" Width="420"  HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,-15,0">
+            <Grid.Effect>
+                <BlurEffect Radius="15"/>
+            </Grid.Effect>
+            <Image Name="Image_Background" Height="420" Width="420" Source="/img/icon_artistloading.png" HorizontalAlignment="Right" Stretch="UniformToFill" Margin="0,0,0,-16">
+                <Image.OpacityMask>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0,1" >
+                        <GradientStop Color="Transparent" />
+                        <GradientStop Color="#80FFFFFF" Offset="1"/>
+                    </LinearGradientBrush>
+                </Image.OpacityMask>
+                <Image.Effect>
+                    <BlurEffect Radius="15"/>
+                </Image.Effect>
+            </Image>
+        </Grid>
     </Grid>
 </Window>

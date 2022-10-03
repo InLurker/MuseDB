@@ -1,0 +1,17 @@
+﻿<UserControl x:Class="MuseDB_Desktop.Controls.TrackListItem"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MuseDB_Desktop.Controls"
+             mc:Ignorable="d"
+             Width="480" Height="50"
+             d:DesignHeight="50" d:DesignWidth="480">
+    <Grid>
+        <DockPanel Background="#FFF5F5F5" HorizontalAlignment="Stretch">
+            <TextBlock Name="TextBlock_Order" Text="0" HorizontalAlignment="Left" Width="25" TextAlignment='Center'  VerticalAlignment="Center" FontFamily="Montserrat Semibold" Margin="10,0,0,0" Foreground="#A8A8A8" FontSize="17"/>
+            <TextBlock Name="TextBlock_TrackName" Text="Track Name" VerticalAlignment="Center" FontFamily="Montserrat Medium" Margin="10,0,10,0" Foreground="#8F8F8F" FontSize="12" TextTrimming="CharacterEllipsis" MaxWidth="370" />
+            <TextBlock Name="TextBlock_TrackDuration" Text="0:00" Margin="0,0,20,0" Width="35" HorizontalAlignment="Right" VerticalAlignment="Center" TextAlignment="Right" FontFamily="Montserrat Medium" FontSize="11" Foreground="#8F8F8F"/>
+        </DockPanel>
+    </Grid>
+</UserControl>
