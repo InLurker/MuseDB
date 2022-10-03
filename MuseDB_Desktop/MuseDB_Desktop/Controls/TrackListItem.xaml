@@ -5,8 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MuseDB_Desktop.Controls"
              mc:Ignorable="d"
-             Width="480" Height="50"
-             d:DesignHeight="50" d:DesignWidth="480">
+             Width="460" Height="50"
+             d:DesignHeight="50" d:DesignWidth="460">
     <Grid>
         <DockPanel Background="#FFF5F5F5" HorizontalAlignment="Stretch">
             <TextBlock Name="TextBlock_Order" Text="0" HorizontalAlignment="Left" Width="25" TextAlignment='Center'  VerticalAlignment="Center" FontFamily="Montserrat Semibold" Margin="10,0,0,0" Foreground="#A8A8A8" FontSize="17"/>

@@ -96,13 +96,13 @@ namespace MuseDB_Desktop.Windows
                     {
                         TextBlock_Error.Text = exception.Message;
                     }
-
+                    int counter = 0;
                     TrackList.ForEach(track => {
-                        command.CommandText = "INSERT INTO track (track_order, track_name, track_duration, album_id) VALUES OUTPUT INSERTED.track_id (" +
-                                                    $"{this.TextBox_TrackOrder.Text}, " +
-                                                    $"N'{this.TextBox_TrackName.Text.Replace("'", "''")}', " +
-                                                    $"{this.TextBox_TrackDuration}, " +
-                                                    $"{this.ComboBox_Album.Text.Substring(0, 6)})"
+                        command.CommandText = "INSERT INTO track (track_order, track_name, track_duration, album_id) VALUES (" +
+                                                    $"{++counter}, " +
+                                                    $"N'{track.TrackName.Replace("'", "''")}', " +
+                                                    $"{track.TrackDuration}, " +
+                                                    $"{NewID})";
                                                 }
                     );
                 }
