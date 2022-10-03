@@ -105,6 +105,9 @@
       <DependentUpon>Admin_MainMenu.xaml</DependentUpon>
     </Compile>
     <Compile Include="Helpers\SqlHelper.cs" />
+    <Compile Include="Windows\ConfirmationPopUp.xaml.cs">
+      <DependentUpon>ConfirmationPopUp.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\NotificationPopUp.xaml.cs">
       <DependentUpon>NotificationPopUp.xaml</DependentUpon>
     </Compile>
@@ -165,6 +168,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\Admin_MainMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\ConfirmationPopUp.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

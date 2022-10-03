@@ -94,13 +94,13 @@ namespace MuseDB_Desktop.Windows
                     using (SqlCommand command = new SqlCommand("INSERT INTO track (track_order, track_name, track_duration, album_id) VALUES OUTPUT INSERTED.track_id (" +
                                                     $"{this.TextBox_TrackOrder.Text}, " +
                                                     $"N'{this.TextBox_TrackName.Text.Replace("'", "''")}', " +
-                                                    $"{this.TextBox_TrackDuration}, " +
+                                                    $"'{this.TextBox_TrackDuration}', " +
                                                     $"{this.ComboBox_Album.Text.Substring(0, 6)})"))
                     {
                         int NewID = (int)command.ExecuteScalar();
                         try
                         {
-                            _ = HttpHelper.UploadImage("http://192.168.0.120:4040/artist/", FilePath, NewID + ".jpg");
+                            _ = HttpHelper.UploadFile("http://192.168.0.120:4040/artist/", FilePath, NewID + ".jpg");
                         }
                         catch (Exception exception)
                         {
@@ -108,8 +108,8 @@ namespace MuseDB_Desktop.Windows
                         }
                         success = true;
                     }
-                    this.Close();
                 }
+                this.Close();
             }
             return;
         }

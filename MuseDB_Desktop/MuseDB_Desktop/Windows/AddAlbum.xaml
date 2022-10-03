@@ -16,10 +16,10 @@
             <TextBlock Text="Album" Foreground="DimGray" FontFamily="Montserrat Medium" FontSize="36" HorizontalAlignment="Left"/>
             <DockPanel Margin="0,25,0,0">
                 <StackPanel HorizontalAlignment="Stretch">
+                    <TextBlock Name="TextBlock_Error" Text="" Foreground="Red" FontFamily="Montserrat Regular" FontSize="10"/>
                     <TextBlock Text="Name" Foreground="DimGray" FontSize="18" FontFamily="Montserrat Medium" HorizontalAlignment="Left"/>
                     <TextBox Name="TextBox_AlbumName" Padding="5" VerticalContentAlignment="Center" Foreground="DimGray" Height="30" Width="270" VerticalAlignment="Center" Text="" FontSize="15" FontFamily="Montserrat Medium" HorizontalAlignment="Left" Background="#FFE8E8E8" BorderBrush="{x:Null}" BorderThickness="0" Margin="0,10,0,0" />
-                    <TextBlock Name="TextBlock_Error" Margin="0,5,0,0"  Text="" Foreground="Red" FontFamily="Montserrat Regular" FontSize="10"/>
-                    <TextBlock Text="Artist" Foreground="DimGray" FontSize="18" FontFamily="Montserrat Medium" HorizontalAlignment="Left"/>
+                    <TextBlock Text="Artist" Margin="0,15,0,0" Foreground="DimGray" FontSize="18" FontFamily="Montserrat Medium" HorizontalAlignment="Left"/>
                     <ComboBox Style="{StaticResource TriangleDropDown}" Name="ComboBox_Artist" Padding="5" VerticalContentAlignment="Center" Foreground="DimGray" Height="30" Width="210" VerticalAlignment="Center" Text="" FontSize="15" FontFamily="Montserrat Medium" HorizontalAlignment="Left" Background="#FFE8E8E8" BorderBrush="{x:Null}" BorderThickness="0" Margin="0,10,0,0" />
                 </StackPanel>
                 <StackPanel>

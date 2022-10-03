@@ -3,6 +3,7 @@ using MuseDB_Desktop.Helpers;
 using System;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Reflection.Emit;
 using System.Windows;
 using System.Windows.Documents;
 using System.Windows.Media.Imaging;
@@ -69,12 +70,17 @@ namespace MuseDB_Desktop.Windows
         {
             if (String.IsNullOrWhiteSpace(this.TextBox_AlbumName.Text))
             {
-                TextBlock_Error.Text = "Please provide the artist's name.";
+                TextBlock_Error.Text = "Please provide the album name.";
+                return;
+            }
+            if (String.IsNullOrWhiteSpace(this.ComboBox_Artist.Text))
+            {
+                TextBlock_Error.Text = "Please select the album artist.";
                 return;
             }
             if (String.IsNullOrWhiteSpace(FilePath))
             {
-                TextBlock_Error.Text = "Please select an image as artist's profile.";
+                TextBlock_Error.Text = "Please select an album art image.";
                 return;
             }
             if(TrackList.Count == 0)
@@ -82,58 +88,51 @@ namespace MuseDB_Desktop.Windows
                 TextBlock_Error.Text = "Please assign tracks to album.";
                 return;
             }
+            int counter = 0;
+            int NewID = 0;
             using (SqlConnection SQLConnection = new SqlConnection(SqlHelper.CnnVal("database")))
             {
                 SQLConnection.Open();
-                using (SqlCommand command = new SqlCommand($"INSERT INTO artist OUTPUT INSERTED.artist_id VALUES (N'{this.TextBox_AlbumName.Text.Replace("'", "''")}')", SQLConnection))
+                using (SqlCommand command = new SqlCommand($"INSERT INTO album OUTPUT INSERTED.album_id VALUES (N'{this.TextBox_AlbumName.Text.Replace("'", "''")}', {this.ComboBox_Artist.Text.Substring(0,5)})", SQLConnection))
                 {
-                    int NewID = (int)command.ExecuteScalar();
+                    NewID = (int)command.ExecuteScalar();
                     try
                     {
-                        _ = HttpHelper.UploadImage("http://192.168.0.120:4040/artist/", FilePath, NewID + ".jpg");
+                        _ = HttpHelper.UploadFile("http://192.168.0.120:4040/album/", FilePath, NewID + ".jpg");
                     }
                     catch (Exception exception)
                     {
                         TextBlock_Error.Text = exception.Message;
+                        return;
                     }
-                    int counter = 0;
-                    TrackList.ForEach(track => {
-                        command.CommandText = "INSERT INTO track (track_order, track_name, track_duration, album_id) VALUES (" +
+                    int TrackID = 0;
+                    TrackList.ForEach(track =>
+                    {
+                        command.CommandText = "INSERT INTO track (track_order, track_name, track_duration, album_id) OUTPUT INSERTED.track_id VALUES (" +
                                                     $"{++counter}, " +
                                                     $"N'{track.TrackName.Replace("'", "''")}', " +
-                                                    $"{track.TrackDuration}, " +
+                                                    $"'{track.TrackDuration}', " +
                                                     $"{NewID})";
-                                                }
+                        TrackID = (int)command.ExecuteScalar();
+                        if (TrackID > 0)
+                            _ = HttpHelper.UploadFile("http://192.168.0.120:4040/track/", track.TrackAudio, TrackID + ".mp3");
+                    }
                     );
                 }
-                success = true;
             }
-            this.Close();
-
-            /**
-            using (SqlConnection SQLConnection = new SqlConnection(SqlHelper.CnnVal("database")))
+            if (NewID > 0 && counter > 0)
             {
-                SQLConnection.Open();
-                using (SqlCommand command = new SqlCommand("INSERT INTO track (track_order, track_name, track_duration, album_id) VALUES OUTPUT INSERTED.track_id (" +
-                                                $"{this.TextBox_TrackOrder.Text}, " +
-                                                $"N'{this.TextBox_TrackName.Text.Replace("'", "''")}', " +
-                                                $"{this.TextBox_TrackDuration}, " +
-                                                $"{this.ComboBox_Album.Text.Substring(0, 6)})"))
-                {
-                    int NewID = (int)command.ExecuteScalar();
-                    try
-                    {
-                        _ = HttpHelper.UploadImage("http://192.168.0.120:4040/artist/", FilePath, NewID + ".jpg");
-                    }
-                    catch (Exception exception)
-                    {
-                        TextBlock_Error.Text = exception.Message;
-                    }
-                    success = true;
-                }
+                success = true;
+                this.Hide();
+                _ = new NotificationPopUp("Successfully Added Album\n" +
+                    $"{NewID} - {TextBox_AlbumName.Text}\n" +
+                    $"({counter} " + ((counter == 1) ? "track" : "tracks") + ")").ShowDialog();
                 this.Close();
             }
-            **/
+            else
+            {
+                TextBlock_Error.Text = "An unknown error occurred.";
+            }
         }
         private void Add_OnHover(object sender, RoutedEventArgs e)
         {

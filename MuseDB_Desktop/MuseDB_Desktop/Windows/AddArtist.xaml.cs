@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -66,23 +67,29 @@ namespace MuseDB_Desktop.Windows
                 TextBlock_Error.Text = "Please select an image as artist's profile.";
                 return;
             }
-
+            int NewID = 0;
             using (SqlConnection SQLConnection = new SqlConnection(SqlHelper.CnnVal("database")))
             {
                 SQLConnection.Open();
                 using (SqlCommand command = new SqlCommand($"INSERT INTO artist OUTPUT INSERTED.artist_id VALUES (N'{this.TextBox_ArtistName.Text.Replace("'", "''")}')", SQLConnection))
                 {
-                    int NewID = (int)command.ExecuteScalar();
+                    NewID = (int)command.ExecuteScalar();
                     try
                     {
-                        _ = HttpHelper.UploadImage("http://192.168.0.120:4040/artist/", FilePath, NewID + ".jpg");
+                        _ = HttpHelper.UploadFile("http://192.168.0.120:4040/artist/", FilePath, NewID + ".jpg");
                     }
                     catch (Exception exception)
                     {
                         TextBlock_Error.Text = exception.Message;
                     }
-                    success = true;
                 }
+            }
+            if(NewID > 0)
+            {
+                this.Hide();
+                _ = new NotificationPopUp("Successfully Added Artist\n" +
+                        $"{NewID} - {TextBox_ArtistName.Text}").ShowDialog();
+                success = true;
             }
             this.Close();
         }

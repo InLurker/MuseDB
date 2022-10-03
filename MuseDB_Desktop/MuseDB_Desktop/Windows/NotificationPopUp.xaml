@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MuseDB_Desktop.Windows"
         mc:Ignorable="d"
-        Title="MuseDB - NotificationPopUp" Height="200" Width="500">
+        Title="MuseDB - Notification Pop Up" Height="200" Width="500">
     <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
         <TextBlock Name="TextBlock_Text" MaxWidth="400" TextAlignment="Center" Text="Text" HorizontalAlignment="Center" Margin="0,0,0,15" FontSize="19" FontFamily="Montserrat Medium" Foreground="#3C3C3C" TextWrapping="Wrap"/>
         <Button Content="Confirm" Click="Button_ConfirmOnClick" HorizontalAlignment="Center" BorderBrush="#FFDBDBDB" Width="130" Height="26" Background="#FFF1F1F1" Foreground="#3C3C3C" FontFamily="Montserrat Regular" VerticalAlignment="Top">

@@ -11,12 +11,11 @@ namespace MuseDB_Desktop.Helpers
 {
     public static class HttpHelper
     {
-        public static async Task UploadImage(string UploadUrl, string ImagePath, string DestinationFileRename)
+        public static async Task UploadFile(string UploadUrl, string ImagePath, string DestinationFileRename)
         {
             using (var client = new System.Net.Http.HttpClient())
             {
                 var uri = new System.Uri(UploadUrl);
-
                 // Load the file:
                 var file = new System.IO.FileInfo(ImagePath);
                 if (!file.Exists)
