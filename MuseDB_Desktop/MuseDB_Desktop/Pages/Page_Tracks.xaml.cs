@@ -15,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using MuseDB_Desktop.Windows;
 
 namespace MuseDB_Desktop.Pages
 {
@@ -130,7 +131,10 @@ namespace MuseDB_Desktop.Pages
 
         private void Add_OnClick(object sender, RoutedEventArgs e)
         {
-            //TODO Add Track Function
+            var AddPopUp = new AddTrack();
+            AddPopUp.ShowDialog();
+            if (AddPopUp.Success)
+                LoadTracks();
         }
         private void Delete_OnHover(object sender, RoutedEventArgs e)
         {

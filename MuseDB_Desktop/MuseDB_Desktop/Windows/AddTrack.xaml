@@ -27,7 +27,7 @@
                 <DockPanel Margin="0,10,0,0" >
                     <StackPanel>
                         <TextBlock Text="Album" Foreground="DimGray" FontSize="18" FontFamily="Montserrat Medium" HorizontalAlignment="Left"/>
-                        <ComboBox IsEnabled="True" Foreground="DimGray" Style="{StaticResource TriangleDropDown}" Name="ComboBox_Album" Padding="5" VerticalContentAlignment="Center" Height="30" Width="210" VerticalAlignment="Center" FontSize="15" FontFamily="Montserrat Medium" HorizontalAlignment="Left" Background="#FFE8E8E8" BorderBrush="{x:Null}" BorderThickness="0" Margin="0,10,0,0" SelectionChanged="ComboBox_Album_SelectionChanged" />
+                        <ComboBox IsEnabled="True" Foreground="DimGray" Style="{StaticResource TriangleDropDown}" Name="ComboBox_Album" Padding="5" VerticalContentAlignment="Center" Height="30" Width="210" VerticalAlignment="Center" FontSize="15" FontFamily="Montserrat Medium" HorizontalAlignment="Left" Background="#FFE8E8E8" BorderBrush="{x:Null}" BorderThickness="0" Margin="0,10,0,0" />
                     </StackPanel>
                     <StackPanel Margin="35,0,0,0">
                         <TextBlock IsEnabled="True" Text="Track Order" Foreground="DimGray" FontSize="18" FontFamily="Montserrat Medium" HorizontalAlignment="Left"/>

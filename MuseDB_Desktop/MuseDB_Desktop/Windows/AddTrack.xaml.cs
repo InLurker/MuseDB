@@ -5,6 +5,7 @@ using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -37,6 +38,18 @@ namespace MuseDB_Desktop.Windows
         public AddTrack()
         {
             InitializeComponent();
+            using (SqlConnection SQLConnection = new SqlConnection(SqlHelper.CnnVal("database")))
+            {
+                SQLConnection.Open();
+                using (SqlCommand command = new SqlCommand("SELECT * FROM album", SQLConnection))
+                {
+                    using (SqlDataReader SQLDataReader = command.ExecuteReader())
+                    {
+                        for (int i = 0; SQLDataReader.Read(); ++i)
+                            this.ComboBox_Album.Items.Add(SQLDataReader["album_id"].ToString() + " - " + SQLDataReader["album_name"].ToString());
+                    }
+                }
+            }
         }
         public AddTrack(int TrackOrder, string AlbumID, string ArtFileLocation)
         {
@@ -83,31 +96,45 @@ namespace MuseDB_Desktop.Windows
             }
             trackName = TextBox_TrackName.Text;
             Duration = TextBox_TrackDuration.Text;
+            AlbumID = ComboBox_Album.Text.Substring(0, 6);
+
             success = true;
             if(isMiscellaneous)
                 this.Close();
             else
             {
+                int NewID = 0;
                 using (SqlConnection SQLConnection = new SqlConnection(SqlHelper.CnnVal("database")))
                 {
                     SQLConnection.Open();
-                    using (SqlCommand command = new SqlCommand("INSERT INTO track (track_order, track_name, track_duration, album_id) VALUES OUTPUT INSERTED.track_id (" +
+                    using (SqlCommand command = new SqlCommand("INSERT INTO track (track_order, track_name, track_duration, album_id) OUTPUT INSERTED.track_id VALUES (" +
                                                     $"{this.TextBox_TrackOrder.Text}, " +
                                                     $"N'{this.TextBox_TrackName.Text.Replace("'", "''")}', " +
-                                                    $"'{this.TextBox_TrackDuration}', " +
-                                                    $"{this.ComboBox_Album.Text.Substring(0, 6)})"))
+                                                    $"'{this.TextBox_TrackDuration.Text}', " +
+                                                    $"{this.ComboBox_Album.Text.Substring(0, 6)})",
+                                                    SQLConnection))
                     {
-                        int NewID = (int)command.ExecuteScalar();
+                        NewID = (int)command.ExecuteScalar();
                         try
                         {
-                            _ = HttpHelper.UploadFile("http://192.168.0.120:4040/artist/", FilePath, NewID + ".jpg");
+                            _ = HttpHelper.UploadFile("http://192.168.0.120:4040/track/", FilePath, NewID + ".mp3");
                         }
                         catch (Exception exception)
                         {
                             TextBlock_Error.Text = exception.Message;
                         }
-                        success = true;
                     }
+                }
+                if (NewID > 0)
+                {
+                    success = true;
+                    this.Hide();
+                    _ = new NotificationPopUp($"Successfully Added Album\n{NewID} - {TextBox_TrackName.Text}").ShowDialog();
+                    this.Close();
+                }
+                else
+                {
+                    TextBlock_Error.Text = "An unknown error occurred.";
                 }
                 this.Close();
             }
@@ -129,21 +156,6 @@ namespace MuseDB_Desktop.Windows
                 FilePath = FilePicker.FileName;
                 this.TextBox_TrackAudio.Text = FilePicker.SafeFileName;
             }
-        }
-
-        private void ComboBox_Album_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            AlbumID = this.ComboBox_Album.Text.Substring(0, 6);
-
-            var uriSource = new Uri($"http://192.168.0.120:4040/album/{AlbumID}.jpg", UriKind.Absolute);
-            var imgTemp = new BitmapImage();
-            imgTemp.BeginInit();
-            //Reduces memory usage
-            imgTemp.DecodePixelWidth = 200;
-            imgTemp.DecodePixelHeight = 200;
-            imgTemp.UriSource = uriSource;
-            imgTemp.EndInit();
-            this.Image_Background.Source = imgTemp;
         }
     }
 }
