@@ -27,5 +27,16 @@ namespace MuseDB_Desktop.Controls
             this.TextBlock_TrackName.Text = TrackName;
             this.TextBlock_TrackDuration.Text = TrackDuration;
         }
+
+        public void DeleteButton(bool reveal)
+        {
+            this.Button_Delete.Visibility = (reveal) ? Visibility.Visible : Visibility.Collapsed;
+        }
+
+        private void Delete_OnClick(object sender, RoutedEventArgs e)
+        {
+            if (this.Parent is ListBox)
+                (this.Parent as ListBox).Items.Remove(this);
+        }
     }
 }

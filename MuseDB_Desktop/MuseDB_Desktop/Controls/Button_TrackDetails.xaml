@@ -21,7 +21,7 @@
                 Padding="0,0,0,0"
                 Background="#FFFF5948"
                 BorderBrush="Transparent"
-                BorderThickness="1" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" >
+                BorderThickness="1" HorizontalAlignment="Center" VerticalAlignment="Center" >
                 <Image Source="{StaticResource minus_DrawingImage}" Width="14" Stretch="Fill"/>
             </Border>
         </Button>

@@ -26,7 +26,7 @@ namespace MuseDB_Desktop.Pages
     {
         private bool DeleteButtonEnabled = false;
 
-        private string SortParam = "album_name";
+        private string SortParam = "album_id";
         private string SortOrder = "DESC";
 
         private string SearchQuery = "";
@@ -96,7 +96,7 @@ namespace MuseDB_Desktop.Pages
                     SortParam = "artist_name";
                     break;
                 default:
-                    SortParam = "track_name";
+                    SortParam = "track_id";
                     break;
             }
             LoadTracks();

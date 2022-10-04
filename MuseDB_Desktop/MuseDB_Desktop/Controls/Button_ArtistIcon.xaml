@@ -9,7 +9,7 @@
              Loaded="OnLoad">
     
     <Grid HorizontalAlignment="Center" VerticalAlignment="Top">
-        <Button Style="{DynamicResource ImageButtonStyle}"  HorizontalAlignment="Left" Height="119" MouseDown="OnClick">
+        <Button Style="{DynamicResource ImageButtonStyle}"  HorizontalAlignment="Left" Height="119" MouseDoubleClick="OnClick">
             <Image x:Name="Button_Image" HorizontalAlignment="Center" VerticalAlignment="Stretch" Width="120" Stretch="UniformToFill" Source="/img/icon_artistloading.png">
                 <Image.Clip>
                     <EllipseGeometry Center="58,58" RadiusX="58" RadiusY="58" />

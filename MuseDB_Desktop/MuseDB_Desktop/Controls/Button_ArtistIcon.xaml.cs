@@ -15,6 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Drawing;
+using MuseDB_Desktop.Windows;
 
 namespace MuseDB_Desktop.Controls
 {
@@ -46,10 +47,10 @@ namespace MuseDB_Desktop.Controls
             var uriSource = new Uri($"http://192.168.0.120:4040/artist/{ArtistID}.jpg", UriKind.Absolute);
             var imgTemp = new BitmapImage();
             imgTemp.BeginInit();
+            imgTemp.UriSource = uriSource;
             //Reduces memory usage
             imgTemp.DecodePixelWidth = 160;
             imgTemp.DecodePixelHeight = 160;
-            imgTemp.UriSource = uriSource;
             imgTemp.EndInit();
             this.Button_Image.Source = imgTemp;
 
@@ -57,7 +58,7 @@ namespace MuseDB_Desktop.Controls
 
         private void OnClick(object sender, EventArgs e)
         {
-
+            _ = new ArtistPreview(ArtistID).ShowDialog();
         }
     }
 }

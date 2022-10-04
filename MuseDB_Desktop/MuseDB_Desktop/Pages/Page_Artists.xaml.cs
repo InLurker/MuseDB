@@ -25,7 +25,7 @@ namespace MuseDB_Desktop.Pages
     /// </summary>
     public partial class Page_Artists : Page
     {
-        private string SortParam = "artist_name";
+        private string SortParam = "artist_id";
         private string SortOrder = "DESC";
         private bool DeleteButtonEnabled = false;
         private string SearchQuery = "";
@@ -90,7 +90,7 @@ namespace MuseDB_Desktop.Pages
                     SortParam = "COUNT(album_id)";
                     break;
                 default:
-                    SortParam = "artist_name";
+                    SortParam = "artist_id";
                     break;
             }
             LoadArtists();

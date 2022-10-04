@@ -105,6 +105,9 @@
       <DependentUpon>Admin_MainMenu.xaml</DependentUpon>
     </Compile>
     <Compile Include="Helpers\SqlHelper.cs" />
+    <Compile Include="Windows\ArtistPreview.xaml.cs">
+      <DependentUpon>ArtistPreview.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\ConfirmationPopUp.xaml.cs">
       <DependentUpon>ConfirmationPopUp.xaml</DependentUpon>
     </Compile>
@@ -168,6 +171,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\Admin_MainMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\ArtistPreview.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -238,6 +245,8 @@
     <Resource Include="img\icon_trash.png" />
     <Resource Include="img\icon_add.png" />
     <Resource Include="img\icon_search.png" />
+    <Resource Include="img\icon_edit.png" />
+    <Resource Include="img\icon_trash_white.png" />
     <Content Include="sampledata_SQL.sql" />
     <Content Include="setup_SQL.sql" />
   </ItemGroup>

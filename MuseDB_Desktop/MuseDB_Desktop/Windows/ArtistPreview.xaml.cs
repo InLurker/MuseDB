@@ -1,5 +1,4 @@
 ﻿using MuseDB_Desktop.Controls;
-using MuseDB_Desktop.Windows;
 using MuseDB_Desktop.Helpers;
 using System;
 using System.Collections.Generic;
@@ -14,30 +13,53 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace MuseDB_Desktop.Pages
+namespace MuseDB_Desktop.Windows
 {
     /// <summary>
-    /// Interaction logic for Page_Albums.xaml
+    /// Interaction logic for ArtistPreview.xaml
     /// </summary>
-    public partial class Page_Albums : Page
+    public partial class ArtistPreview : Window
     {
-
         private bool DeleteButtonEnabled = false;
 
         private string SortParam = "album_id";
         private string SortOrder = "DESC";
         private string SearchQuery = "";
+        private string ArtistID = "";
+        private string ArtistName = "";
 
-        public Page_Albums()
+        public ArtistPreview(string ArtistID)
         {
             InitializeComponent();
+            this.ArtistID = ArtistID;
+            using (SqlConnection SQLConnection = new SqlConnection(SqlHelper.CnnVal("database")))
+            {
+                SQLConnection.Open();
+                using (SqlCommand command = new SqlCommand($"SELECT artist_name FROM artist WHERE artist_id = {ArtistID}", SQLConnection))
+                {
+                    this.ArtistName = (string)command.ExecuteScalar();
+                }
+            }
+            this.TextBlock_ArtistID.Text = "Artist #" + ArtistID;
+            this.TextBlock_ArtistName.Text = ArtistName;
         }
 
         private void OnLoad(object sender, RoutedEventArgs e)
         {
+            var uriSource = new Uri($"http://192.168.0.120:4040/artist/{ArtistID}.jpg", UriKind.Absolute);
+            var imgTemp = new BitmapImage();
+            imgTemp.BeginInit();
+            imgTemp.UriSource = uriSource;
+            //Reduces memory usage
+            imgTemp.DecodePixelWidth = 184;
+            imgTemp.DecodePixelHeight = 184;
+            imgTemp.CacheOption = BitmapCacheOption.OnLoad;
+            imgTemp.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
+            imgTemp.EndInit();
+            this.Image_Profile.Source = imgTemp;
+            this.Image_Background.Source = imgTemp;
             LoadAlbums();
         }
 
@@ -51,14 +73,15 @@ namespace MuseDB_Desktop.Pages
             {
                 SQLConnection.Open();
                 using (SqlCommand command = new SqlCommand("SELECT " +
-                    "COUNT(track_id) AS track_count, album.album_id, album.album_name, artist.artist_name " +
+                    "COUNT(track_id) AS track_count, album.album_id, album.album_name " +
                     "FROM album " +
-                    "INNER JOIN artist ON album.artist_id = artist.artist_id " +
                     "INNER JOIN track ON album.album_id = track.album_id " +
+                    $"WHERE artist_id = {ArtistID} " + 
                     SearchQuery +
-                    "GROUP BY album.album_id, album.album_name, artist.artist_name " +
+                    "GROUP BY album.album_id, album.album_name " +
                     $"ORDER BY {SortParam} {SortOrder}", SQLConnection))
                 {
+                    Console.WriteLine(command.CommandText);
                     using (SqlDataReader SQLDataReader = command.ExecuteReader())
                     {
                         for (int i = 0; SQLDataReader.Read(); ++i)
@@ -66,7 +89,7 @@ namespace MuseDB_Desktop.Pages
                                 new Button_AlbumDetails(
                                     SQLDataReader["album_id"].ToString(),
                                     SQLDataReader["album_name"].ToString(),
-                                    SQLDataReader["artist_name"].ToString(),
+                                    ArtistName,
                                     SQLDataReader.GetInt32(0)));
                     }
                 }
@@ -90,9 +113,6 @@ namespace MuseDB_Desktop.Pages
                     SortParam = "album.album_name";
                     break;
                 case 2:
-                    SortParam = "artist.artist_name";
-                    break;
-                case 3:
                     SortParam = "COUNT(track.track_id)";
                     break;
                 default:
@@ -151,7 +171,7 @@ namespace MuseDB_Desktop.Pages
         }
         private void Search_OnClick(object sender, RoutedEventArgs e)
         {
-            SearchQuery = String.IsNullOrWhiteSpace(TextBox_SearchQuery.Text) ? "" : $"WHERE artist_name LIKE N'%{TextBox_SearchQuery.Text.Replace("'", "''")}%'";
+            SearchQuery = String.IsNullOrWhiteSpace(TextBox_SearchQuery.Text) ? "" : $"AND album_name LIKE N'%{TextBox_SearchQuery.Text.Replace("'", "''")}%' ";
             LoadAlbums();
         }
 
@@ -162,6 +182,16 @@ namespace MuseDB_Desktop.Pages
                 SearchQuery = "";
                 LoadAlbums();
             }
+        }
+
+        private void DeleteArtist_OnClick(object sender, MouseButtonEventArgs e)
+        {
+
+        }
+
+        private void EditArtist_OnClick(object sender, MouseButtonEventArgs e)
+        {
+
         }
     }
 }
