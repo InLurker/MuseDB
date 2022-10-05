@@ -11,7 +11,7 @@ namespace MuseDB_Desktop.Helpers
 {
     public static class HttpHelper
     {
-        public static async Task UploadFile(string UploadUrl, string ImagePath, string DestinationFileRename)
+        public static async void UploadFile(string UploadUrl, string ImagePath, string DestinationFileRename)
         {
             using (var client = new System.Net.Http.HttpClient())
             {
@@ -34,6 +34,16 @@ namespace MuseDB_Desktop.Helpers
                     var response = await client.SendAsync(request);
                     response.EnsureSuccessStatusCode(); // this throws an exception on non HTTP success codes
                 }
+            }
+        }
+
+        public static async void DeleteFile(string Url)
+        {
+            using (var client = new System.Net.Http.HttpClient())
+            {
+                System.Net.Http.HttpRequestMessage request = new System.Net.Http.HttpRequestMessage(System.Net.Http.HttpMethod.Delete, Url);
+                var response = await client.SendAsync(request);
+                response.EnsureSuccessStatusCode(); // this throws an exception on non HTTP success codes
             }
         }
     }

@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:MuseDB_Desktop.Windows"
         mc:Ignorable="d"
         Title="MuseDB - Add Track"
+        WindowStartupLocation="CenterScreen"
         Icon="/img/app_icon_mini.png" ResizeMode="NoResize"
         Height="400" Width="550">
 

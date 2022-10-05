@@ -9,7 +9,7 @@
         Title="MuseDB - Artist Preview"
         Icon="/img/app_icon_mini.png"
         Height="940" Width="840" 
-        ScrollViewer.CanContentScroll="True"
+        WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize">
     
     <ScrollViewer VerticalScrollBarVisibility="Visible">

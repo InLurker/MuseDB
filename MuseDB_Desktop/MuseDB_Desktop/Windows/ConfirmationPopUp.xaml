@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MuseDB_Desktop.Windows"
+        WindowStartupLocation="CenterScreen"
         mc:Ignorable="d"
         Title="MuseDB - Confirmation Pop Up" Height="200" Width="500">
     <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">

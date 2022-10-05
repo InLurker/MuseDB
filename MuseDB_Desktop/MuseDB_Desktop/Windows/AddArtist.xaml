@@ -7,6 +7,7 @@
         mc:Ignorable="d"
         Title="MuseDB - Add Artist"
         Icon="/img/app_icon_mini.png" ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
         Height="400" Width="550">
 
     <Grid>

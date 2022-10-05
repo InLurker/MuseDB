@@ -8,6 +8,7 @@
         mc:Ignorable="d"
         Title="MuseDB - Add Album"
         Icon="/img/app_icon_mini.png" ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
         Height="650" Width="550">
 
 
