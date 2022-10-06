@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="MuseDB - Login" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" SizeToContent="WidthAndHeight" Width="900" Height="604" Padding="0,0,0,6" Icon="/img/app_icon_mini.png">
     <Window.Background>
-        <ImageBrush ImageSource="/img/login background.png" Stretch="Fill"/>
+        <ImageBrush ImageSource="/img/login background.png" Stretch="UniformToFill"/>
     </Window.Background>
     <StackPanel Margin="0,0,531,15">
         <Image HorizontalAlignment="Left" Height="113" Margin="41,60,0,0" VerticalAlignment="Top" Width="274" Source="/img/MuseDB_logo.png"/>

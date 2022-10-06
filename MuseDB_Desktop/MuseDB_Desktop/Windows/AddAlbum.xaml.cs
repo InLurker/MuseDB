@@ -109,10 +109,10 @@ namespace MuseDB_Desktop.Windows
                     TrackList.ForEach(track =>
                     {
                         command.CommandText = "INSERT INTO track (track_order, track_name, track_duration, album_id) OUTPUT INSERTED.track_id VALUES (" +
-                                                    $"{++counter}, " +
-                                                    $"N'{track.TrackName.Replace("'", "''")}', " +
-                                                    $"'{track.TrackDuration}', " +
-                                                    $"{NewID})";
+                                            $"{++counter}, " +
+                                            $"N'{track.TrackName.Replace("'", "''")}', " +
+                                            $"'{track.TrackDuration}', " +
+                                            $"{NewID})";
                         TrackID = (int)command.ExecuteScalar();
                         if (TrackID > 0)
                             HttpHelper.UploadFile("http://192.168.0.120:4040/track/", track.TrackAudio, TrackID + ".mp3");
@@ -150,7 +150,7 @@ namespace MuseDB_Desktop.Windows
             using (SqlConnection SQLConnection = new SqlConnection(SqlHelper.CnnVal("database")))
             {
                 SQLConnection.Open();
-                using (SqlCommand command = new SqlCommand("SELECT IDENT_CURRENT('album')", SQLConnection))
+                using (SqlCommand command = new SqlCommand($"SELECT IDENT_CURRENT('album') + {TrackList.Count + 1}", SQLConnection))
                 {
                     command.ExecuteScalar();
                     lastID = command.ExecuteScalar().ToString();
@@ -158,13 +158,13 @@ namespace MuseDB_Desktop.Windows
                         return;
                 }
             }
-            var track = new AddTrack(TrackList.Count + 1, lastID, FilePath);
+            var track = new AddTrack(TrackList.Count + 1, lastID, FilePath, true);
             track.ShowDialog();
             if (track.Success == false)
                 return;
             Track NewTrack = new Track(track.TrackName, track.TrackDuration, track.AudioFilePath);
             TrackList.Add(NewTrack);
-            this.ListBox_Tracks.Items.Add(new TrackListItem(TrackList.Count, NewTrack.TrackName, NewTrack.TrackDuration));
+            this.ListBox_Tracks.Items.Add(new TrackListItem(TrackList.Count, NewTrack.TrackName, NewTrack.TrackDuration, true));
         }
         private void Delete_OnHover(object sender, RoutedEventArgs e)
         {

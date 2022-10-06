@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Data.SqlTypes;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
@@ -29,7 +30,7 @@ namespace MuseDB_Desktop.Windows
         private string FilePath = "";
         private string AlbumID = "";
         private string Duration = "";
-        private bool isMiscellaneous = false;
+        private readonly bool isMiscellaneous = false;
         public bool Success => success;
         public string TrackName => trackName;
         public string AudioFilePath => FilePath;
@@ -51,11 +52,10 @@ namespace MuseDB_Desktop.Windows
                 }
             }
         }
-        public AddTrack(int TrackOrder, string AlbumID, string ArtFileLocation)
+
+        public AddTrack(string AlbumID, string ArtFileLocation, bool isMiscellaneous)
         {
             InitializeComponent();
-            this.TextBox_TrackOrder.Text = TrackOrder.ToString();
-            this.TextBox_TrackOrder.IsEnabled = false;
             this.ComboBox_Album.IsEditable = true;
             this.ComboBox_Album.Text = AlbumID;
             this.ComboBox_Album.IsEnabled = false;
@@ -63,7 +63,14 @@ namespace MuseDB_Desktop.Windows
                 this.Image_Background.Source = new BitmapImage(new Uri("/img/icon_albumloading.png", UriKind.Relative));
             else
                 this.Image_Background.Source = new BitmapImage(new Uri(ArtFileLocation));
-            isMiscellaneous = true;
+            this.isMiscellaneous = isMiscellaneous;
+        }
+
+        public AddTrack(int TrackOrder, string AlbumID, string ArtFileLocation, bool isMiscellaneous):
+            this(AlbumID, ArtFileLocation, isMiscellaneous)
+        {
+            this.TextBox_TrackOrder.Text = TrackOrder.ToString();
+            this.TextBox_TrackOrder.IsEnabled = false;
         }
 
         private void Button_ConfirmOnClick(object sender, RoutedEventArgs e)
@@ -111,7 +118,7 @@ namespace MuseDB_Desktop.Windows
                                                     $"{this.TextBox_TrackOrder.Text}, " +
                                                     $"N'{this.TextBox_TrackName.Text.Replace("'", "''")}', " +
                                                     $"'{this.TextBox_TrackDuration.Text}', " +
-                                                    $"{this.ComboBox_Album.Text.Substring(0, 6)})",
+                                                    $"{AlbumID})",
                                                     SQLConnection))
                     {
                         NewID = (int)command.ExecuteScalar();

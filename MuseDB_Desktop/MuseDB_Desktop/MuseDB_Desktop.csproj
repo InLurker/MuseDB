@@ -105,6 +105,9 @@
       <DependentUpon>Admin_MainMenu.xaml</DependentUpon>
     </Compile>
     <Compile Include="Helpers\SqlHelper.cs" />
+    <Compile Include="Windows\AlbumPreview.xaml.cs">
+      <DependentUpon>AlbumPreview.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\ArtistPreview.xaml.cs">
       <DependentUpon>ArtistPreview.xaml</DependentUpon>
     </Compile>
@@ -113,6 +116,9 @@
     </Compile>
     <Compile Include="Windows\NotificationPopUp.xaml.cs">
       <DependentUpon>NotificationPopUp.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\TrackPreview.xaml.cs">
+      <DependentUpon>TrackPreview.xaml</DependentUpon>
     </Compile>
     <Page Include="Controls\Button_AlbumDetails.xaml">
       <SubType>Designer</SubType>
@@ -174,6 +180,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Windows\AlbumPreview.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Windows\ArtistPreview.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -195,6 +205,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Windows\NotificationPopUp.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\TrackPreview.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -247,8 +261,6 @@
     <Resource Include="img\icon_search.png" />
     <Resource Include="img\icon_edit.png" />
     <Resource Include="img\icon_trash_white.png" />
-    <Content Include="sampledata_SQL.sql" />
-    <Content Include="setup_SQL.sql" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

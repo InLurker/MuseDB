@@ -48,7 +48,7 @@
                     <Image Source="/img/icon_add.png" />
                 </Button>
             </DockPanel>
-            <ListBox Name="ListBox_Tracks" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.HorizontalScrollBarVisibility="Disabled" BorderBrush="#00000000" Background="Transparent" Height="200">
+            <ListBox Name="ListBox_Tracks" ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.HorizontalScrollBarVisibility="Disabled" BorderBrush="#00000000" Background="Transparent" Height="200">
                 <ListBox.ItemContainerStyle>
                     <Style TargetType="ListBoxItem">
                         <Setter Property="Padding" Value="0"/>

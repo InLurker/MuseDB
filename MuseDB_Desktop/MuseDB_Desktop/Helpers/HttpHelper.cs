@@ -15,7 +15,7 @@ namespace MuseDB_Desktop.Helpers
         {
             using (var client = new System.Net.Http.HttpClient())
             {
-                var uri = new System.Uri(UploadUrl);
+                var url = new System.Uri(UploadUrl);
                 // Load the file:
                 var file = new System.IO.FileInfo(ImagePath);
                 if (!file.Exists)
@@ -23,14 +23,18 @@ namespace MuseDB_Desktop.Helpers
 
                 using (var stream = file.OpenRead())
                 {
-                    var multipartContent = new System.Net.Http.MultipartFormDataContent();
-                    multipartContent.Add(
-                        new System.Net.Http.StreamContent(stream),
-                        "files", // this is the name of FormData field
-                        DestinationFileRename);
-
-                    System.Net.Http.HttpRequestMessage request = new System.Net.Http.HttpRequestMessage(System.Net.Http.HttpMethod.Post, uri);
-                    request.Content = multipartContent;
+                    var multipartContent = new System.Net.Http.MultipartFormDataContent
+                    {
+                        {
+                            new System.Net.Http.StreamContent(stream),
+                            "files", // this is the name of FormData field
+                            DestinationFileRename
+                        }
+                    };
+                    System.Net.Http.HttpRequestMessage request = new System.Net.Http.HttpRequestMessage(System.Net.Http.HttpMethod.Post, url)
+                    {
+                        Content = multipartContent
+                    };
                     var response = await client.SendAsync(request);
                     response.EnsureSuccessStatusCode(); // this throws an exception on non HTTP success codes
                 }

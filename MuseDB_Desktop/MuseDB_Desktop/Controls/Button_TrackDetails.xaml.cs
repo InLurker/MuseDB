@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MuseDB_Desktop.Windows;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,6 +21,7 @@ namespace MuseDB_Desktop.Controls
     /// </summary>
     public partial class Button_TrackDetails : UserControl
     {
+        private string TrackID;
         public Button_TrackDetails()
         {
             InitializeComponent();
@@ -28,15 +30,13 @@ namespace MuseDB_Desktop.Controls
             this.Button_TrackPanel.TextBlock_TrackName.Foreground = new SolidColorBrush(Color.FromRgb(60,60,60));
         }
 
-        public Button_TrackDetails(string TrackID, string TrackName, string TrackArtist, string AlbumID, string AlbumName, string TrackDuration)
+        public Button_TrackDetails(string TrackID, string TrackName, string TrackArtist, string AlbumID, string AlbumName, string TrackDuration) :
+            this()
         {
-            InitializeComponent();
+            this.TrackID = TrackID;
             this.Button_TrackPanel.Background = Brushes.Transparent;
-            this.Button_TrackPanel.TextBlock_TrackName.FontSize = 16;
-            this.Button_TrackPanel.TextBlock_TrackArtist.FontSize = 13;
             this.Button_TrackPanel.Label_TrackDuration.FontSize = 15;
             this.Button_TrackPanel.TrackID = TrackID;
-            this.Button_TrackPanel.TextBlock_TrackName.Foreground = new SolidColorBrush(Color.FromRgb(60,60,60));
             this.Button_TrackPanel.TextBlock_TrackName.Text = TrackName;
             this.Button_TrackPanel.TextBlock_TrackArtist.Text = TrackArtist + " - " + AlbumName;
             this.Button_TrackPanel.Label_TrackDuration.Content = TrackDuration;
@@ -67,6 +67,11 @@ namespace MuseDB_Desktop.Controls
         {
             if (this.Parent is ListBox)
                 (this.Parent as ListBox).Items.Remove(this);
+        }
+
+        private void OnDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            _ = new TrackPreview(TrackID).ShowDialog();
         }
     }
 }

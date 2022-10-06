@@ -56,7 +56,7 @@ namespace MuseDB_Desktop.Controls
 
         }
 
-        private void OnClick(object sender, EventArgs e)
+        private void OnDoubleClick(object sender, MouseButtonEventArgs e)
         {
             _ = new ArtistPreview(ArtistID).ShowDialog();
         }

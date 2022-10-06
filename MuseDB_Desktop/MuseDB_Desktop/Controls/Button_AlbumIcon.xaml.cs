@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MuseDB_Desktop.Windows;
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Drawing;
@@ -56,9 +57,9 @@ namespace MuseDB_Desktop.Controls
             imgTemp.EndInit();
             this.Button_Image.Source = imgTemp;
         }
-        public void OnClick(object sender, EventArgs e)
+        private void OnDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            
+            _ = new AlbumPreview(AlbumID).ShowDialog();
         }
     }
 }

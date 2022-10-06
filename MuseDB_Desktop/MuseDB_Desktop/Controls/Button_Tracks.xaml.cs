@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MuseDB_Desktop.Windows;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -36,9 +37,9 @@ namespace MuseDB_Desktop.Controls
             Label_TrackDuration.Content = TrackDuration;
         }
 
-        private void OnClick(object sender, EventArgs e)
+        private void OnDoubleClick(object sender, MouseButtonEventArgs e)
         {
+            _ = new TrackPreview(TrackID).ShowDialog();
         }
-
     }
 }

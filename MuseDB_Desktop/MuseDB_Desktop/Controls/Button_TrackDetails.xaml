@@ -6,7 +6,8 @@
              xmlns:local="clr-namespace:MuseDB_Desktop.Controls"
              mc:Ignorable="d" 
              d:DesignHeight="70" d:DesignWidth="720"
-             Background="WhiteSmoke">
+             Background="WhiteSmoke"
+             MouseDoubleClick="OnDoubleClick">
 
     <Grid Height="70">
         <Button

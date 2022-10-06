@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:MuseDB_Desktop.Controls"
              mc:Ignorable="d" 
              d:DesignHeight="55" d:DesignWidth="778" Background="#FFF5F5F5" 
-             MouseDown="OnClick">
+             MouseDoubleClick="OnDoubleClick">
     <DockPanel Margin="17,11,17,11">
         <StackPanel VerticalAlignment="Center">
             <TextBlock Name="TextBlock_TrackName" Text="Track Name" MaxWidth="600" FontFamily="Montserrat Medium" FontSize="13" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#FF8F8F8F" TextTrimming="CharacterEllipsis"  LineStackingStrategy="BlockLineHeight" TextWrapping="NoWrap"/>
