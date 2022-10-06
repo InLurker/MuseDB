@@ -17,9 +17,9 @@ namespace MuseDB_Desktop.Windows
     /// <summary>
     /// Interaction logic for TrackPreview.xaml
     /// </summary>
-    public partial class TrackPreview : Window
+    public partial class PreviewTrack : Window
     {
-        public TrackPreview(string TrackID)
+        public PreviewTrack(string TrackID)
         {
             InitializeComponent();
         }

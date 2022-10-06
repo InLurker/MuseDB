@@ -59,7 +59,7 @@ namespace MuseDB_Desktop.Controls
         }
         private void OnDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            _ = new AlbumPreview(AlbumID).ShowDialog();
+            _ = new PreviewAlbum(AlbumID).ShowDialog();
         }
     }
 }

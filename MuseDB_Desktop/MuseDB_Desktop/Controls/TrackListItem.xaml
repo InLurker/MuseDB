@@ -15,7 +15,7 @@
     <Grid HorizontalAlignment="Stretch">
         <DockPanel Background="#FFF5F5F5" HorizontalAlignment="Stretch">
             <TextBlock Name="TextBlock_Order" Text="0" HorizontalAlignment="Left" Width="25" TextAlignment='Center'  VerticalAlignment="Center" FontFamily="Montserrat Semibold" Margin="10,0,0,0" Foreground="#A8A8A8" FontSize="17"/>
-            <TextBlock Name="TextBlock_TrackName" Text="Track Name" VerticalAlignment="Center" FontFamily="Montserrat Medium" Margin="10,0,10,0" Foreground="#8F8F8F" FontSize="12" TextTrimming="CharacterEllipsis" MaxWidth="370" />
+            <TextBlock Name="TextBlock_TrackName" Text="Track Name" VerticalAlignment="Center" FontFamily="Montserrat Medium" Margin="10,0,10,0" Foreground="#8F8F8F" FontSize="12" TextTrimming="CharacterEllipsis" />
             <TextBlock Name="TextBlock_TrackDuration" Text="0:00" Margin="0,0,20,0" Width="35" HorizontalAlignment="Right" VerticalAlignment="Center" TextAlignment="Right" FontFamily="Montserrat Medium" FontSize="11" Foreground="#8F8F8F"/>
         </DockPanel>
         <Button 

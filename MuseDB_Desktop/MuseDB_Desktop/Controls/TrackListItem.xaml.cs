@@ -52,7 +52,7 @@ namespace MuseDB_Desktop.Controls
         private void OnDoubleClick(object sender, MouseButtonEventArgs e)
         {
             if (!isMiscellaneous)
-                _ = new TrackPreview(TrackID).ShowDialog();
+                _ = new PreviewTrack(TrackID).ShowDialog();
         }
     }
 }

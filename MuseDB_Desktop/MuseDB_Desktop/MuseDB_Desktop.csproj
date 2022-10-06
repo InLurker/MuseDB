@@ -105,11 +105,11 @@
       <DependentUpon>Admin_MainMenu.xaml</DependentUpon>
     </Compile>
     <Compile Include="Helpers\SqlHelper.cs" />
-    <Compile Include="Windows\AlbumPreview.xaml.cs">
-      <DependentUpon>AlbumPreview.xaml</DependentUpon>
+    <Compile Include="Windows\PreviewAlbum.xaml.cs">
+      <DependentUpon>PreviewAlbum.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\ArtistPreview.xaml.cs">
-      <DependentUpon>ArtistPreview.xaml</DependentUpon>
+    <Compile Include="Windows\PreviewArtist.xaml.cs">
+      <DependentUpon>PreviewArtist.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\ConfirmationPopUp.xaml.cs">
       <DependentUpon>ConfirmationPopUp.xaml</DependentUpon>
@@ -117,8 +117,8 @@
     <Compile Include="Windows\NotificationPopUp.xaml.cs">
       <DependentUpon>NotificationPopUp.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\TrackPreview.xaml.cs">
-      <DependentUpon>TrackPreview.xaml</DependentUpon>
+    <Compile Include="Windows\PreviewTrack.xaml.cs">
+      <DependentUpon>PreviewTrack.xaml</DependentUpon>
     </Compile>
     <Page Include="Controls\Button_AlbumDetails.xaml">
       <SubType>Designer</SubType>
@@ -180,11 +180,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\AlbumPreview.xaml">
+    <Page Include="Windows\PreviewAlbum.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Windows\ArtistPreview.xaml">
+    <Page Include="Windows\PreviewArtist.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -208,7 +208,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\TrackPreview.xaml">
+    <Page Include="Windows\PreviewTrack.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

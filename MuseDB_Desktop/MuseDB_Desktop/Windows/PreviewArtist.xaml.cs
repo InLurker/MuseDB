@@ -20,7 +20,7 @@ namespace MuseDB_Desktop.Windows
     /// <summary>
     /// Interaction logic for ArtistPreview.xaml
     /// </summary>
-    public partial class ArtistPreview : Window
+    public partial class PreviewArtist : Window
     {
         private bool DeleteButtonEnabled = false;
 
@@ -30,7 +30,7 @@ namespace MuseDB_Desktop.Windows
         private string ArtistID = "";
         private string ArtistName = "";
 
-        public ArtistPreview(string ArtistID)
+        public PreviewArtist(string ArtistID)
         {
             InitializeComponent();
             this.ArtistID = ArtistID;
