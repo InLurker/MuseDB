@@ -18,7 +18,7 @@ using System.Windows.Shapes;
 namespace MuseDB_Desktop.Windows
 {
     /// <summary>
-    /// Interaction logic for ArtistPreview.xaml
+    /// Interaction logic for PreviewArtist.xaml
     /// </summary>
     public partial class PreviewArtist : Window
     {
@@ -27,8 +27,8 @@ namespace MuseDB_Desktop.Windows
         private string SortParam = "album_id";
         private string SortOrder = "DESC";
         private string SearchQuery = "";
-        private string ArtistID = "";
-        private string ArtistName = "";
+        private readonly string ArtistID = "";
+        private readonly string ArtistName = "";
 
         public PreviewArtist(string ArtistID)
         {
@@ -150,7 +150,10 @@ namespace MuseDB_Desktop.Windows
 
         private void Add_OnClick(object sender, RoutedEventArgs e)
         {
-            var AddAlbum = new AddAlbum().ShowDialog();
+            var AddAlbum = new AddAlbum();
+            AddAlbum.ShowDialog();
+            if (AddAlbum.Success)
+                LoadAlbums();
         }
         private void Delete_OnHover(object sender, RoutedEventArgs e)
         {
@@ -221,17 +224,13 @@ namespace MuseDB_Desktop.Windows
                         int result = (int)command.ExecuteNonQuery();
                         if(result > 0)
                         {
-                            _ = new NotificationPopUp($"#{ArtistID} - {ArtistName}'s profile,\nalong with their albums, has been deleted.").ShowDialog();
+                            HttpHelper.DeleteFile($"http://192.168.0.120:4040/artist/{ArtistID}.jpg");
+                            _ = new NotificationPopUp($"#{ArtistID} - {ArtistName}'s profile, along with their albums, has been deleted.").ShowDialog();
                         }
                     }
                 }
                 this.Close();
             }
-        }
-
-        private void EditArtist_OnClick(object sender, MouseButtonEventArgs e)
-        {
-
         }
     }
 }

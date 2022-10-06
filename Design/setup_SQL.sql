@@ -1,13 +1,13 @@
 ﻿CREATE TABLE artist (
 	artist_id INT IDENTITY(10001,1) NOT NULL PRIMARY KEY CLUSTERED, -- 5 digits ID
 	artist_name NVARCHAR(30) NOT NULL
-)
+);
 
 CREATE TABLE album (
 	album_id INT IDENTITY(100001,1) NOT NULL PRIMARY KEY CLUSTERED, -- 6 digits ID
 	album_name NVARCHAR(40) NOT NULL,
-	artist_id INT REFERENCES artist(artist_id) ON DELETE CASCADE
-)
+	artist_id INT NOT NULL FOREIGN KEY REFERENCES artist(artist_id) ON DELETE CASCADE
+);
 
 CREATE TABLE track (
 	track_id INT IDENTITY(1000001,1) NOT NULL PRIMARY KEY CLUSTERED, -- 7 digits ID
@@ -15,23 +15,23 @@ CREATE TABLE track (
 	track_order TINYINT NOT NULL,
 	track_duration VARCHAR(5) NOT NULL,
 	last_playback DATETIME,
-	album_id INT REFERENCES album(album_id) ON DELETE CASCADE
-)
+	album_id INT NOT NULL FOREIGN KEY REFERENCES album(album_id) ON DELETE CASCADE
+);
 
 CREATE TABLE users (
 	username VARCHAR(20) NOT NULL PRIMARY KEY,
 	password VARCHAR(28) NOT NULL
-)
+);
 
 CREATE TABLE admins (
 	username VARCHAR(20) NOT NULL PRIMARY KEY,
 	password VARCHAR(28) NOT NULL
-)
+);
 
 CREATE TABLE album_comment (
 	comment_id INT IDENTITY(10000001,1) NOT NULL PRIMARY KEY CLUSTERED, -- 8 digits ID
-	album_id INT NOT NULL REFERENCES album(album_id) ON DELETE CASCADE,
-	username VARCHAR(20) NOT NULL REFERENCES users(username) ON DELETE CASCADE,
+	album_id INT NOT NULL FOREIGN KEY REFERENCES album(album_id) ON DELETE CASCADE,
+	username VARCHAR(20) NOT NULL FOREIGN KEY REFERENCES users(username) ON DELETE CASCADE,
 	comment_details NVARCHAR(200) NOT NULL,
 	comment_time DATE DEFAULT GETDATE() NOT NULL
-)
+);

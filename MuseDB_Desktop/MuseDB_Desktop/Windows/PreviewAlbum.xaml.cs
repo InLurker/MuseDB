@@ -18,7 +18,7 @@ using System.Windows.Shapes;
 namespace MuseDB_Desktop.Windows
 {
     /// <summary>
-    /// Interaction logic for ArtistPreview.xaml
+    /// Interaction logic for PreviewAlbum.xaml
     /// </summary>
     public partial class PreviewAlbum : Window
     {
@@ -28,7 +28,7 @@ namespace MuseDB_Desktop.Windows
         private string SortOrder = "ASC";
         private string SearchQuery = "";
         private readonly string AlbumID = "";
-        private string AlbumName = "";
+        private readonly string AlbumName = "";
 
         public PreviewAlbum(string AlbumID)
         {
@@ -81,7 +81,7 @@ namespace MuseDB_Desktop.Windows
             {
                 SQLConnection.Open();
                 using (SqlCommand command = new SqlCommand("SELECT " +
-                    "track_order, track_id, track_name, track_duration " +
+                    "track_order, track_id, track_name, album_id, track_duration " +
                     "FROM track " +
                     $"WHERE album_id = {AlbumID} " +
                     SearchQuery +
@@ -89,7 +89,6 @@ namespace MuseDB_Desktop.Windows
                 {
                     using (SqlDataReader SQLDataReader = command.ExecuteReader())
                     {
-                        //(int TrackOrder, string TrackID, string TrackName, string TrackDuration)
                         for (int i = 0; SQLDataReader.Read(); ++i)
                             this.ListBox_Tracks.Items.Add(
                                 new TrackListItem(
@@ -97,6 +96,7 @@ namespace MuseDB_Desktop.Windows
                                     SQLDataReader.GetInt32(1).ToString(),
                                     SQLDataReader["track_name"].ToString(),
                                     SQLDataReader["track_duration"].ToString(),
+                                    SQLDataReader.GetInt32(3).ToString(),
                                     false));
                     }
                 }
@@ -225,11 +225,5 @@ namespace MuseDB_Desktop.Windows
                 this.Close();
             }
         }
-
-        private void EditArtist_OnClick(object sender, MouseButtonEventArgs e)
-        {
-
-        }
-
     }
 }

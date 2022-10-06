@@ -6,8 +6,7 @@
              xmlns:local="clr-namespace:MuseDB_Desktop.Controls"
              mc:Ignorable="d" 
              d:DesignHeight="70" d:DesignWidth="720"
-             Background="WhiteSmoke"
-             MouseDoubleClick="OnDoubleClick">
+             Background="WhiteSmoke">
 
     <Grid Height="70">
         <Button
@@ -27,7 +26,9 @@
             </Border>
         </Button>
         <DockPanel Height="70" Panel.ZIndex="1">
-            <Image Name="Image_AlbumIcon" Source="/img/icon_albumloading.png" VerticalAlignment="Center" Width="150" Stretch="UniformToFill" Margin="0"/>
+            <Button Style="{StaticResource ImageButtonStyle}" MouseDoubleClick="OnDoubleClick" BorderThickness="0" Margin="-1">
+                <Image Name="Image_AlbumIcon" Source="/img/icon_albumloading.png" VerticalAlignment="Center" Width="150" Stretch="UniformToFill" Margin="0"/>
+            </Button>
             <local:Button_Tracks x:Name="Button_TrackPanel" Width="649" Margin="0"/>
         </DockPanel>
         <Grid HorizontalAlignment="Left" Width="720">

@@ -54,7 +54,7 @@ namespace MuseDB_Desktop.Pages
                     "COUNT(track_id) AS track_count, album.album_id, album.album_name, artist.artist_name " +
                     "FROM album " +
                     "INNER JOIN artist ON album.artist_id = artist.artist_id " +
-                    "INNER JOIN track ON album.album_id = track.album_id " +
+                    "LEFT JOIN track ON album.album_id = track.album_id " +
                     SearchQuery +
                     "GROUP BY album.album_id, album.album_name, artist.artist_name " +
                     $"ORDER BY {SortParam} {SortOrder}", SQLConnection))

@@ -1,6 +1,4 @@
-﻿
---Sample data for artists (17 total)
-INSERT INTO artist 
+﻿INSERT INTO artist --Sample data for artists (20 total)
 	VALUES
 		(N'Moe Shop'),
 		(N'Ujico*/Snail''s House'),
@@ -18,11 +16,12 @@ INSERT INTO artist
 		(N'KOTONOHOUSE'),
 		(N'Porter Robinson'),
 		(N'ピノキオピー'),
-		(N'キノシタ');
+		(N'キノシタ'),
+		(N'ナナヲアカリ'),
+		(N'sumika'),
+		(N'DECO*27');
 
-
---Sample data for albums (20 total)
-INSERT INTO album (album_name, artist_id) 
+INSERT INTO album (album_name, artist_id) --Sample data for albums (78 total)
 	VALUES 
 		(N'Pure Pure', 10001),
 		(N'Charm (w/ Puniden)', 10001),
@@ -47,7 +46,6 @@ INSERT INTO album (album_name, artist_id)
 		(N'Christmas of a Wandering Ghost', 10002),
 		(N'Biscuit Funk', 10002),
 		(N'PIXELIZE', 10002),
-		(N'ujbeats vol.2', 10002),
 		(N'ujbeats vol.2', 10002),
 		(N'Illusions of the Heart', 10003),
 		(N'Everlasting Summer', 10003),
@@ -104,8 +102,8 @@ INSERT INTO album (album_name, artist_id)
 		(N'ヴァンパイア', 10020),
 		(N'愛言葉Ⅳ feat. 初音ミク', 10020);
 
---Sample data for tracks (78 total)
-INSERT INTO track (track_name, track_order, track_duration, album_id)
+
+INSERT INTO track (track_name, track_order, track_duration, album_id) --Sample data for tracks (332 total)
 	VALUES
 		(N'Intro', 1, '0:16', 100001),
 		(N'You Look So Good', 2, '3:24', 100001),
