@@ -38,7 +38,7 @@ namespace MuseDB_Desktop.Windows
                         SQLDataReader.Read();
                         this.TextBlock_TrackName.Text = TrackName = SQLDataReader["track_name"].ToString();
                         this.TextBlock_TrackDuration.Text = SQLDataReader["track_duration"].ToString();
-                        this.TextBlock_TrackOrderLastPlayed.Text = "Track " + SQLDataReader["track_order"].ToString() + " - last played " + (String.IsNullOrEmpty(SQLDataReader["last_playback"].ToString()) ? "(null)" : SQLDataReader["last_playback"].ToString());
+                        this.TextBlock_TrackOrderLastPlayed.Text = "Track " + SQLDataReader["track_order"].ToString() + " - " + (String.IsNullOrEmpty(SQLDataReader["last_playback"].ToString()) ? "not played yet." : "last played " + SQLDataReader["last_playback"].ToString());
                         AlbumID = SQLDataReader["album_id"].ToString();
                     }
                     command.CommandText = $"SELECT album_name FROM album WHERE album_id = {AlbumID}";
