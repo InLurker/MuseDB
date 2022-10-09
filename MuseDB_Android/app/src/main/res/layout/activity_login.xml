@@ -4,20 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginActivity">
+    android:backgroundTint="#000000"
+    android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
+    tools:context="com.musedb.musedb_android.LoginActivity">
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/background_waves"
         android:adjustViewBounds="true"
         android:cropToPadding="false"
         android:scaleType="fitXY"
-        />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/background_waves" />
 
     <ImageView
         android:id="@+id/imageViewLogo"
@@ -26,18 +27,16 @@
         android:layout_marginStart="-40dp"
         android:layout_marginTop="-40dp"
         android:adjustViewBounds="true"
+        android:alpha="0.9"
         android:cropToPadding="false"
         android:scaleType="fitXY"
-        android:alpha="0.9"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/app_icon" />
 
     <LinearLayout
-        android:layout_width="0dp"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="48dp"
-        android:layout_marginEnd="48dp"
         android:gravity="center_horizontal|center_vertical"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -45,23 +44,69 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="wrap_content"
+            android:layout_height="100dp"
+            app:srcCompat="@drawable/musedb_logo" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_semibold"
+            android:text="User Login"
+            android:textAlignment="center"
+            android:textColor="#000000"
+            android:textSize="23sp" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="30dp" />
+
         <EditText
             android:id="@+id/UsernameTextBox"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:ems="10"
-            android:fontFamily="@font/montserrat_semibold"
             android:hint="Username"
+            android:fontFamily="@font/montserrat_semibold"
             android:inputType="textPersonName" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
         <EditText
             android:id="@+id/PasswordTextBox"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:ems="10"
             android:fontFamily="@font/montserrat_semibold"
             android:hint="Password"
             android:inputType="textPassword" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="40dp" />
+
+        <CheckBox
+            android:id="@+id/checkBox_Register"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:fontFamily="@font/montserrat_medium"
+            android:text="No account yet? Register now!"
+            android:textSize="12sp"
+            />
+
+        <Button
+            android:id="@+id/button_LoginRegister"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/black"
+            android:fontFamily="@font/montserrat_semibold"
+            android:onClick="LoginRegister"
+            android:text="Login" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
