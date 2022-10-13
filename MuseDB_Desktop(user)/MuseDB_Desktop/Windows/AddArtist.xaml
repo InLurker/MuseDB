@@ -1,0 +1,67 @@
+﻿<Window x:Class="MuseDB_Desktop.Windows.AddArtist"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MuseDB_Desktop.Windows"
+        mc:Ignorable="d"
+        Title="MuseDB - Add Artist"
+        Icon="/img/app_icon_mini.png" ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
+        Height="400" Width="550">
+
+    <Grid>
+        <StackPanel Margin="25,25,25,0" Panel.ZIndex="1">
+            <TextBlock Text="Artist" Foreground="DimGray" FontFamily="Montserrat Medium" FontSize="36" HorizontalAlignment="Left"/>
+            <DockPanel Margin="0,25,0,0">
+                <StackPanel HorizontalAlignment="Stretch">
+                    <TextBlock Text="Name" Foreground="DimGray" FontSize="18" FontFamily="Montserrat Medium" HorizontalAlignment="Left"/>
+                    <TextBox Name="TextBox_ArtistName" Padding="5" VerticalContentAlignment="Center" Foreground="DimGray" Height="30" Width="270" VerticalAlignment="Center" Text="" FontSize="15" FontFamily="Montserrat Medium" HorizontalAlignment="Left" Background="#FFE8E8E8" BorderBrush="{x:Null}" BorderThickness="0" Margin="0,10,0,0" />
+                    <TextBlock Name="TextBlock_Error" Margin="0,5,0,0"  Text="" Foreground="Red" FontFamily="Montserrat Regular" FontSize="10"/>
+                </StackPanel>
+                <StackPanel>
+                    <Border>
+                        <Image Name="Image_Icon" Source="/img/icon_artistloading.png" Height="170" Width="170" Stretch="UniformToFill">
+                            <Image.Clip>
+                                <EllipseGeometry Center="85,85" RadiusX="85" RadiusY="85" />
+                            </Image.Clip>
+                        </Image>
+                        <Border.Effect>
+                            <DropShadowEffect Color="#10B4B4B4" BlurRadius="15" ShadowDepth="4" Direction="225"/>
+                        </Border.Effect>
+                    </Border>
+                    <Button Content="Select Image" Click="Button_SelectOnClick" BorderBrush="#FFDBDBDB" Margin="0,15,0,0" Width="130" Height="26" Background="#FFF1F1F1" Foreground="#FF646464" FontFamily="Montserrat Regular">
+                        <Button.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="5"/>
+                            </Style>
+                        </Button.Resources>
+                    </Button>
+                </StackPanel>
+            </DockPanel>
+            <Button Content="Confirm" Click="Button_ConfirmOnClick" BorderBrush="#FFDBDBDB" Margin="0,15,0,0" Width="130" Height="26" Background="#FFF1F1F1" Foreground="#FF646464" FontFamily="Montserrat Regular" HorizontalAlignment="Left" VerticalAlignment="Top">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="5"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+        </StackPanel>
+        <Grid Height="420" Width="420"  HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,-15,0">
+            <Grid.Effect>
+                <BlurEffect Radius="15"/>
+            </Grid.Effect>
+            <Image Name="Image_Background" Height="420" Width="420" Source="/img/icon_artistloading.png" HorizontalAlignment="Right" Stretch="UniformToFill" Margin="0,0,0,-16">
+                <Image.OpacityMask>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0,1" >
+                        <GradientStop Color="Transparent" />
+                        <GradientStop Color="#B2FFFFFF" Offset="1"/>
+                    </LinearGradientBrush>
+                </Image.OpacityMask>
+                <Image.Effect>
+                    <BlurEffect Radius="15"/>
+                </Image.Effect>
+            </Image>
+        </Grid>
+    </Grid>
+</Window>

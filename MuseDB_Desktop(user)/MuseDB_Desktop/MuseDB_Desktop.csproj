@@ -1,0 +1,267 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{D40122A4-E819-4368-AA2D-BF7AF53AC269}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>MuseDB_Desktop</RootNamespace>
+    <AssemblyName>MuseDB_Desktop</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="PresentationFramework.Aero2" />
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="Controls\Button_AlbumDetails.xaml.cs">
+      <DependentUpon>Button_AlbumDetails.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Button_AlbumIcon.xaml.cs">
+      <DependentUpon>Button_AlbumIcon.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Button_ArtistIcon.xaml.cs">
+      <DependentUpon>Button_ArtistIcon.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Button_ArtistDetails.xaml.cs">
+      <DependentUpon>Button_ArtistDetails.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Button_TrackDetails.xaml.cs">
+      <DependentUpon>Button_TrackDetails.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Button_Tracks.xaml.cs">
+      <DependentUpon>Button_Tracks.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\TrackListItem.xaml.cs">
+      <DependentUpon>TrackListItem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Helpers\HttpHelper.cs" />
+    <Compile Include="Pages\Page_Albums.xaml.cs">
+      <DependentUpon>Page_Albums.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Page_Artists.xaml.cs">
+      <DependentUpon>Page_Artists.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Page_Home.xaml.cs">
+      <DependentUpon>Page_Home.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Page_Tracks.xaml.cs">
+      <DependentUpon>Page_Tracks.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\AddAlbum.xaml.cs">
+      <DependentUpon>AddAlbum.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\AddArtist.xaml.cs">
+      <DependentUpon>AddArtist.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\AddTrack.xaml.cs">
+      <DependentUpon>AddTrack.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Admin_MainMenu.xaml.cs">
+      <DependentUpon>Admin_MainMenu.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Helpers\SqlHelper.cs" />
+    <Compile Include="Windows\PreviewAlbum.xaml.cs">
+      <DependentUpon>PreviewAlbum.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\PreviewArtist.xaml.cs">
+      <DependentUpon>PreviewArtist.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\ConfirmationPopUp.xaml.cs">
+      <DependentUpon>ConfirmationPopUp.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\NotificationPopUp.xaml.cs">
+      <DependentUpon>NotificationPopUp.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\PreviewTrack.xaml.cs">
+      <DependentUpon>PreviewTrack.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Controls\Button_AlbumDetails.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Button_AlbumIcon.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Button_ArtistIcon.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Button_ArtistDetails.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Button_TrackDetails.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Button_Tracks.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\TrackListItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Page_Albums.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Page_Artists.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Page_Home.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Page_Tracks.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\AddAlbum.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Windows\AddArtist.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\AddTrack.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\Admin_MainMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\PreviewAlbum.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Windows\PreviewArtist.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\ConfirmationPopUp.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\Login.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Windows\Login.xaml.cs">
+      <DependentUpon>Login.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="Windows\NotificationPopUp.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\PreviewTrack.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="img\login background.png" />
+    <Resource Include="img\MuseDB_logo.png" />
+    <Resource Include="img\password_icon.png" />
+    <Resource Include="img\app_icon_mini.png" />
+    <Resource Include="img\icon_album.png" />
+    <Resource Include="img\icon_albumsubmission.png" />
+    <Resource Include="img\icon_artist.png" />
+    <Resource Include="img\icon_home.png" />
+    <Resource Include="img\icon_track.png" />
+    <Resource Include="img\icon_collection.png" />
+    <Resource Include="img\icon_community.png" />
+    <Resource Include="img\profile_icon.png" />
+    <Resource Include="img\icon_albumloading.png" />
+    <Resource Include="img\icon_artistloading.png" />
+    <Resource Include="img\icon_comment.png" />
+    <Resource Include="img\icon_sort.png" />
+    <Resource Include="img\icon_trash.png" />
+    <Resource Include="img\icon_add.png" />
+    <Resource Include="img\icon_search.png" />
+    <Resource Include="img\icon_edit.png" />
+    <Resource Include="img\icon_trash_white.png" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
