@@ -16,20 +16,20 @@ using MuseDB_Desktop.Pages;
 namespace MuseDB_Desktop.Windows
 {
     /// <summary>
-    /// Interaction logic for Admin_MainMenu.xaml
+    /// Interaction logic for MainMenu.xaml
     /// </summary>
-    public partial class Admin_MainMenu : Window
+    public partial class MainMenu : Window
     {
-        public Admin_MainMenu(string AdminName)
+        public MainMenu(string UserName)
         {
             InitializeComponent();
-            this.TextBlock_AdminName.Text = AdminName;
-            this.Frame_PageLoader.Content = new Page_Home();
+            this.TextBlock_UserName.Text = UserName;
+            this.Frame_PageLoader.Content = new Page_YourCollection();
         }
         private void Load_Home(object sender, RoutedEventArgs e)
         {
-            this.Label_PageTitle.Content = "Home";
-            Load_Page(new Page_Home());
+            this.Label_PageTitle.Content = "Your Collection";
+            Load_Page(new Page_YourCollection());
         }
 
         private void Load_Artists(object sender, RoutedEventArgs e)

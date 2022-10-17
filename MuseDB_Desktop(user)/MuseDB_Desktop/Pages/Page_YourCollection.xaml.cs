@@ -20,15 +20,15 @@ using System.Windows.Shapes;
 namespace MuseDB_Desktop.Pages
 {
     /// <summary>
-    /// Interaction logic for Page_Albums.xaml
+    /// Interaction logic for Page_YourCollection.xaml
     /// </summary>
-    public partial class Page_Albums : Page
+    public partial class Page_YourCollection : Page
     {
         private string SortParam = "album_id";
         private string SortOrder = "DESC";
         private string SearchQuery = "";
 
-        public Page_Albums()
+        public Page_YourCollection()
         {
             InitializeComponent();
         }

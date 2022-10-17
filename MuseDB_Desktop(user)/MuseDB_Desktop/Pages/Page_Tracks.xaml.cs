@@ -24,11 +24,9 @@ namespace MuseDB_Desktop.Pages
     /// </summary>
     public partial class Page_Tracks : Page
     {
-        private bool DeleteButtonEnabled = false;
 
         private string SortParam = "album_id";
         private string SortOrder = "DESC";
-
         private string SearchQuery = "";
 
         public Page_Tracks()
@@ -118,39 +116,6 @@ namespace MuseDB_Desktop.Pages
                 this.Button_Sort_Image.UpdateLayout();
             }
             LoadTracks();
-        }
-        private void Add_OnHover(object sender, RoutedEventArgs e)
-        {
-            this.Button_Add.Opacity = 1;
-        }
-
-        private void Add_OnLeave(object sender, RoutedEventArgs e)
-        {
-            this.Button_Add.Opacity = 0.2;
-        }
-
-        private void Add_OnClick(object sender, RoutedEventArgs e)
-        {
-            var AddPopUp = new AddTrack();
-            AddPopUp.ShowDialog();
-            if (AddPopUp.Success)
-                LoadTracks();
-        }
-        private void Delete_OnHover(object sender, RoutedEventArgs e)
-        {
-            this.Button_Delete.Opacity = 1;
-        }
-
-        private void Delete_OnLeave(object sender, RoutedEventArgs e)
-        {
-            this.Button_Delete.Opacity = (DeleteButtonEnabled) ? 1 : 0.2;
-        }
-
-        private void Delete_OnClick(object sender, RoutedEventArgs e)
-        {
-            DeleteButtonEnabled = !DeleteButtonEnabled;
-            foreach (Button_TrackDetails Track in ListBox_Tracks.Items)
-                Track.DeleteButton(DeleteButtonEnabled);
         }
 
         private void Search_OnClick(object sender, RoutedEventArgs e)

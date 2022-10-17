@@ -14,6 +14,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Data.SQLite;
+using System.IO;
 
 namespace MuseDB_Desktop.Windows
 {
@@ -34,21 +36,20 @@ namespace MuseDB_Desktop.Windows
 
             using (SqlConnection SQLConnection = new SqlConnection(SqlHelper.CnnVal("database")))
             {
-                string Query = $"SELECT COUNT(username) FROM admins WHERE username COLLATE Latin1_General_CS_AS = '{TextBox_Username.Text}'";
+                string Query = $"SELECT COUNT(username) FROM users WHERE username COLLATE Latin1_General_CS_AS = '{TextBox_Username.Text}'";
                 SqlCommand command = new SqlCommand(Query, SQLConnection);
 
                 SQLConnection.Open();
                 int count = (int)command.ExecuteScalar();
                 if (count != 0)
                 {
-                    command.CommandText = $"SELECT COUNT(username) FROM admins WHERE username COLLATE Latin1_General_CS_AS = '{TextBox_Username.Text}' AND password COLLATE Latin1_General_CS_AS = '{PasswordBox_Password.Password}'";
+                    command.CommandText = $"SELECT COUNT(username) FROM users WHERE username COLLATE Latin1_General_CS_AS = '{TextBox_Username.Text}' AND password COLLATE Latin1_General_CS_AS = '{PasswordBox_Password.Password}'";
                     count = (int)command.ExecuteScalar();
                     if (count != 0)
                     {
                         Label_ErrorMsg.Content = "Successfully logged in.";
                         Label_ErrorMsg.Foreground = Brushes.Green;
-
-                        Admin_MainMenu mainmenu = new Admin_MainMenu(TextBox_Username.Text);
+                        MainMenu mainmenu = new MainMenu(TextBox_Username.Text);
                         this.Close();
                         mainmenu.ShowDialog();
                     } else
@@ -73,16 +74,31 @@ namespace MuseDB_Desktop.Windows
 
             using (SqlConnection SQLConnection = new SqlConnection(SqlHelper.CnnVal("database")))
             {
-                string Query = $"SELECT COUNT(username) FROM admins WHERE username = '{TextBox_Username.Text}'";
+                string Query = $"SELECT COUNT(username) FROM users WHERE username = '{TextBox_Username.Text}'";
                 SqlCommand command = new SqlCommand(Query, SQLConnection);
 
                 SQLConnection.Open();
                 int count = (int)command.ExecuteScalar();
                 if (count == 0)
                 {
-                    Query = $"INSERT INTO admins (username, password) VALUES ('{TextBox_Username.Text}', '{PasswordBox_Password.Password}')";
+                    Query = $"INSERT INTO users (username, password) VALUES ('{TextBox_Username.Text}', '{PasswordBox_Password.Password}')";
                     command.CommandText = Query;
                     command.ExecuteNonQuery();
+
+                    var SqliteConnection = new SQLiteConnection("Data Source=temp.db");
+                    SqliteConnection.Open();
+                    using (var SqliteCommand = new SQLiteCommand(
+                        "CREATE TABLE IF NOT EXISTS album (" +
+                            "album_id INT NOT NULL PRIMARY KEY, " +
+                            "album_name NVARCHAR(40) NOT NULL, " +
+                            "artist_id INT NOT NULL)", SqliteConnection))
+                    {
+                        SqliteCommand.ExecuteNonQuery();
+                    }
+                    SqliteConnection.Close();
+                    GC.Collect();
+                    GC.WaitForPendingFinalizers();
+                    HttpHelper.UploadFileAndDelete("http://192.168.0.120:4040/user_library/", Environment.CurrentDirectory + "\\temp.db", $"{TextBox_Username.Text}.db");
                     Label_ErrorMsg.Content = "Successfully registered.";
                     Label_ErrorMsg.Foreground = Brushes.Green;
                 }

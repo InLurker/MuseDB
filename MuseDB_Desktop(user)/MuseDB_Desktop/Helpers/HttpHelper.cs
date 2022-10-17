@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Security.Cryptography;
@@ -11,15 +12,15 @@ namespace MuseDB_Desktop.Helpers
 {
     public static class HttpHelper
     {
-        public static async void UploadFile(string UploadUrl, string ImagePath, string DestinationFileRename)
+        public static async Task UploadFile(string UploadUrl, string FilePath, string DestinationFileRename)
         {
             using (var client = new System.Net.Http.HttpClient())
             {
                 var url = new System.Uri(UploadUrl);
                 // Load the file:
-                var file = new System.IO.FileInfo(ImagePath);
+                var file = new System.IO.FileInfo(FilePath);
                 if (!file.Exists)
-                    throw new ArgumentException($"Unable to access file at: {ImagePath}", nameof(ImagePath));
+                    throw new ArgumentException($"Unable to access file at: {FilePath}", nameof(FilePath));
 
                 using (var stream = file.OpenRead())
                 {
@@ -40,6 +41,13 @@ namespace MuseDB_Desktop.Helpers
                 }
             }
         }
+
+        public static async void UploadFileAndDelete(string UploadUrl, string FilePath, string DestinationFileRename)
+        {
+            await UploadFile(UploadUrl,FilePath, DestinationFileRename);
+            File.Delete(FilePath);
+        }
+
 
         public static async void DeleteFile(string Url)
         {

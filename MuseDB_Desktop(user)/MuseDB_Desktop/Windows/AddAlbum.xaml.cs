@@ -98,7 +98,7 @@ namespace MuseDB_Desktop.Windows
                     NewID = (int)command.ExecuteScalar();
                     try
                     {
-                        HttpHelper.UploadFile("http://192.168.0.120:4040/album/", FilePath, NewID + ".jpg");
+                         _ = HttpHelper.UploadFile("http://192.168.0.120:4040/album/", FilePath, NewID + ".jpg");
                     }
                     catch (Exception exception)
                     {
@@ -115,7 +115,7 @@ namespace MuseDB_Desktop.Windows
                                             $"{NewID})";
                         TrackID = (int)command.ExecuteScalar();
                         if (TrackID > 0)
-                            HttpHelper.UploadFile("http://192.168.0.120:4040/track/", track.TrackAudio, TrackID + ".mp3");
+                            _ = HttpHelper.UploadFile("http://192.168.0.120:4040/track/", track.TrackAudio, TrackID + ".mp3");
                     }
                     );
                 }

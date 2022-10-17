@@ -27,7 +27,6 @@ namespace MuseDB_Desktop.Pages
     {
         private string SortParam = "artist_id";
         private string SortOrder = "DESC";
-        private bool DeleteButtonEnabled = false;
         private string SearchQuery = "";
 
         public Page_Artists()
@@ -113,40 +112,7 @@ namespace MuseDB_Desktop.Pages
             }
             LoadArtists();
         }
-        private void Add_OnHover(object sender, RoutedEventArgs e)
-        {
-            this.Button_Add.Opacity = 1;
-        }
-
-        private void Add_OnLeave(object sender, RoutedEventArgs e)
-        {
-            this.Button_Add.Opacity = 0.2;
-        }
-
-        private void Add_OnClick(object sender, RoutedEventArgs e)
-        {
-            var AddPopUp = new AddArtist();
-            AddPopUp.ShowDialog();
-            if (AddPopUp.Success)
-                LoadArtists();
-        }
-        private void Delete_OnHover(object sender, RoutedEventArgs e)
-        {
-            this.Button_Delete.Opacity = 1;
-        }
-
-        private void Delete_OnLeave(object sender, RoutedEventArgs e)
-        {
-            this.Button_Delete.Opacity = (DeleteButtonEnabled) ? 1 : 0.2;
-        }
-
-        private void Delete_OnClick(object sender, RoutedEventArgs e)
-        {
-            DeleteButtonEnabled = !DeleteButtonEnabled;
-            foreach (Button_ArtistDetails artist in ListBox_Artists.Items)
-                artist.DeleteButton(DeleteButtonEnabled);
-        }
-
+        
         private void Search_OnClick(object sender, RoutedEventArgs e)
         {
             SearchQuery = String.IsNullOrWhiteSpace(TextBox_SearchQuery.Text) ? "" : $"WHERE artist_name LIKE N'%{TextBox_SearchQuery.Text.Replace("'", "''")}%'";

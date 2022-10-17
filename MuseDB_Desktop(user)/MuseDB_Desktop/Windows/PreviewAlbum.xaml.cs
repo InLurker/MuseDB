@@ -22,8 +22,6 @@ namespace MuseDB_Desktop.Windows
     /// </summary>
     public partial class PreviewAlbum : Window
     {
-        private bool DeleteButtonEnabled = false;
-
         private string SortParam = "track_order";
         private string SortOrder = "ASC";
         private string SearchQuery = "";
@@ -146,39 +144,7 @@ namespace MuseDB_Desktop.Windows
             }
             LoadTracks();
         }
-        private void Add_OnHover(object sender, RoutedEventArgs e)
-        {
-            this.Button_Add.Opacity = 1;
-        }
 
-        private void Add_OnLeave(object sender, RoutedEventArgs e)
-        {
-            this.Button_Add.Opacity = 0.2;
-        }
-
-        private void Add_OnClick(object sender, RoutedEventArgs e)
-        {
-            var AddTrack = new AddTrack(AlbumID, $"http://192.168.0.120:4040/album/{AlbumID}.jpg", false);
-            AddTrack.ShowDialog();
-            if (AddTrack.Success)
-                LoadTracks();
-        }
-        private void Delete_OnHover(object sender, RoutedEventArgs e)
-        {
-            this.Button_Delete.Opacity = 1;
-        }
-
-        private void Delete_OnLeave(object sender, RoutedEventArgs e)
-        {
-            this.Button_Delete.Opacity = (DeleteButtonEnabled) ? 1 : 0.2;
-        }
-
-        private void Delete_OnClick(object sender, RoutedEventArgs e)
-        {
-            DeleteButtonEnabled = !DeleteButtonEnabled;
-            foreach (TrackListItem track in ListBox_Tracks.Items)
-                track.DeleteButton(DeleteButtonEnabled);
-        }
         private void Search_OnClick(object sender, RoutedEventArgs e)
         {
             SearchQuery = String.IsNullOrWhiteSpace(TextBox_SearchQuery.Text) ? "" : $"AND track_name LIKE N'%{TextBox_SearchQuery.Text.Replace("'", "''")}%' ";
@@ -191,38 +157,6 @@ namespace MuseDB_Desktop.Windows
             {
                 SearchQuery = "";
                 LoadTracks();
-            }
-        }
-
-        private void DeleteAlbum_OnClick(object sender, MouseButtonEventArgs e)
-        {
-            var Confirmation = new ConfirmationPopUp($"#{AlbumID} - {AlbumName}'s data, along with its tracks will be deleted.\nAre you sure?");
-            Confirmation.ShowDialog();
-            if (Confirmation.ConfirmResult)
-            {
-                using (SqlConnection SQLConnection = new SqlConnection(SqlHelper.CnnVal("database")))
-                {
-                    SQLConnection.Open();
-                    using (SqlCommand command = new SqlCommand($"SELECT track_id FROM track WHERE album_id = {AlbumID}", SQLConnection))
-                    {
-                        using (SqlDataReader SQLDataReader = command.ExecuteReader())
-                        {
-                            while (SQLDataReader.Read())
-                            {
-                                HttpHelper.DeleteFile($"http://192.168.0.120:4040/track/{SQLDataReader.GetInt32(0)}.mp3");
-                            }
-
-                        }
-                        command.CommandText = $"DELETE FROM album WHERE album_id = {AlbumID}";
-                        int result = (int)command.ExecuteNonQuery();
-                        if (result > 0)
-                        {
-                            HttpHelper.DeleteFile($"http://192.168.0.120:4040/album/{AlbumID}.jpg");
-                            _ = new NotificationPopUp($"#{AlbumID} - {AlbumName}'s data,\nalong with its tracks, has been deleted.").ShowDialog();
-                        }
-                    }
-                }
-                this.Close();
             }
         }
     }
