@@ -24,12 +24,12 @@ namespace MuseDB_Desktop.Windows
         {
             InitializeComponent();
             this.TextBlock_UserName.Text = UserName;
-            this.Frame_PageLoader.Content = new Page_YourCollection();
+            this.Frame_PageLoader.Content = new Page_YourCollection(UserName);
         }
         private void Load_Home(object sender, RoutedEventArgs e)
         {
             this.Label_PageTitle.Content = "Your Collection";
-            Load_Page(new Page_YourCollection());
+            Load_Page(new Page_YourCollection(TextBlock_UserName.Text));
         }
 
         private void Load_Artists(object sender, RoutedEventArgs e)

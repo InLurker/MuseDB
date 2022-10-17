@@ -18,8 +18,8 @@
                 <TextBlock x:Name="TextBlock_UserName" Foreground="#FF646464" VerticalAlignment="Center" HorizontalAlignment="Center">user_name</TextBlock>
             </Label>
             <DockPanel MouseDown="Load_Home" Background="#FFE8E8E8" Height="54" Margin="0,60,0,0">
-                <Image Source="/img/icon_folder.png" HorizontalAlignment="Left" Margin="28,0,0,0" VerticalAlignment="Center" Width="32"/>
-                <Label Content="Your Collection" FontFamily="Montserrat Regular" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,60,0" Foreground="#FF646464"/>
+                <Image Source="/img/icon_folder.png" HorizontalAlignment="Left" Margin="50,0,0,0" VerticalAlignment="Center" Width="32"/>
+                <Label Content="Your Collection" FontFamily="Montserrat Regular" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="20,0,0,0" Foreground="#FF646464"/>
             </DockPanel>
             <StackPanel Margin="0,50,0,0">
                 <DockPanel Height="54">

@@ -89,16 +89,14 @@ namespace MuseDB_Desktop.Windows
                     SqliteConnection.Open();
                     using (var SqliteCommand = new SQLiteCommand(
                         "CREATE TABLE IF NOT EXISTS album (" +
-                            "album_id INT NOT NULL PRIMARY KEY, " +
-                            "album_name NVARCHAR(40) NOT NULL, " +
-                            "artist_id INT NOT NULL)", SqliteConnection))
+                            "album_id INT NOT NULL PRIMARY KEY)", SqliteConnection))
                     {
                         SqliteCommand.ExecuteNonQuery();
                     }
                     SqliteConnection.Close();
                     GC.Collect();
                     GC.WaitForPendingFinalizers();
-                    HttpHelper.UploadFileAndDelete("http://192.168.0.120:4040/user_library/", Environment.CurrentDirectory + "\\temp.db", $"{TextBox_Username.Text}.db");
+                    HttpHelper.UploadFileAndDelete("http://192.168.0.120:4040/user_library/", Environment.CurrentDirectory + "\\temp.db", TextBox_Username.Text + ".db");
                     Label_ErrorMsg.Content = "Successfully registered.";
                     Label_ErrorMsg.Foreground = Brushes.Green;
                 }

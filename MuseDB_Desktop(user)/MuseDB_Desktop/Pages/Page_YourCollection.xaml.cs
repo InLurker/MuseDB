@@ -16,6 +16,11 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Net;
+using System.Data.SQLite;
+using System.IO;
+using System.Runtime.CompilerServices;
+using System.Collections;
 
 namespace MuseDB_Desktop.Pages
 {
@@ -27,15 +32,44 @@ namespace MuseDB_Desktop.Pages
         private string SortParam = "album_id";
         private string SortOrder = "DESC";
         private string SearchQuery = "";
+        private string UserName = "";
+        private List<string> AlbumCollection = new List<string>();
 
-        public Page_YourCollection()
+        public Page_YourCollection(string username)
         {
             InitializeComponent();
+            UserName = username;
         }
 
         private void OnLoad(object sender, RoutedEventArgs e)
         {
+            LoadUserCollection();
             LoadAlbums();
+        }
+
+        private void LoadUserCollection()
+        {
+            using (var client = new WebClient())
+            {
+                client.DownloadFile("http://192.168.0.120:4040/user_library/" + UserName + ".db", "temp_userdata.db");
+            }
+            using (var SqliteConnection = new SQLiteConnection("Data Source=temp_userdata.db"))
+            {
+                SqliteConnection.Open();
+                using (var SqliteCommand = new SQLiteCommand("SELECT * FROM album", SqliteConnection))
+                {
+                    using (var reader = SqliteCommand.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            AlbumCollection.Add(reader.GetInt32(0).ToString());
+                        }
+                    }
+                }
+                GC.Collect();
+                GC.WaitForPendingFinalizers();
+            }
+            File.Delete("temp_userdata.db");
         }
 
         private void LoadAlbums()
@@ -52,6 +86,7 @@ namespace MuseDB_Desktop.Pages
                     "FROM album " +
                     "INNER JOIN artist ON album.artist_id = artist.artist_id " +
                     "LEFT JOIN track ON album.album_id = track.album_id " +
+                    $"WHERE album.album_id IN ({string.Join(",", AlbumCollection)}) " +
                     SearchQuery +
                     "GROUP BY album.album_id, album.album_name, artist.artist_name " +
                     $"ORDER BY {SortParam} {SortOrder}", SQLConnection))
@@ -119,7 +154,7 @@ namespace MuseDB_Desktop.Pages
         
         private void Search_OnClick(object sender, RoutedEventArgs e)
         {
-            SearchQuery = String.IsNullOrWhiteSpace(TextBox_SearchQuery.Text) ? "" : $"WHERE artist_name LIKE N'%{TextBox_SearchQuery.Text.Replace("'", "''")}%'";
+            SearchQuery = String.IsNullOrWhiteSpace(TextBox_SearchQuery.Text) ? "" : $"AND artist_name LIKE N'%{TextBox_SearchQuery.Text.Replace("'", "''")}%' ";
             LoadAlbums();
         }
 
