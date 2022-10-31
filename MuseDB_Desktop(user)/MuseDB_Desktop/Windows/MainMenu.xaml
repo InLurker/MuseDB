@@ -48,10 +48,6 @@
                     <Image Source="/img/icon_albumsubmission.png" VerticalAlignment="Center" Height="32" HorizontalAlignment="Center" Margin="50,0,0,0"/>
                     <Label Content="Album Submissions" FontFamily="Montserrat Regular" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="#FF646464" Margin="16,0,0,0"/>
                 </DockPanel>
-                <DockPanel MouseDown="Load_Comments" Background="#FFE8E8E8" Height="54">
-                    <Image Source="/img/icon_comment.png" VerticalAlignment="Center" Height="32" HorizontalAlignment="Center" Margin="50,0,0,0"/>
-                    <Label Content="User Comments" FontFamily="Montserrat Regular" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="#FF646464" Margin="16,0,0,0"/>
-                </DockPanel>
             </StackPanel>
         </StackPanel>
         <StackPanel  Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Bottom">

@@ -49,6 +49,7 @@ namespace MuseDB_Desktop.Windows
                     {
                         Label_ErrorMsg.Content = "Successfully logged in.";
                         Label_ErrorMsg.Foreground = Brushes.Green;
+                        App.Current.Properties["username"] = TextBox_Username.Text;
                         MainMenu mainmenu = new MainMenu(TextBox_Username.Text);
                         this.Close();
                         mainmenu.ShowDialog();
@@ -96,7 +97,7 @@ namespace MuseDB_Desktop.Windows
                     SqliteConnection.Close();
                     GC.Collect();
                     GC.WaitForPendingFinalizers();
-                    HttpHelper.UploadFileAndDelete("http://192.168.0.120:4040/user_library/", Environment.CurrentDirectory + "\\temp.db", TextBox_Username.Text + ".db");
+                    _ = HttpHelper.UploadFileAndDelete("http://192.168.0.120:4040/user_library/", Environment.CurrentDirectory + "\\temp.db", TextBox_Username.Text + ".db");
                     Label_ErrorMsg.Content = "Successfully registered.";
                     Label_ErrorMsg.Foreground = Brushes.Green;
                 }

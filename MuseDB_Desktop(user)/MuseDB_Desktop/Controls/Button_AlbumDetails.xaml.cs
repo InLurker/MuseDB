@@ -3,7 +3,10 @@ using MuseDB_Desktop.Windows;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Data.SQLite;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -38,32 +41,29 @@ namespace MuseDB_Desktop.Controls
         }
         private void Delete_OnClick(object sender, MouseButtonEventArgs e)
         {
-            var Confirmation = new ConfirmationPopUp($"#{AlbumIcon.AlbumID} - {TextBlock_AlbumName.Text}'s data, along with its tracks will be deleted.\nAre you sure?");
+            var Confirmation = new ConfirmationPopUp($"#{AlbumIcon.AlbumID} - {TextBlock_AlbumName.Text} will be deleted from your collection.\nAre you sure?");
             Confirmation.ShowDialog();
             if (Confirmation.ConfirmResult)
             {
-                using (SqlConnection SQLConnection = new SqlConnection(SqlHelper.CnnVal("database")))
+                using (var client = new WebClient())
                 {
-                    SQLConnection.Open();
-                    using (SqlCommand command = new SqlCommand($"SELECT track_id FROM track WHERE album_id = {AlbumIcon.AlbumID}", SQLConnection))
+                    client.DownloadFile("http://192.168.0.120:4040/user_library/" + App.Current.Properties["username"] + ".db", "temp_userdata.db");
+                }
+                using (var SqliteConnection = new SQLiteConnection("Data Source=temp_userdata.db"))
+                {
+                    SqliteConnection.Open();
+                    using (var SqliteCommand = new SQLiteCommand($"DELETE FROM album WHERE album_id = {AlbumIcon.AlbumID}", SqliteConnection))
                     {
-                        using (SqlDataReader SQLDataReader = command.ExecuteReader())
+                        int result = (int)SqliteCommand.ExecuteNonQuery();
+                        if (result == 0)
                         {
-                            while (SQLDataReader.Read())
-                            {
-                                HttpHelper.DeleteFile($"http://192.168.0.120:4040/track/{SQLDataReader.GetInt32(0)}.mp3");
-                            }
-
-                        }
-                        command.CommandText = $"DELETE FROM album WHERE album_id = {AlbumIcon.AlbumID}";
-                        int result = (int)command.ExecuteNonQuery();
-                        if (result > 0)
-                        {
-                            HttpHelper.DeleteFile($"http://192.168.0.120:4040/album/{AlbumIcon.AlbumID}.jpg");
-                            _ = new NotificationPopUp($"#{AlbumIcon.AlbumID} - {TextBlock_AlbumName.Text}'s data,\nalong with its tracks, has been deleted.").ShowDialog();
+                            _ = new NotificationPopUp($"Failed to remove #{AlbumIcon.AlbumID} - {TextBlock_AlbumName.Text}.").ShowDialog();
+                            return;
                         }
                     }
                 }
+                _ = HttpHelper.ReplaceFileAndDelete("http://192.168.0.120:4040/user_library/", Environment.CurrentDirectory + "\\temp_userdata.db", App.Current.Properties["username"] + ".db");
+                _ = new NotificationPopUp($"#{AlbumIcon.AlbumID} - {TextBlock_AlbumName.Text}\nhas been removed from your collection.").ShowDialog();
                 if (this.Parent is ListBox)
                     (this.Parent as ListBox).Items.Remove(this);
             }

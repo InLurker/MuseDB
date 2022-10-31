@@ -131,7 +131,10 @@ namespace MuseDB_Desktop.Pages
 
         private void Add_OnClick(object sender, RoutedEventArgs e)
         {
-            var AddAlbum = new AddAlbum().ShowDialog();
+            var AddAlbum = new AddAlbum();
+            AddAlbum.ShowDialog();
+            if (AddAlbum.Success)
+                LoadAlbums();
         }
         private void Delete_OnHover(object sender, RoutedEventArgs e)
         {

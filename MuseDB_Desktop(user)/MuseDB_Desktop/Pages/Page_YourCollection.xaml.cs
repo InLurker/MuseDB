@@ -32,8 +32,9 @@ namespace MuseDB_Desktop.Pages
         private string SortParam = "album_id";
         private string SortOrder = "DESC";
         private string SearchQuery = "";
-        private string UserName = "";
-        private List<string> AlbumCollection = new List<string>();
+        private readonly string UserName = "";
+        private readonly List<string> AlbumCollection = new List<string>();
+        private bool DeleteButtonEnabled = false;
 
         public Page_YourCollection(string username)
         {
@@ -76,6 +77,8 @@ namespace MuseDB_Desktop.Pages
         {
             if (this.ListBox_Albums == null)
                 return;
+            if (AlbumCollection.Count < 1)
+                return;
             this.TextBlock_Loading.Text = "Loading...";
             this.ListBox_Albums.Items.Clear();
             using (SqlConnection SQLConnection = new SqlConnection(SqlHelper.CnnVal("database")))
@@ -86,7 +89,7 @@ namespace MuseDB_Desktop.Pages
                     "FROM album " +
                     "INNER JOIN artist ON album.artist_id = artist.artist_id " +
                     "LEFT JOIN track ON album.album_id = track.album_id " +
-                    $"WHERE album.album_id IN ({string.Join(",", AlbumCollection)}) " +
+                    $"WHERE album.album_id IN ({string.Join(",", AlbumCollection)}) " + 
                     SearchQuery +
                     "GROUP BY album.album_id, album.album_name, artist.artist_name " +
                     $"ORDER BY {SortParam} {SortOrder}", SQLConnection))
@@ -156,6 +159,23 @@ namespace MuseDB_Desktop.Pages
         {
             SearchQuery = String.IsNullOrWhiteSpace(TextBox_SearchQuery.Text) ? "" : $"AND artist_name LIKE N'%{TextBox_SearchQuery.Text.Replace("'", "''")}%' ";
             LoadAlbums();
+        }
+
+        private void Delete_OnHover(object sender, RoutedEventArgs e)
+        {
+            this.Button_Delete.Opacity = 1;
+        }
+
+        private void Delete_OnLeave(object sender, RoutedEventArgs e)
+        {
+            this.Button_Delete.Opacity = (DeleteButtonEnabled) ? 1 : 0.2;
+        }
+
+        private void Delete_OnClick(object sender, RoutedEventArgs e)
+        {
+            DeleteButtonEnabled = !DeleteButtonEnabled;
+            foreach (Button_AlbumDetails album in ListBox_Albums.Items)
+                album.DeleteButton(DeleteButtonEnabled);
         }
 
         private void TextBox_SearchQuery_TextChanged(object sender, TextChangedEventArgs e)

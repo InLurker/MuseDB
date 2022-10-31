@@ -42,14 +42,14 @@ namespace MuseDB_Desktop.Helpers
             }
         }
 
-        public static async void UploadFileAndDelete(string UploadUrl, string FilePath, string DestinationFileRename)
+        public static async Task UploadFileAndDelete(string UploadUrl, string FilePath, string DestinationFileRename)
         {
             await UploadFile(UploadUrl,FilePath, DestinationFileRename);
             File.Delete(FilePath);
         }
 
 
-        public static async void DeleteFile(string Url)
+        public static async Task DeleteFile(string Url)
         {
             using (var client = new System.Net.Http.HttpClient())
             {
@@ -57,6 +57,12 @@ namespace MuseDB_Desktop.Helpers
                 var response = await client.SendAsync(request);
                 response.EnsureSuccessStatusCode(); // this throws an exception on non HTTP success codes
             }
+        }
+
+        public static async Task ReplaceFileAndDelete(string UploadUrl, string FilePath, string DestinationFileRename)
+        {
+            await DeleteFile(UploadUrl + DestinationFileRename);
+            await UploadFileAndDelete(UploadUrl, FilePath, DestinationFileRename);
         }
     }
 }

@@ -1,0 +1,33 @@
+﻿<UserControl x:Class="MuseDB_Desktop.Controls.UserComment"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MuseDB_Desktop.Controls"
+             mc:Ignorable="d">
+    <DockPanel LastChildFill="False">
+        <Image Source="/img/profile_icon.png" Height="40" VerticalAlignment="Top"/>
+        <StackPanel Margin="5,0,0,0">
+            <TextBlock Text="Username" Margin="10,0,0,1"  FontFamily="Montserrat Semibold" FontSize="12" Foreground="#585858"/>
+            <StackPanel Orientation="Horizontal"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Left">
+                <Polygon Points="0,0 10,0 10,15"
+                    Fill="LightGray"
+                    Margin="0,10,0,0"/>
+                <Border Background="LightGray"
+                    CornerRadius="3"
+                    Padding="6"
+                    VerticalAlignment="Top">
+                    <TextBlock 
+                        Name="TextBlock_Comment"
+                        Text="Sample Text"
+                        TextWrapping="Wrap"
+                        FontFamily="Montserrat Medium"
+                        FontSize="12"
+                        MaxWidth="600"/>
+                </Border>
+            </StackPanel>
+        </StackPanel>
+    </DockPanel>
+</UserControl>

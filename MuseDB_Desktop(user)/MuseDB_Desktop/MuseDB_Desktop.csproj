@@ -99,7 +99,13 @@
     <Compile Include="Controls\TrackListItem.xaml.cs">
       <DependentUpon>TrackListItem.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\UserComment.xaml.cs">
+      <DependentUpon>UserComment.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Helpers\HttpHelper.cs" />
+    <Compile Include="Pages\Page_UserSubmissions.xaml.cs">
+      <DependentUpon>Page_UserSubmissions.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\Page_YourCollection.xaml.cs">
       <DependentUpon>Page_YourCollection.xaml</DependentUpon>
     </Compile>
@@ -162,6 +168,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\TrackListItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\UserComment.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Page_UserSubmissions.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

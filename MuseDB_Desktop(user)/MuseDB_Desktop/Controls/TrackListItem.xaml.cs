@@ -44,45 +44,6 @@ namespace MuseDB_Desktop.Controls
             this.AlbumID = AlbumID;
         }
 
-        public void DeleteButton(bool reveal)
-        {
-            this.Button_Delete.Visibility = (reveal) ? Visibility.Visible : Visibility.Collapsed;
-        }
-
-
-        private void Delete_OnClick(object sender, RoutedEventArgs e)
-        {
-            if (isMiscellaneous)
-                return;
-            var Confirmation = new ConfirmationPopUp($"#{TrackID} - {TrackName}'s data will be deleted.\nAre you sure?");
-            Confirmation.ShowDialog();
-            if (Confirmation.ConfirmResult)
-            {
-                using (SqlConnection SQLConnection = new SqlConnection(SqlHelper.CnnVal("database")))
-                {
-                    SQLConnection.Open();
-                    using (SqlCommand command = new SqlCommand($"SELECT COUNT(track_id) FROM track WHERE album_id = {AlbumID}", SQLConnection))
-                    {
-                        int result = (int)command.ExecuteScalar();
-                        if (result == 1)//if track the last in album, then delete album
-                        {
-                            command.CommandText = $"DELETE FROM album WHERE album_id = {AlbumID}";
-                            HttpHelper.DeleteFile($"http://192.168.0.120:4040/album/{AlbumID}.jpg");
-                        }
-                        else //if track is not the last, only delete track
-                            command.CommandText = $"DELETE FROM track WHERE track_id = {TrackID}";
-                        result = command.ExecuteNonQuery();
-
-                        if (result > 0)
-                            _ = new NotificationPopUp($"#{TrackID} - {TrackName}'s data has been deleted.").ShowDialog();
-                    }
-                    HttpHelper.DeleteFile($"http://192.168.0.120:4040/track/{TrackID}.mp3");
-                }
-                if (this.Parent is ListBox)
-                    (this.Parent as ListBox).Items.Remove(this);
-            }
-        }
-
         private void OnDoubleClick(object sender, MouseButtonEventArgs e)
         {
             if (!isMiscellaneous)
