@@ -6,13 +6,13 @@
              xmlns:local="clr-namespace:MuseDB_Desktop.Controls"
              mc:Ignorable="d">
     <DockPanel LastChildFill="False">
-        <Image Source="/img/profile_icon.png" Height="40" VerticalAlignment="Top"/>
+        <Image Source="/img/profile_icon.png" Height="47" Width="47" VerticalAlignment="Top"/>
         <StackPanel Margin="5,0,0,0">
-            <TextBlock Text="Username" Margin="10,0,0,1"  FontFamily="Montserrat Semibold" FontSize="12" Foreground="#585858"/>
+            <TextBlock Text="Username" Margin="10,0,0,1"  FontFamily="Montserrat Medium" FontSize="13" Foreground="#585858"/>
             <StackPanel Orientation="Horizontal"
                 VerticalAlignment="Center"
                 HorizontalAlignment="Left">
-                <Polygon Points="0,0 10,0 10,15"
+                <Polygon Points="0,0 10,0 10,18"
                     Fill="LightGray"
                     Margin="0,10,0,0"/>
                 <Border Background="LightGray"
@@ -20,14 +20,21 @@
                     Padding="6"
                     VerticalAlignment="Top">
                     <TextBlock 
+                        Foreground="#353535"
                         Name="TextBlock_Comment"
                         Text="Sample Text"
                         TextWrapping="Wrap"
-                        FontFamily="Montserrat Medium"
-                        FontSize="12"
+                        FontFamily="Montserrat Regular"
+                        FontSize="15"
                         MaxWidth="600"/>
                 </Border>
             </StackPanel>
+            <TextBlock
+                Margin="10,0,0,0"
+                Text="DateTime"
+                FontFamily="Montserrat Regular"
+                FontSize="9"
+                Foreground="#707070"/>
         </StackPanel>
     </DockPanel>
 </UserControl>

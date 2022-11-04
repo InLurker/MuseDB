@@ -78,6 +78,67 @@
                         </ItemsPanelTemplate>
                     </ListBox.ItemsPanel>
                 </ListBox>
+                <TextBlock Margin="38,20,38,20" Text="Comments" FontFamily="Montserrat Semibold" Foreground="#696969" FontSize="26"/>
+                <DockPanel Margin="38,0,38,0">
+                    <Image Source="/img/profile_icon.png" Width="50" Margin="0,0,0,0"/>
+                    <TextBox Name="TextBox_Comment" Padding="8" TextChanged="TextBox_SearchQuery_TextChanged" VerticalContentAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Stretch" Height="40" Margin="15,0,0,0" Background="#FFF1F1F1" BorderBrush="Transparent" BorderThickness="0"
+                             FontFamily="Montserrat Regular" FontSize="15"
+                             Foreground="#505050">
+                        <TextBox.Resources>
+                            <Style TargetType="{x:Type Border}">
+                                <Setter Property="CornerRadius" Value="10"/>
+                            </Style>
+                        </TextBox.Resources>
+                    </TextBox>
+                </DockPanel>
+                <Button 
+                    Background="White"
+                    HorizontalAlignment="Left"
+                    Margin="105,5,0,0"
+                    Height="30"
+                    Width="50"
+                    BorderThickness="1"
+                    HorizontalContentAlignment="Center"
+                    VerticalAlignment="Center"
+                    FontFamily="Montserrat Medium"
+                    FontSize="14"
+                    Foreground="#FF646464"
+                    Content="Post"
+                    Click="Button_PostComment_OnClick">
+                    <Button.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="5"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+                <TextBlock
+                    Name="TextBlock_NoComments"
+                    Text="No comments yet."
+                    HorizontalAlignment="Center"
+                    FontSize="15"
+                    FontFamily="Montserrat Regular"
+                    Foreground="#646464"
+                    />
+                <ListBox Name="ListBox_Comments" ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrollBarVisibility="Disabled" BorderBrush="#00000000" Background="Transparent" Margin="35,15,20,15" HorizontalAlignment="Stretch">
+                    <ListBox.Template>
+                        <ControlTemplate>
+                            <ItemsPresenter/>
+                        </ControlTemplate>
+                    </ListBox.Template>
+                    <ListBox.ItemContainerStyle>
+                        <Style TargetType="ListBoxItem">
+                            <Setter Property="Padding" Value="0"/>
+                            <Setter Property="Margin" Value="0,0,0,0"/>
+                            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                            <Setter Property="IsEnabled" Value="False"/>
+                        </Style>
+                    </ListBox.ItemContainerStyle>
+                    <ListBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel Orientation="Vertical"/>
+                        </ItemsPanelTemplate>
+                    </ListBox.ItemsPanel>
+                </ListBox>
             </StackPanel>
             <Grid Panel.ZIndex="0" Height="324" VerticalAlignment="Top" >
                 <Grid.OpacityMask>

@@ -46,6 +46,7 @@ namespace MuseDB_Desktop.Windows
                     }
                     command.CommandText = $"SELECT artist_name FROM artist WHERE artist_id = {ArtistID}";
                     this.TextBlock_ArtistName.Text = (string)command.ExecuteScalar();
+                    command.CommandText = $"SELECT artist_name FROM artist WHERE artist_id = {ArtistID}";
                 }
             }
             this.TextBlock_AlbumID.Text = "Album #" + AlbumID;
@@ -158,6 +159,11 @@ namespace MuseDB_Desktop.Windows
                 SearchQuery = "";
                 LoadTracks();
             }
+        }
+
+        private void Button_PostComment_OnClick(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
