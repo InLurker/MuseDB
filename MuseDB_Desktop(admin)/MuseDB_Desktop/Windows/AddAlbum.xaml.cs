@@ -18,7 +18,7 @@ namespace MuseDB_Desktop.Windows
     {
         private string FilePath = "";
         private bool success = false;
-        private System.Collections.Generic.List<Track> TrackList = new System.Collections.Generic.List<Track>();
+        private readonly System.Collections.Generic.List<Track> TrackList = new System.Collections.Generic.List<Track>();
         private struct Track
         {
             public string TrackName;
@@ -94,12 +94,12 @@ namespace MuseDB_Desktop.Windows
             using (SqlConnection SQLConnection = new SqlConnection(SqlHelper.CnnVal("database")))
             {
                 SQLConnection.Open();
-                using (SqlCommand command = new SqlCommand($"INSERT INTO album OUTPUT INSERTED.album_id VALUES (N'{this.TextBox_AlbumName.Text.Replace("'", "''")}', {this.ComboBox_Artist.Text.Substring(0,5)})", SQLConnection))
+                using (SqlCommand command = new SqlCommand($"INSERT INTO album (album_name, artist_id) OUTPUT INSERTED.album_id VALUES (N'{this.TextBox_AlbumName.Text.Replace("'", "''")}', {this.ComboBox_Artist.Text.Substring(0,5)})", SQLConnection))
                 {
                     NewID = (int)command.ExecuteScalar();
                     try
                     {
-                        HttpHelper.UploadFile("http://192.168.0.120:4040/album/", FilePath, NewID + ".jpg");
+                        _ = HttpHelper.UploadFile("http://192.168.0.120:4040/album/", FilePath, NewID + ".jpg");
                     }
                     catch (Exception exception)
                     {
@@ -107,7 +107,6 @@ namespace MuseDB_Desktop.Windows
                         return;
                     }
                     int TrackID = 0;
-
                     string[] timeformats = { @"m\:ss", @"mm\:ss", @"h\:mm\:ss" };
                     TrackList.ForEach(track =>
                     {
@@ -118,7 +117,7 @@ namespace MuseDB_Desktop.Windows
                                             $"{NewID})";
                         TrackID = (int)command.ExecuteScalar();
                         if (TrackID > 0)
-                            HttpHelper.UploadFile("http://192.168.0.120:4040/track/", track.TrackAudio, TrackID + ".mp3");
+                            _ = HttpHelper.UploadFile("http://192.168.0.120:4040/track/", track.TrackAudio, TrackID + ".mp3");
                     }
                     );
                 }
@@ -182,7 +181,7 @@ namespace MuseDB_Desktop.Windows
         {
             if (TrackList.Count > 0)
             {
-                TrackList.RemoveAt(TrackList.Count - 1);
+                TrackList.RemoveAt(TrackList.Count-1);
                 this.ListBox_Tracks.Items.RemoveAt(TrackList.Count);
             }
         }

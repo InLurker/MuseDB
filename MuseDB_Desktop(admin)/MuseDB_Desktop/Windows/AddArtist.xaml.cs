@@ -76,7 +76,7 @@ namespace MuseDB_Desktop.Windows
                     NewID = (int)command.ExecuteScalar();
                     try
                     {
-                        HttpHelper.UploadFile("http://192.168.0.120:4040/artist/", FilePath, NewID + ".jpg");
+                        _ = HttpHelper.UploadFile("http://192.168.0.120:4040/artist/", FilePath, NewID + ".jpg");
                     }
                     catch (Exception exception)
                     {

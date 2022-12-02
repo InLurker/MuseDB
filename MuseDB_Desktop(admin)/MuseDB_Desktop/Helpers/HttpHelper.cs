@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Security.Cryptography;
@@ -11,7 +12,7 @@ namespace MuseDB_Desktop.Helpers
 {
     public static class HttpHelper
     {
-        public static async void UploadFile(string UploadUrl, string ImagePath, string DestinationFileRename)
+        public static async Task UploadFile(string UploadUrl, string ImagePath, string DestinationFileRename)
         {
             using (var client = new System.Net.Http.HttpClient())
             {
@@ -49,6 +50,12 @@ namespace MuseDB_Desktop.Helpers
                 var response = await client.SendAsync(request);
                 response.EnsureSuccessStatusCode(); // this throws an exception on non HTTP success codes
             }
+        }
+
+        public static async Task UploadFileAndDelete(string UploadUrl, string FilePath, string DestinationFileRename)
+        {
+            await UploadFile(UploadUrl, FilePath, DestinationFileRename);
+            File.Delete(FilePath);
         }
     }
 }

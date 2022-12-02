@@ -49,7 +49,7 @@ namespace MuseDB_Desktop.Pages
             {
                 SQLConnection.Open();
                 using (SqlCommand command = new SqlCommand("SELECT " +
-                    "username, album_submission.album_s_id, album_submission.album_name, artist.artist_name " +
+                    "username, album_submission.album_s_id, album_submission.album_name, artist.artist_name, artist.artist_id " +
                     "FROM album_submission " +
                     "INNER JOIN artist ON album_submission.artist_id = artist.artist_id "+
                     SearchQuery +
@@ -63,7 +63,8 @@ namespace MuseDB_Desktop.Pages
                                     SQLDataReader["username"].ToString(),
                                     SQLDataReader["album_s_id"].ToString(),
                                     SQLDataReader["album_name"].ToString(),
-                                    SQLDataReader["artist_name"].ToString()
+                                    SQLDataReader["artist_name"].ToString(),
+                                    SQLDataReader["artist_id"].ToString()
                                     ));
                     }
                 }

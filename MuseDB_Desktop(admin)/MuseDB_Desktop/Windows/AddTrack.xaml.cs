@@ -127,7 +127,7 @@ namespace MuseDB_Desktop.Windows
                         NewID = (int)command.ExecuteScalar();
                         try
                         {
-                            HttpHelper.UploadFile("http://192.168.0.120:4040/track/", FilePath, NewID + ".mp3");
+                            _ = HttpHelper.UploadFile("http://192.168.0.120:4040/track/", FilePath, NewID + ".mp3");
                         }
                         catch (Exception exception)
                         {
