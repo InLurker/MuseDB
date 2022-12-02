@@ -1,62 +1,203 @@
-﻿<Window x:Class="MuseDB_Desktop.Windows.Admin_MainMenu"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:MuseDB_Desktop.Windows"
-        WindowStartupLocation="CenterScreen"
-        mc:Ignorable="d"
-        Title="MuseDB - Administrator Main Menu" Height="940" Width="1200" Icon="/img/app_icon_mini.png" ResizeMode="NoResize">
+﻿<Window
+    x:Class="MuseDB_Desktop.Windows.Admin_MainMenu"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:local="clr-namespace:MuseDB_Desktop.Windows"
+    WindowStartupLocation="CenterScreen"
+    mc:Ignorable="d"
+    Title="MuseDB - Administrator Main Menu"
+    Height="940"
+    Width="1200"
+    Icon="/img/app_icon_mini.png"
+    ResizeMode="NoResize">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="28*"/>
-            <ColumnDefinition Width="72*"/>
+            <ColumnDefinition
+                Width="28*" />
+            <ColumnDefinition
+                Width="72*" />
         </Grid.ColumnDefinitions>
-        <StackPanel Grid.Column="0" Margin="0,0,0,0" Background="#FFEFEFEF">
-            <Image Height="89" Width="212" Source="/img/MuseDB_logo.png" Margin="0,60,0,0"/>
-            <Label HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="Montserrat Regular" FontSize="20" Margin="0,8,0,0" VerticalAlignment="Center">
-                <TextBlock x:Name="TextBlock_AdminName" Foreground="#FF646464" VerticalAlignment="Center" HorizontalAlignment="Center">admin_name</TextBlock>
+        <StackPanel
+            Grid.Column="0"
+            Margin="0,0,0,0"
+            Background="#FFEFEFEF">
+            <Image
+                Height="89"
+                Width="212"
+                Source="/img/MuseDB_logo.png"
+                Margin="0,60,0,0" />
+            <Label
+                HorizontalContentAlignment="Center"
+                VerticalContentAlignment="Center"
+                FontFamily="Montserrat Regular"
+                FontSize="20"
+                Margin="0,8,0,0"
+                VerticalAlignment="Center">
+                <TextBlock
+                    x:Name="TextBlock_AdminName"
+                    Foreground="#FF646464"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center">admin_name</TextBlock>
             </Label>
-            <DockPanel MouseDown="Load_Home" Background="#FFE8E8E8" Height="54" Margin="0,60,0,0">
-                <Image Source="/img/icon_home.png" HorizontalAlignment="Left" Margin="28,0,0,0" VerticalAlignment="Center" Width="32"/>
-                <Label Content="Homepage" FontFamily="Montserrat Regular" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,60,0" Foreground="#FF646464"/>
+            <DockPanel
+                MouseDown="Load_Home"
+                Background="#FFE8E8E8"
+                Height="54"
+                Margin="0,60,0,0">
+                <Image
+                    Source="/img/icon_home.png"
+                    HorizontalAlignment="Left"
+                    Margin="28,0,0,0"
+                    VerticalAlignment="Center"
+                    Width="32" />
+                <Label
+                    Content="Homepage"
+                    FontFamily="Montserrat Regular"
+                    FontSize="18"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center"
+                    Margin="0,0,60,0"
+                    Foreground="#FF646464" />
             </DockPanel>
-            <StackPanel Margin="0,50,0,0">
-                <DockPanel Height="54">
-                    <Image Source="/img/icon_collection.png" HorizontalAlignment="Left" Margin="28,0,0,0" VerticalAlignment="Center" Height="32"/>
-                    <Label Content="Collections" FontFamily="Montserrat Medium" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="15,0,60,0" Foreground="#FF646464"/>
+            <StackPanel
+                Margin="0,50,0,0">
+                <DockPanel
+                    Height="54">
+                    <Image
+                        Source="/img/icon_collection.png"
+                        HorizontalAlignment="Left"
+                        Margin="28,0,0,0"
+                        VerticalAlignment="Center"
+                        Height="32" />
+                    <Label
+                        Content="Collections"
+                        FontFamily="Montserrat Medium"
+                        FontSize="18"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Left"
+                        Margin="15,0,60,0"
+                        Foreground="#FF646464" />
                 </DockPanel>
-                <DockPanel MouseDown="Load_Artists" Background="#FFE8E8E8" Height="54">
-                    <Image Source="/img/icon_artist.png" VerticalAlignment="Center" Height="32" HorizontalAlignment="Center" Margin="100,0,0,0"/>
-                    <Label Content="Artists" FontFamily="Montserrat Regular" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="#FF646464" Margin="16,0,0,0"/>
+                <DockPanel
+                    MouseDown="Load_Artists"
+                    Background="#FFE8E8E8"
+                    Height="54">
+                    <Image
+                        Source="/img/icon_artist.png"
+                        VerticalAlignment="Center"
+                        Height="32"
+                        HorizontalAlignment="Center"
+                        Margin="100,0,0,0" />
+                    <Label
+                        Content="Artists"
+                        FontFamily="Montserrat Regular"
+                        FontSize="18"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Left"
+                        Foreground="#FF646464"
+                        Margin="16,0,0,0" />
                 </DockPanel>
-                <DockPanel MouseDown="Load_Albums" Background="#FFE8E8E8" Height="54">
-                    <Image Source="/img/icon_album.png" VerticalAlignment="Center" Height="32" HorizontalAlignment="Center" Margin="100,0,0,0"/>
-                    <Label Content="Albums" FontFamily="Montserrat Regular" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="#FF646464" Margin="16,0,0,0"/>
+                <DockPanel
+                    MouseDown="Load_Albums"
+                    Background="#FFE8E8E8"
+                    Height="54">
+                    <Image
+                        Source="/img/icon_album.png"
+                        VerticalAlignment="Center"
+                        Height="32"
+                        HorizontalAlignment="Center"
+                        Margin="100,0,0,0" />
+                    <Label
+                        Content="Albums"
+                        FontFamily="Montserrat Regular"
+                        FontSize="18"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Left"
+                        Foreground="#FF646464"
+                        Margin="16,0,0,0" />
                 </DockPanel>
-                <DockPanel MouseDown="Load_Tracks" Background="#FFE8E8E8" Height="54">
-                    <Image Source="/img/icon_track.png" VerticalAlignment="Center" Height="32" HorizontalAlignment="Center" Margin="100,0,0,0"/>
-                    <Label Content="Tracks" FontFamily="Montserrat Regular" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="#FF646464" Margin="16,0,0,0"/>
+                <DockPanel
+                    MouseDown="Load_Tracks"
+                    Background="#FFE8E8E8"
+                    Height="54">
+                    <Image
+                        Source="/img/icon_track.png"
+                        VerticalAlignment="Center"
+                        Height="32"
+                        HorizontalAlignment="Center"
+                        Margin="100,0,0,0" />
+                    <Label
+                        Content="Tracks"
+                        FontFamily="Montserrat Regular"
+                        FontSize="18"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Left"
+                        Foreground="#FF646464"
+                        Margin="16,0,0,0" />
                 </DockPanel>
             </StackPanel>
-            <StackPanel Margin="0,50,0,0">
-                <DockPanel Height="54">
-                    <Image Source="/img/icon_community.png" HorizontalAlignment="Left" Margin="28,0,0,0" VerticalAlignment="Center" Width="32"/>
-                    <Label Content="Community" FontFamily="Montserrat Medium" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="15,0,60,0" Foreground="#FF646464"/>
+            <StackPanel
+                Margin="0,50,0,0">
+                <DockPanel
+                    Height="54">
+                    <Image
+                        Source="/img/icon_community.png"
+                        HorizontalAlignment="Left"
+                        Margin="28,0,0,0"
+                        VerticalAlignment="Center"
+                        Width="32" />
+                    <Label
+                        Content="Community"
+                        FontFamily="Montserrat Medium"
+                        FontSize="18"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Left"
+                        Margin="15,0,60,0"
+                        Foreground="#FF646464" />
                 </DockPanel>
-                <DockPanel MouseDown="Load_Submissions" Background="#FFE8E8E8" Height="54">
-                    <Image Source="/img/icon_albumsubmission.png" VerticalAlignment="Center" Height="32" HorizontalAlignment="Center" Margin="50,0,0,0"/>
-                    <Label Content="Album Submissions" FontFamily="Montserrat Regular" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="#FF646464" Margin="16,0,0,0"/>
-                </DockPanel>
-                <DockPanel MouseDown="Load_Comments" Background="#FFE8E8E8" Height="54">
-                    <Image Source="/img/icon_comment.png" VerticalAlignment="Center" Height="32" HorizontalAlignment="Center" Margin="50,0,0,0"/>
-                    <Label Content="User Comments" FontFamily="Montserrat Regular" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="#FF646464" Margin="16,0,0,0"/>
+                <DockPanel
+                    MouseDown="Load_Submissions"
+                    Background="#FFE8E8E8"
+                    Height="54">
+                    <Image
+                        Source="/img/icon_albumsubmission.png"
+                        VerticalAlignment="Center"
+                        Height="32"
+                        HorizontalAlignment="Center"
+                        Margin="50,0,0,0" />
+                    <Label
+                        Content="Album Submissions"
+                        FontFamily="Montserrat Regular"
+                        FontSize="18"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Left"
+                        Foreground="#FF646464"
+                        Margin="16,0,0,0" />
                 </DockPanel>
             </StackPanel>
         </StackPanel>
-        <StackPanel  Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Bottom">
-            <Label x:Name="Label_PageTitle" Content="Home" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="DimGray" FontFamily="Montserrat Medium" FontSize="45"/>
-            <Frame x:Name="Frame_PageLoader" NavigationUIVisibility="Hidden" HorizontalContentAlignment="Right" VerticalContentAlignment="Bottom" Height="773" Width="840" Margin="0,25,0,0"/>
+        <StackPanel
+            Grid.Column="1"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Bottom">
+            <Label
+                x:Name="Label_PageTitle"
+                Content="Home"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Foreground="DimGray"
+                FontFamily="Montserrat Medium"
+                FontSize="45" />
+            <Frame
+                x:Name="Frame_PageLoader"
+                NavigationUIVisibility="Hidden"
+                HorizontalContentAlignment="Right"
+                VerticalContentAlignment="Bottom"
+                Height="773"
+                Width="840"
+                Margin="0,25,0,0" />
         </StackPanel>
     </Grid>
 </Window>

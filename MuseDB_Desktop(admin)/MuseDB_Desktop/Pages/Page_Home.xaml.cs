@@ -56,14 +56,19 @@ namespace MuseDB_Desktop.Pages
                     using (SqlDataReader SQLDataReader = command.ExecuteReader())
                     {
                         for (int i = 0; SQLDataReader.Read(); ++i)
+                        {
+                            TimeSpan duration = TimeSpan.FromSeconds((short)SQLDataReader["track_duration"]);
                             StackPanel_Tracks.Children.Add(
                                 new Button_Tracks(
                                     SQLDataReader["track_id"].ToString(),
                                     SQLDataReader["track_name"].ToString(),
                                     SQLDataReader["artist_name"].ToString(),
                                     SQLDataReader["album_name"].ToString(),
-                                    SQLDataReader["track_duration"].ToString()
+                                    (duration.Hours > 0 ? duration.Hours + (duration.Hours < 10 ? ":0" : ":") : "")
+                                        + duration.Minutes + (duration.Seconds < 10 ? ":0" : ":")
+                                        + duration.Seconds
                                     ));
+                        }
                     }
                 }
             }

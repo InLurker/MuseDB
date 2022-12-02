@@ -34,14 +34,14 @@ namespace MuseDB_Desktop.Windows
 
             using (SqlConnection SQLConnection = new SqlConnection(SqlHelper.CnnVal("database")))
             {
-                string Query = $"SELECT COUNT(username) FROM admins WHERE username COLLATE Latin1_General_CS_AS = '{TextBox_Username.Text}'";
+                string Query = $"SELECT COUNT(username) FROM admins WHERE username COLLATE Latin1_General_CS_AS = '{TextBox_Username.Text.Replace("'", "''")}'";
                 SqlCommand command = new SqlCommand(Query, SQLConnection);
 
                 SQLConnection.Open();
                 int count = (int)command.ExecuteScalar();
                 if (count != 0)
                 {
-                    command.CommandText = $"SELECT COUNT(username) FROM admins WHERE username COLLATE Latin1_General_CS_AS = '{TextBox_Username.Text}' AND password COLLATE Latin1_General_CS_AS = '{PasswordBox_Password.Password}'";
+                    command.CommandText = $"SELECT COUNT(username) FROM admins WHERE username COLLATE Latin1_General_CS_AS = '{TextBox_Username.Text.Replace("'", "''")}' AND password COLLATE Latin1_General_CS_AS = '{PasswordBox_Password.Password.Replace("'", "''")}'";
                     count = (int)command.ExecuteScalar();
                     if (count != 0)
                     {
@@ -73,14 +73,14 @@ namespace MuseDB_Desktop.Windows
 
             using (SqlConnection SQLConnection = new SqlConnection(SqlHelper.CnnVal("database")))
             {
-                string Query = $"SELECT COUNT(username) FROM admins WHERE username = '{TextBox_Username.Text}'";
+                string Query = $"SELECT COUNT(username) FROM admins WHERE username = '{TextBox_Username.Text.Replace("'", "''")}'";
                 SqlCommand command = new SqlCommand(Query, SQLConnection);
 
                 SQLConnection.Open();
                 int count = (int)command.ExecuteScalar();
                 if (count == 0)
                 {
-                    Query = $"INSERT INTO admins (username, password) VALUES ('{TextBox_Username.Text}', '{PasswordBox_Password.Password}')";
+                    Query = $"INSERT INTO admins (username, password) VALUES ('{TextBox_Username.Text.Replace("'", "''")}', '{PasswordBox_Password.Password.Replace("'", "''")}')";
                     command.CommandText = Query;
                     command.ExecuteNonQuery();
                     Label_ErrorMsg.Content = "Successfully registered.";
@@ -99,6 +99,12 @@ namespace MuseDB_Desktop.Windows
             if (String.IsNullOrWhiteSpace(TextBox_Username.Text) || String.IsNullOrWhiteSpace(PasswordBox_Password.Password))
             {
                 Label_ErrorMsg.Content = "Please enter your username and password.";
+                Label_ErrorMsg.Foreground = Brushes.Red;
+                return false;
+            }
+            if (Encoding.UTF8.GetByteCount(TextBox_Username.Text) != TextBox_Username.Text.Length || Encoding.UTF8.GetByteCount(PasswordBox_Password.Password) != PasswordBox_Password.Password.Length)
+            {
+                Label_ErrorMsg.Content = "Invalid character input.";
                 Label_ErrorMsg.Foreground = Brushes.Red;
                 return false;
             }

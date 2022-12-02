@@ -37,7 +37,10 @@ namespace MuseDB_Desktop.Windows
                     {
                         SQLDataReader.Read();
                         this.TextBlock_TrackName.Text = TrackName = SQLDataReader["track_name"].ToString();
-                        this.TextBlock_TrackDuration.Text = SQLDataReader["track_duration"].ToString();
+                        TimeSpan duration = TimeSpan.FromSeconds((short)SQLDataReader["track_duration"]);
+                        this.TextBlock_TrackDuration.Text = (duration.Hours > 0 ? duration.Hours + (duration.Hours < 10 ? ":0" : ":") : "")
+                                + duration.Minutes + (duration.Seconds < 10 ? ":0" : ":")
+                                + duration.Seconds;
                         this.TextBlock_TrackOrderLastPlayed.Text = "Track " + SQLDataReader["track_order"].ToString() + " - " + (String.IsNullOrEmpty(SQLDataReader["last_playback"].ToString()) ? "not played yet." : "last played " + SQLDataReader["last_playback"].ToString());
                         AlbumID = SQLDataReader["album_id"].ToString();
                     }

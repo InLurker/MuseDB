@@ -37,6 +37,8 @@ namespace MuseDB_Desktop.Pages
         private void OnLoad(object sender, RoutedEventArgs e)
         {
             LoadTracks();
+            if (ListBox_Tracks.Items.Count > 0)
+                ListBox_Tracks.ScrollIntoView(ListBox_Tracks.Items[0]);
         }
 
         private void LoadTracks()
@@ -57,7 +59,9 @@ namespace MuseDB_Desktop.Pages
                 {
                     using (SqlDataReader SQLDataReader = command.ExecuteReader())
                     {
-                        for (int i = 0; SQLDataReader.Read(); ++i)
+                        while (SQLDataReader.Read())
+                        {
+                            TimeSpan duration = TimeSpan.FromSeconds((short)SQLDataReader["track_duration"]);
                             ListBox_Tracks.Items.Add(
                                 new Button_TrackDetails(
                                     SQLDataReader["track_id"].ToString(),
@@ -65,8 +69,11 @@ namespace MuseDB_Desktop.Pages
                                     SQLDataReader["artist_name"].ToString(),
                                     SQLDataReader["album_id"].ToString(),
                                     SQLDataReader["album_name"].ToString(),
-                                    SQLDataReader["track_duration"].ToString()
+                                    (duration.Hours > 0 ? duration.Hours + (duration.Hours < 10 ? ":0" : ":") : "")
+                                        + duration.Minutes + (duration.Seconds < 10 ? ":0" : ":")
+                                        + duration.Seconds
                                     ));
+                        }
                     }
                 }
             }

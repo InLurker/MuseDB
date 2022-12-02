@@ -56,11 +56,6 @@ namespace MuseDB_Desktop.Windows
             Load_Page(new Page_UserSubmissions());
         }
 
-        private void Load_Comments(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         private void Load_Page(Page newpage)
         {
             this.Frame_PageLoader.Content = newpage;

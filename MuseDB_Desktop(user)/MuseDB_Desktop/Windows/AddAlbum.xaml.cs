@@ -2,6 +2,7 @@
 using MuseDB_Desktop.Helpers;
 using System;
 using System.Data.SqlClient;
+using System.Globalization;
 using System.Linq;
 using System.Reflection.Emit;
 using System.Windows;
@@ -93,12 +94,12 @@ namespace MuseDB_Desktop.Windows
             using (SqlConnection SQLConnection = new SqlConnection(SqlHelper.CnnVal("database")))
             {
                 SQLConnection.Open();
-                using (SqlCommand command = new SqlCommand($"INSERT INTO album OUTPUT INSERTED.album_id VALUES (N'{this.TextBox_AlbumName.Text.Replace("'", "''")}', {this.ComboBox_Artist.Text.Substring(0,5)})", SQLConnection))
+                using (SqlCommand command = new SqlCommand($"INSERT INTO album_submission OUTPUT INSERTED.album_s_id VALUES ('{App.Current.Properties["username"]}', N'{this.TextBox_AlbumName.Text.Replace("'", "''")}', {this.ComboBox_Artist.Text.Substring(0,5)})", SQLConnection))
                 {
                     NewID = (int)command.ExecuteScalar();
                     try
                     {
-                         _ = HttpHelper.UploadFile("http://192.168.0.120:4040/album/", FilePath, NewID + ".jpg");
+                         _ = HttpHelper.UploadFile("http://192.168.0.120:4040/submissions/pending_album", FilePath, NewID + ".jpg");
                     }
                     catch (Exception exception)
                     {
@@ -106,16 +107,17 @@ namespace MuseDB_Desktop.Windows
                         return;
                     }
                     int TrackID = 0;
+                    string[] timeformats = { @"m\:ss", @"mm\:ss", @"h\:mm\:ss" };
                     TrackList.ForEach(track =>
                     {
-                        command.CommandText = "INSERT INTO track (track_order, track_name, track_duration, album_id) OUTPUT INSERTED.track_id VALUES (" +
+                        command.CommandText = "INSERT INTO track_submission (track_order, track_name, track_duration, album_s_id) OUTPUT INSERTED.track_s_id VALUES (" +
                                             $"{++counter}, " +
                                             $"N'{track.TrackName.Replace("'", "''")}', " +
-                                            $"'{track.TrackDuration}', " +
+                                            $"{TimeSpan.ParseExact(track.TrackDuration, timeformats, CultureInfo.InvariantCulture).TotalSeconds}, " +
                                             $"{NewID})";
                         TrackID = (int)command.ExecuteScalar();
                         if (TrackID > 0)
-                            _ = HttpHelper.UploadFile("http://192.168.0.120:4040/track/", track.TrackAudio, TrackID + ".mp3");
+                            _ = HttpHelper.UploadFile("http://192.168.0.120:4040/submissions/pending_track", track.TrackAudio, TrackID + ".mp3");
                     }
                     );
                 }
@@ -146,19 +148,7 @@ namespace MuseDB_Desktop.Windows
 
         private void Add_OnClick(object sender, RoutedEventArgs e)
         {
-            string lastID = "";
-            using (SqlConnection SQLConnection = new SqlConnection(SqlHelper.CnnVal("database")))
-            {
-                SQLConnection.Open();
-                using (SqlCommand command = new SqlCommand($"SELECT IDENT_CURRENT('album') + {TrackList.Count + 1}", SQLConnection))
-                {
-                    command.ExecuteScalar();
-                    lastID = command.ExecuteScalar().ToString();
-                    if (lastID == "")
-                        return;
-                }
-            }
-            var track = new AddTrack(TrackList.Count + 1, lastID, FilePath, true);
+            var track = new AddTrack(TrackList.Count + 1, FilePath, true);
             track.ShowDialog();
             if (track.Success == false)
                 return;
@@ -175,7 +165,7 @@ namespace MuseDB_Desktop.Windows
         {
             this.Button_Delete.Opacity = 0.2;
         }
-        private void Delete_OnClick(object sender, RoutedEventArgs e)
+        private void Delete_OnClick(object sender, RoutedEventArgs e)  
         {
             if (TrackList.Count > 0)
             {

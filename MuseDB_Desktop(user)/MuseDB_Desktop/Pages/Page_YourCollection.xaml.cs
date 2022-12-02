@@ -33,7 +33,6 @@ namespace MuseDB_Desktop.Pages
         private string SortOrder = "DESC";
         private string SearchQuery = "";
         private readonly string UserName = "";
-        private readonly List<string> AlbumCollection = new List<string>();
         private bool DeleteButtonEnabled = false;
 
         public Page_YourCollection(string username)
@@ -54,6 +53,7 @@ namespace MuseDB_Desktop.Pages
             {
                 client.DownloadFile("http://192.168.0.120:4040/user_library/" + UserName + ".db", "temp_userdata.db");
             }
+            List<string> AlbumCollection = new List<string>();
             using (var SqliteConnection = new SQLiteConnection("Data Source=temp_userdata.db"))
             {
                 SqliteConnection.Open();
@@ -71,13 +71,14 @@ namespace MuseDB_Desktop.Pages
                 GC.WaitForPendingFinalizers();
             }
             File.Delete("temp_userdata.db");
+            App.Current.Properties["album_library"] = AlbumCollection;
         }
 
         private void LoadAlbums()
         {
             if (this.ListBox_Albums == null)
                 return;
-            if (AlbumCollection.Count < 1)
+            if (((List<string>)App.Current.Properties["album_library"]).Count < 1)
                 return;
             this.TextBlock_Loading.Text = "Loading...";
             this.ListBox_Albums.Items.Clear();
@@ -89,14 +90,14 @@ namespace MuseDB_Desktop.Pages
                     "FROM album " +
                     "INNER JOIN artist ON album.artist_id = artist.artist_id " +
                     "LEFT JOIN track ON album.album_id = track.album_id " +
-                    $"WHERE album.album_id IN ({string.Join(",", AlbumCollection)}) " + 
+                    $"WHERE album.album_id IN ({string.Join(",", ((List<string>)App.Current.Properties["album_library"]))}) " + 
                     SearchQuery +
                     "GROUP BY album.album_id, album.album_name, artist.artist_name " +
                     $"ORDER BY {SortParam} {SortOrder}", SQLConnection))
                 {
                     using (SqlDataReader SQLDataReader = command.ExecuteReader())
                     {
-                        for (int i = 0; SQLDataReader.Read(); ++i)
+                        while (SQLDataReader.Read())
                             this.ListBox_Albums.Items.Add(
                                 new Button_AlbumDetails(
                                     SQLDataReader["album_id"].ToString(),

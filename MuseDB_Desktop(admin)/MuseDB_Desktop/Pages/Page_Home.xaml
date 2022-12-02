@@ -2,49 +2,112 @@
     x:Class="MuseDB_Desktop.Pages.Page_Home"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:MuseDB_Desktop"
-    xmlns:Control="clr-namespace:MuseDB_Desktop.Controls" 
-    mc:Ignorable="d" 
-    d:DesignHeight="773" d:DesignWidth="840"
+    xmlns:Control="clr-namespace:MuseDB_Desktop.Controls"
+    mc:Ignorable="d"
+    d:DesignHeight="773"
+    d:DesignWidth="840"
     Title="Page_Home"
     Loaded="OnLoad">
 
     <StackPanel>
-        <StackPanel Width="864">
-            <Label Content="Artists" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="28" FontFamily="Montserrat Medium" Foreground="DimGray"/>
-            <DockPanel x:Name="DockPanel_Artists" Margin="0,13,0,0" HorizontalAlignment="Left" Width="890" LastChildFill="False" Height="132">
+        <StackPanel
+            Width="864">
+            <Label
+                Content="Artists"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                FontSize="28"
+                FontFamily="Montserrat Medium"
+                Foreground="DimGray" />
+            <DockPanel
+                x:Name="DockPanel_Artists"
+                Margin="0,13,0,0"
+                HorizontalAlignment="Left"
+                Width="890"
+                LastChildFill="False"
+                Height="132">
                 <DockPanel.OpacityMask>
-                    <LinearGradientBrush EndPoint="1,1" StartPoint="0.90,1" SpreadMethod="Pad">
-                        <GradientStop Color="White" Offset="0"/>
-                        <GradientStop Color="#10000000" Offset="1"/>
-                    </LinearGradientBrush>
-                </DockPanel.OpacityMask>
-                
-            </DockPanel>
-        </StackPanel>
-        <StackPanel Margin="0,30,0,0" Width="900">
-            <Label Content="Albums" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="28" FontFamily="Montserrat Medium" Foreground="DimGray"/>
-            <DockPanel x:Name="DockPanel_Albums" Margin="0,13,0,0" HorizontalAlignment="Left" Width="890" LastChildFill="False" Height="173">
-                <DockPanel.OpacityMask>
-                    <LinearGradientBrush EndPoint="1,1" StartPoint="0.85,1" SpreadMethod="Pad">
-                        <GradientStop Color="White" Offset="0"/>
-                        <GradientStop Color="#10000000" Offset="1"/>
+                    <LinearGradientBrush
+                        EndPoint="1,1"
+                        StartPoint="0.90,1"
+                        SpreadMethod="Pad">
+                        <GradientStop
+                            Color="White"
+                            Offset="0" />
+                        <GradientStop
+                            Color="#10000000"
+                            Offset="1" />
                     </LinearGradientBrush>
                 </DockPanel.OpacityMask>
 
             </DockPanel>
         </StackPanel>
-        <StackPanel Margin="0,30,0,0" Height="301.7">
+        <StackPanel
+            Margin="0,30,0,0"
+            Width="900">
+            <Label
+                Content="Albums"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                FontSize="28"
+                FontFamily="Montserrat Medium"
+                Foreground="DimGray" />
+            <DockPanel
+                x:Name="DockPanel_Albums"
+                Margin="0,13,0,0"
+                HorizontalAlignment="Left"
+                Width="890"
+                LastChildFill="False"
+                Height="173">
+                <DockPanel.OpacityMask>
+                    <LinearGradientBrush
+                        EndPoint="1,1"
+                        StartPoint="0.85,1"
+                        SpreadMethod="Pad">
+                        <GradientStop
+                            Color="White"
+                            Offset="0" />
+                        <GradientStop
+                            Color="#10000000"
+                            Offset="1" />
+                    </LinearGradientBrush>
+                </DockPanel.OpacityMask>
+
+            </DockPanel>
+        </StackPanel>
+        <StackPanel
+            Margin="0,30,0,0"
+            Height="301.7">
             <StackPanel.OpacityMask>
-                <LinearGradientBrush EndPoint="1,1" StartPoint="1,0.8" SpreadMethod="Pad">
-                    <GradientStop Color="White" Offset="0"/>
-                    <GradientStop Color="#10000000" Offset="1"/>
+                <LinearGradientBrush
+                    EndPoint="1,1"
+                    StartPoint="1,0.8"
+                    SpreadMethod="Pad">
+                    <GradientStop
+                        Color="White"
+                        Offset="0" />
+                    <GradientStop
+                        Color="#10000000"
+                        Offset="1" />
                 </LinearGradientBrush>
             </StackPanel.OpacityMask>
-            <Label Content="Tracks" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="28" FontFamily="Montserrat Medium" Foreground="DimGray"/>
-            <StackPanel x:Name="StackPanel_Tracks" Margin="8,13,0,0" HorizontalAlignment="Left" Width="778" Height="245" VerticalAlignment="Top">
+            <Label
+                Content="Tracks"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                FontSize="28"
+                FontFamily="Montserrat Medium"
+                Foreground="DimGray" />
+            <StackPanel
+                x:Name="StackPanel_Tracks"
+                Margin="8,13,0,0"
+                HorizontalAlignment="Left"
+                Width="778"
+                Height="245"
+                VerticalAlignment="Top">
 
             </StackPanel>
         </StackPanel>

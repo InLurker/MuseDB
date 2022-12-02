@@ -13,13 +13,49 @@
     
     <ScrollViewer VerticalScrollBarVisibility="Visible">
         <Grid>
-            <StackPanel Panel.ZIndex="1">
+            <StackPanel Panel.ZIndex="1" >
+                <Button Style="{StaticResource ImageButtonStyle_OpaqueOnHover}" Background="Transparent" BorderThickness="0" Panel.ZIndex="2" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="15">
+                    <Border CornerRadius="20"
+                        Name="Button_AddAlbumToLibrary"
+                        Visibility="Visible"
+                        MouseDown="AddAlbumToLibrary_OnClick"
+                        Width="40"
+                        Height="40"
+                        Padding="0,0,0,0"
+                        Background="#50BB50"
+                        BorderBrush="Transparent"
+                        BorderThickness="1" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Top" >
+                        <Image Width="22" Height="22" Stretch="UniformToFill">
+                            <Image.Source>
+                                <DrawingImage>
+                                    <DrawingImage.Drawing>
+                                        <DrawingGroup ClipGeometry="M0,0 V122.648 H122.875 V0 H0 Z">
+                                            <DrawingGroup.Transform>
+                                                <TranslateTransform X="3.0818824598100036E-05" Y="9.8335149232298136E-06" />
+                                            </DrawingGroup.Transform>
+                                            <DrawingGroup Opacity="1">
+                                                <GeometryDrawing Brush="#FFFFFF" Geometry="F0 M122.875,122.648z M0,0z M108.993,47.079C116.676,47.02 122.891,53.199 122.875,60.884 122.857,68.567 116.615,74.843 108.933,74.903L75.24,75.138 75.005,108.868C74.942,116.487 68.667,122.657 60.991,122.648 53.313,122.638 47.143,116.451 47.206,108.83L47.439,75.333 13.881,75.568C6.2,75.628 -0.016,69.448 0,61.764 0.018,54.081 6.261,47.805 13.943,47.746L47.635,47.51 47.871,13.78C47.935,6.161 54.209,-0.009 61.885,0 69.563,0.009 75.733,6.197 75.669,13.818L75.436,47.315 108.993,47.079 108.993,47.079z" />
+                                            </DrawingGroup>
+                                        </DrawingGroup>
+                                    </DrawingImage.Drawing>
+                                </DrawingImage>
+                            </Image.Source>
+                        </Image>
+                    </Border>
+                </Button>
+
                 <DockPanel Margin="38,120,38,0">
                     <Image Name="Image_Profile" Width="200" Height="200" Stretch="Fill"  Source="/img/icon_artistloading.png" />
                     <StackPanel VerticalAlignment="Bottom" Margin="20,0,0,0">
                         <TextBlock Name="TextBlock_AlbumID" Text="Album #ID" FontFamily="Montserrat Bold" FontSize="21"/>
                         <TextBlock Name="TextBlock_AlbumName" Text="Album Name" FontFamily="Montserrat Bold" FontSize="51" TextTrimming="CharacterEllipsis"/>
                         <TextBlock Name="TextBlock_ArtistName" Text="Album Artist" FontFamily="Montserrat Bold" FontSize="21"/>
+                        <TextBlock
+                            Margin="0,5,0,0"
+                            Name="TextBlock_LastPlayback"
+                            Text="Last played 1970-01-01 00:00:00"
+                            FontFamily="Montserrat Bold"
+                            FontSize="17" />
                     </StackPanel>
                 </DockPanel>
                 <TextBlock Margin="38,30,38,10" Text="Tracks" FontFamily="Montserrat Semibold" Foreground="#696969" FontSize="26"/>
@@ -119,7 +155,7 @@
                     FontFamily="Montserrat Regular"
                     Foreground="#646464"
                     />
-                <ListBox Name="ListBox_Comments" ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrollBarVisibility="Disabled" BorderBrush="#00000000" Background="Transparent" Margin="35,15,20,15" HorizontalAlignment="Stretch">
+                <ListBox Name="ListBox_Comments" ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrollBarVisibility="Disabled" BorderBrush="#00000000" Background="Transparent" Margin="35,15,20,40" HorizontalAlignment="Stretch">
                     <ListBox.Template>
                         <ControlTemplate>
                             <ItemsPresenter/>
@@ -128,7 +164,7 @@
                     <ListBox.ItemContainerStyle>
                         <Style TargetType="ListBoxItem">
                             <Setter Property="Padding" Value="0"/>
-                            <Setter Property="Margin" Value="0,0,0,0"/>
+                            <Setter Property="Margin" Value="0,10,10,0"/>
                             <Setter Property="HorizontalAlignment" Value="Stretch"/>
                             <Setter Property="IsEnabled" Value="False"/>
                         </Style>

@@ -1,6 +1,12 @@
-﻿using System;
+﻿using MuseDB_Desktop.Controls;
+using MuseDB_Desktop.Helpers;
+using MuseDB_Desktop.Windows;
+using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.Data.SQLite;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -20,9 +26,118 @@ namespace MuseDB_Desktop.Pages
     /// </summary>
     public partial class Page_UserSubmissions : Page
     {
+        private string SortParam = "album_s_id";
+        private string SortOrder = "DESC";
+        private string SearchQuery = "";
+
         public Page_UserSubmissions()
         {
             InitializeComponent();
         }
+
+        private void OnLoad(object sender, RoutedEventArgs e)
+        {
+            LoadSubmissions();
+        }
+
+        private void LoadSubmissions()
+        {
+            if (this.ListBox_Albums == null)
+                return;
+            this.TextBlock_Loading.Text = "Loading...";
+            this.ListBox_Albums.Items.Clear();
+            using (SqlConnection SQLConnection = new SqlConnection(SqlHelper.CnnVal("database")))
+            {
+                SQLConnection.Open();
+                using (SqlCommand command = new SqlCommand("SELECT " +
+                    "album_submission.album_s_id, album_submission.album_name, artist.artist_name " +
+                    "FROM album_submission " +
+                    "INNER JOIN artist ON album_submission.artist_id = artist.artist_id " +
+                    $"WHERE album_submission.username = '{App.Current.Properties["username"]}' " +
+                    SearchQuery +
+                    "GROUP BY album_submission.album_s_id, album_submission.album_name, artist.artist_name " +
+                    $"ORDER BY {SortParam} {SortOrder}", SQLConnection))
+                {
+                    using (SqlDataReader SQLDataReader = command.ExecuteReader())
+                    {
+                        while (SQLDataReader.Read())
+                            this.ListBox_Albums.Items.Add(
+                                new SubmissionEntry(
+                                    SQLDataReader["album_s_id"].ToString(),
+                                    SQLDataReader["album_name"].ToString(),
+                                    SQLDataReader["artist_name"].ToString()
+                                    ));
+                    }
+                }
+            }
+            this.TextBlock_Loading.Text = "";
+        }
+
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            /*
+            0 - Recently Added
+            1 - Alphabetical
+            2 - Album Count
+            */
+            switch (this.ComboBox_SortParam.SelectedIndex)
+            {
+                case 0:
+                    SortParam = "album_submission.album_s_id";
+                    break;
+                case 1:
+                    SortParam = "album_submission.album_name";
+                    break;
+                case 2:
+                    SortParam = "artist.artist_name";
+                    break;
+                default:
+                    SortParam = "album_submission.album_s_id";
+                    break;
+            }
+            LoadSubmissions();
+        }
+
+        private void Button_Sort_OnClick(object sender, RoutedEventArgs e)
+        {
+            //if initial is asc change value to desc, vice versa
+            if (SortOrder == "ASC")
+            {
+                SortOrder = "DESC";
+                this.Button_Sort_Image.RenderTransform = new ScaleTransform() { ScaleY = -1 };
+                this.Button_Sort_Image.UpdateLayout();
+            }
+            else
+            {
+                SortOrder = "ASC";
+                this.Button_Sort_Image.RenderTransform = new ScaleTransform() { ScaleY = 1 };
+                this.Button_Sort_Image.UpdateLayout();
+            }
+            LoadSubmissions();
+        }
+
+        private void Search_OnClick(object sender, RoutedEventArgs e)
+        {
+            SearchQuery = String.IsNullOrWhiteSpace(TextBox_SearchQuery.Text) ? "" : $"AND album_submission.album_name LIKE N'%{TextBox_SearchQuery.Text.Replace("'", "''")}%' ";
+            LoadSubmissions();
+        }
+
+        private void TextBox_SearchQuery_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (String.IsNullOrWhiteSpace(TextBox_SearchQuery.Text))
+            {
+                SearchQuery = "";
+                LoadSubmissions();
+            }
+        }
+
+        private void Add_OnClick(object sender, RoutedEventArgs e)
+        {
+            var AddAlbum = new AddAlbum();
+            AddAlbum.ShowDialog();
+            if (AddAlbum.Success)
+                LoadSubmissions();
+        }
     }
 }
+

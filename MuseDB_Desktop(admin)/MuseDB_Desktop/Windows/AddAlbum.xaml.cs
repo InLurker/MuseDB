@@ -2,6 +2,7 @@
 using MuseDB_Desktop.Helpers;
 using System;
 using System.Data.SqlClient;
+using System.Globalization;
 using System.Linq;
 using System.Reflection.Emit;
 using System.Windows;
@@ -106,12 +107,14 @@ namespace MuseDB_Desktop.Windows
                         return;
                     }
                     int TrackID = 0;
+
+                    string[] timeformats = { @"m\:ss", @"mm\:ss", @"h\:mm\:ss" };
                     TrackList.ForEach(track =>
                     {
                         command.CommandText = "INSERT INTO track (track_order, track_name, track_duration, album_id) OUTPUT INSERTED.track_id VALUES (" +
                                             $"{++counter}, " +
                                             $"N'{track.TrackName.Replace("'", "''")}', " +
-                                            $"'{track.TrackDuration}', " +
+                                            $"{TimeSpan.ParseExact(track.TrackDuration, timeformats, CultureInfo.InvariantCulture).TotalSeconds}, " +
                                             $"{NewID})";
                         TrackID = (int)command.ExecuteScalar();
                         if (TrackID > 0)

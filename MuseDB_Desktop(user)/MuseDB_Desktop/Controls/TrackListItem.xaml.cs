@@ -24,8 +24,6 @@ namespace MuseDB_Desktop.Controls
     public partial class TrackListItem : UserControl
     {
         private readonly string TrackID;
-        private readonly string TrackName;
-        private readonly string AlbumID;
         private readonly bool isMiscellaneous = false;
         public TrackListItem(int TrackOrder, string TrackName, string TrackDuration, bool isMiscellenous)
         {
@@ -36,12 +34,10 @@ namespace MuseDB_Desktop.Controls
             this.TextBlock_TrackDuration.Text = TrackDuration;
         }
 
-        public TrackListItem(int TrackOrder, string TrackID, string TrackName, string TrackDuration, string AlbumID, bool isMiscellenous) :
+        public TrackListItem(int TrackOrder, string TrackID, string TrackName, string TrackDuration, bool isMiscellenous) :
             this(TrackOrder, TrackName, TrackDuration, isMiscellenous)
         {
             this.TrackID = TrackID;
-            this.TrackName = TrackName;
-            this.AlbumID = AlbumID;
         }
 
         private void OnDoubleClick(object sender, MouseButtonEventArgs e)

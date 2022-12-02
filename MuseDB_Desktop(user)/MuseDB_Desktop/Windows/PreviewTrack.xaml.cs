@@ -22,7 +22,6 @@ namespace MuseDB_Desktop.Windows
     public partial class PreviewTrack : Window
     {
         private readonly string TrackID;
-        private readonly string TrackName;
         private readonly string AlbumID;
         public PreviewTrack(string TrackID)
         {
@@ -36,8 +35,11 @@ namespace MuseDB_Desktop.Windows
                     using (SqlDataReader SQLDataReader = command.ExecuteReader())
                     {
                         SQLDataReader.Read();
-                        this.TextBlock_TrackName.Text = TrackName = SQLDataReader["track_name"].ToString();
-                        this.TextBlock_TrackDuration.Text = SQLDataReader["track_duration"].ToString();
+                        TimeSpan duration = TimeSpan.FromSeconds((short)SQLDataReader["track_duration"]);
+                        this.TextBlock_TrackName.Text = SQLDataReader["track_name"].ToString();
+                        this.TextBlock_TrackDuration.Text = (duration.Hours > 0 ? duration.Hours + (duration.Hours < 10 ? ":0" : ":") : "")
+                                + duration.Minutes + (duration.Seconds < 10 ? ":0" : ":")
+                                + duration.Seconds;
                         this.TextBlock_TrackOrderLastPlayed.Text = "Track " + SQLDataReader["track_order"].ToString() + " - " + (String.IsNullOrEmpty(SQLDataReader["last_playback"].ToString()) ? "not played yet." : "last played " + SQLDataReader["last_playback"].ToString());
                         AlbumID = SQLDataReader["album_id"].ToString();
                     }
@@ -62,6 +64,17 @@ namespace MuseDB_Desktop.Windows
             imgTemp.EndInit();
             this.Image_Profile.Source = imgTemp;
             this.Image_Background.Source = imgTemp;
+
+            using (SqlConnection SQLConnection = new SqlConnection(SqlHelper.CnnVal("database")))
+            {
+                SQLConnection.Open();
+                using (SqlCommand command = new SqlCommand($"UPDATE track SET last_playback = GETDATE() WHERE track_id = {TrackID}", SQLConnection))
+                {
+                    command.ExecuteNonQuery();
+                    command.CommandText = $"UPDATE album SET last_playback = GETDATE() WHERE album_id = {AlbumID}";
+                    command.ExecuteNonQuery();
+                }
+            }
         }
     }
 }

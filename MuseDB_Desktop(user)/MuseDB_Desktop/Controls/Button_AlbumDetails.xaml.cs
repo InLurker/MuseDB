@@ -1,6 +1,7 @@
 ﻿using MuseDB_Desktop.Helpers;
 using MuseDB_Desktop.Windows;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Data.SQLite;
@@ -63,6 +64,7 @@ namespace MuseDB_Desktop.Controls
                     }
                 }
                 _ = HttpHelper.ReplaceFileAndDelete("http://192.168.0.120:4040/user_library/", Environment.CurrentDirectory + "\\temp_userdata.db", App.Current.Properties["username"] + ".db");
+                ((List<string>)App.Current.Properties["album_library"]).Remove(((List<string>)App.Current.Properties["album_library"]).Find(item => item == AlbumIcon.AlbumID));
                 _ = new NotificationPopUp($"#{AlbumIcon.AlbumID} - {TextBlock_AlbumName.Text}\nhas been removed from your collection.").ShowDialog();
                 if (this.Parent is ListBox)
                     (this.Parent as ListBox).Items.Remove(this);

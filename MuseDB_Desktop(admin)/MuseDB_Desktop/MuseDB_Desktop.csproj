@@ -76,6 +76,9 @@
     <Compile Include="Controls\Button_Tracks.xaml.cs">
       <DependentUpon>Button_Tracks.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\SubmissionEntry.xaml.cs">
+      <DependentUpon>SubmissionEntry.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\TrackListItem.xaml.cs">
       <DependentUpon>TrackListItem.xaml</DependentUpon>
     </Compile>
@@ -94,6 +97,9 @@
     </Compile>
     <Compile Include="Pages\Page_Tracks.xaml.cs">
       <DependentUpon>Page_Tracks.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Page_UserSubmissions.xaml.cs">
+      <DependentUpon>Page_UserSubmissions.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\AddAlbum.xaml.cs">
       <DependentUpon>AddAlbum.xaml</DependentUpon>
@@ -147,6 +153,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\SubmissionEntry.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Controls\TrackListItem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -170,6 +180,10 @@
     <Page Include="Pages\Page_Tracks.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Page_UserSubmissions.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Windows\AddAlbum.xaml">
       <Generator>MSBuild:Compile</Generator>

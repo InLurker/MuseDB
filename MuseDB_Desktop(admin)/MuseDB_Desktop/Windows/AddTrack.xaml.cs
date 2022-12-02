@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Data.SqlTypes;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
@@ -11,6 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -80,7 +82,7 @@ namespace MuseDB_Desktop.Windows
                 TextBlock_Error.Text = "Invalid Track Name.";
                 return;
             }
-            if (String.IsNullOrWhiteSpace(TextBox_TrackDuration.Text))
+            if (String.IsNullOrWhiteSpace(TextBox_TrackDuration.Text) || !TimeSpan.TryParse(TextBox_TrackDuration.Text, out _))
             {
                 TextBlock_Error.Text = "Invalid Track Duration.";
                 return;
@@ -111,13 +113,14 @@ namespace MuseDB_Desktop.Windows
             else
             {
                 int NewID = 0;
+                string[] timeformats = { @"m\:ss", @"mm\:ss", @"h\:mm\:ss" };
                 using (SqlConnection SQLConnection = new SqlConnection(SqlHelper.CnnVal("database")))
                 {
                     SQLConnection.Open();
                     using (SqlCommand command = new SqlCommand("INSERT INTO track (track_order, track_name, track_duration, album_id) OUTPUT INSERTED.track_id VALUES (" +
                                                     $"{this.TextBox_TrackOrder.Text}, " +
                                                     $"N'{this.TextBox_TrackName.Text.Replace("'", "''")}', " +
-                                                    $"'{this.TextBox_TrackDuration.Text}', " +
+                                                    $"{TimeSpan.ParseExact(Duration, timeformats, CultureInfo.InvariantCulture).TotalSeconds}, " +
                                                     $"{AlbumID})",
                                                     SQLConnection))
                     {

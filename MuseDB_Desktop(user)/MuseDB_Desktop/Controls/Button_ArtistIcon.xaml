@@ -1,22 +1,45 @@
-﻿<UserControl x:Class="MuseDB_Desktop.Controls.Button_ArtistIcon"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:MuseDB_Desktop.Controls"
-             mc:Ignorable="d"  
-             d:DesignHeight="124" d:DesignWidth="132" Margin="12,5,12,8" HorizontalAlignment="Left"
-             Loaded="OnLoad">
-    
-    <Grid HorizontalAlignment="Center" VerticalAlignment="Top">
-        <Button Style="{DynamicResource ImageButtonStyle}"  HorizontalAlignment="Left" Height="119" MouseDoubleClick="OnDoubleClick">
-            <Image x:Name="Button_Image" HorizontalAlignment="Center" VerticalAlignment="Stretch" Width="120" Stretch="UniformToFill" Source="/img/icon_artistloading.png">
+﻿<UserControl
+    x:Class="MuseDB_Desktop.Controls.Button_ArtistIcon"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:MuseDB_Desktop.Controls"
+    mc:Ignorable="d"
+    d:DesignHeight="124"
+    d:DesignWidth="132"
+    Margin="12,5,12,8"
+    HorizontalAlignment="Left"
+    Loaded="OnLoad">
+
+    <Grid
+        HorizontalAlignment="Center"
+        VerticalAlignment="Top">
+        <Button
+            Style="{DynamicResource ImageButtonStyle}"
+            HorizontalAlignment="Left"
+            Height="119"
+            MouseDoubleClick="OnDoubleClick">
+            <Image
+                x:Name="Button_Image"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Stretch"
+                Width="120"
+                Stretch="UniformToFill"
+                Source="/img/icon_artistloading.png">
                 <Image.Clip>
-                    <EllipseGeometry Center="58,58" RadiusX="58" RadiusY="58" />
+                    <EllipseGeometry
+                        Center="58,58"
+                        RadiusX="58"
+                        RadiusY="58" />
                 </Image.Clip>
             </Image>
             <Button.Effect>
-                <DropShadowEffect Color="#10B4B4B4" BlurRadius="10" ShadowDepth="4" Direction="225"/>
+                <DropShadowEffect
+                    Color="#10B4B4B4"
+                    BlurRadius="10"
+                    ShadowDepth="4"
+                    Direction="225" />
             </Button.Effect>
         </Button>
     </Grid>

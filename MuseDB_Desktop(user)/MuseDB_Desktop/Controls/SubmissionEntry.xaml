@@ -1,0 +1,61 @@
+﻿<UserControl
+    x:Class="MuseDB_Desktop.Controls.SubmissionEntry"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:MuseDB_Desktop.Controls"
+    mc:Ignorable="d"
+    Background="#fcfcfc"
+    d:DesignHeight="450"
+    d:DesignWidth="780">
+    <DockPanel
+        Margin="25"
+        LastChildFill="False">
+        <Image
+            Name="Image_AlbumCover"
+            Source="/img/icon_albumloading.png"
+            Height="200"
+            VerticalAlignment="Top" />
+        <StackPanel
+            Margin="15,0,0,0">
+            <TextBlock
+                Name="TextBlock_Username"
+                Text="Username"
+                FontFamily="Montserrat Semibold"
+                FontSize="15"
+                Foreground="#757575" />
+            <TextBlock
+                Name="TextBlock_AlbumName"
+                Text="Album Name"
+                Foreground="#707070"
+                FontFamily="Montserrat Bold"
+                FontSize="30"
+                TextTrimming="CharacterEllipsis" />
+            <TextBlock
+                Name="TextBlock_ArtistName"
+                Foreground="#606060"
+                Text="Album Artist"
+                FontFamily="Montserrat Bold"
+                FontSize="18" />
+            <ListBox
+                Name="ListBox_Tracks"
+                ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                BorderBrush="Transparent"
+                Background="Transparent"
+                Margin="0,10,0,0">
+                <ListBox.ItemContainerStyle>
+                    <Style
+                        TargetType="ListBoxItem">
+                        <Setter
+                            Property="Padding"
+                            Value="0" />
+                        <Setter
+                            Property="Margin"
+                            Value="0,0,0,0" />
+                    </Style>
+                </ListBox.ItemContainerStyle>
+            </ListBox>
+        </StackPanel>
+    </DockPanel>
+</UserControl>

@@ -37,7 +37,7 @@ namespace MuseDB_Desktop.Windows
             using (SqlConnection SQLConnection = new SqlConnection(SqlHelper.CnnVal("database")))
             {
                 SQLConnection.Open();
-                using (SqlCommand command = new SqlCommand($"SELECT album_name, artist_id FROM album WHERE album_id = {AlbumID}", SQLConnection))
+                using (SqlCommand command = new SqlCommand($"SELECT album_name, artist_id, last_playback FROM album WHERE album_id = {AlbumID}", SQLConnection))
                 {
                     string ArtistID;
                     using (SqlDataReader SQLDataReader = command.ExecuteReader())
@@ -45,6 +45,7 @@ namespace MuseDB_Desktop.Windows
                         SQLDataReader.Read();
                         this.AlbumName = SQLDataReader["album_name"].ToString();
                         ArtistID = SQLDataReader["artist_id"].ToString();
+                        this.TextBlock_LastPlayback.Text = (String.IsNullOrEmpty(SQLDataReader["last_playback"].ToString()) ? "Not played yet." : "Last played " + SQLDataReader["last_playback"].ToString());
                     }
                     command.CommandText = $"SELECT artist_name FROM artist WHERE artist_id = {ArtistID}";
                     this.TextBlock_ArtistName.Text = (string)command.ExecuteScalar();
@@ -90,14 +91,19 @@ namespace MuseDB_Desktop.Windows
                     using (SqlDataReader SQLDataReader = command.ExecuteReader())
                     {
                         for (int i = 0; SQLDataReader.Read(); ++i)
+                        {
+                            TimeSpan duration = TimeSpan.FromSeconds((short)SQLDataReader["track_duration"]);
                             this.ListBox_Tracks.Items.Add(
                                 new TrackListItem(
                                     SQLDataReader.GetByte(0),
                                     SQLDataReader.GetInt32(1).ToString(),
                                     SQLDataReader["track_name"].ToString(),
-                                    SQLDataReader["track_duration"].ToString(),
+                                    (duration.Hours > 0 ? duration.Hours + (duration.Hours < 10 ? ":0" : ":") : "")
+                                        + duration.Minutes + (duration.Seconds < 10 ? ":0" : ":")
+                                        + duration.Seconds,
                                     SQLDataReader.GetInt32(3).ToString(),
                                     false));
+                        }
                     }
                 }
             }

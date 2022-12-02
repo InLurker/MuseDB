@@ -52,11 +52,8 @@ namespace MuseDB_Desktop.Windows
 
         private void Load_Submissions(object sender, RoutedEventArgs e)
         {
-
-        }
-        private void Load_Comments(object sender, RoutedEventArgs e)
-        {
-
+            this.Label_PageTitle.Content = "Submissions";
+            Load_Page(new Page_UserSubmissions());
         }
 
         private void Load_Page(Page newpage)

@@ -58,7 +58,7 @@ namespace MuseDB_Desktop.Pages
                 {
                     using (SqlDataReader SQLDataReader = command.ExecuteReader())
                     {
-                        for (int i = 0; SQLDataReader.Read(); ++i)
+                        while (SQLDataReader.Read())
                             this.ListBox_Artists.Items.Add(
                                 new Button_ArtistDetails(
                                     SQLDataReader["artist_id"].ToString(),

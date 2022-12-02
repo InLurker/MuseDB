@@ -1,26 +1,68 @@
-﻿<Window x:Class="MuseDB_Desktop.Windows.ConfirmationPopUp"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:MuseDB_Desktop.Windows"
-        WindowStartupLocation="CenterScreen"
-        mc:Ignorable="d"
-        Title="MuseDB - Confirmation Pop Up" Height="200" Width="500">
-    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-        <TextBlock Name="TextBlock_Text" MaxWidth="400" TextAlignment="Center" Text="Text" HorizontalAlignment="Center" Margin="0,0,0,15" FontSize="19" FontFamily="Montserrat Medium" Foreground="#3C3C3C" TextWrapping="Wrap"/>
+﻿<Window
+    x:Class="MuseDB_Desktop.Windows.ConfirmationPopUp"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:local="clr-namespace:MuseDB_Desktop.Windows"
+    WindowStartupLocation="CenterScreen"
+    mc:Ignorable="d"
+    Title="MuseDB - Confirmation Pop Up"
+    Height="200"
+    Width="500">
+    <StackPanel
+        VerticalAlignment="Center"
+        HorizontalAlignment="Center">
+        <TextBlock
+            Name="TextBlock_Text"
+            MaxWidth="400"
+            TextAlignment="Center"
+            Text="Text"
+            HorizontalAlignment="Center"
+            Margin="0,0,0,15"
+            FontSize="19"
+            FontFamily="Montserrat Medium"
+            Foreground="#3C3C3C"
+            TextWrapping="Wrap" />
         <DockPanel>
-        <Button Content="Cancel" Margin="0,0,30,0" Click="Button_CancelOnClick" HorizontalAlignment="Center" BorderBrush="#FFDBDBDB" Width="130" Height="26" Background="#FFF1F1F1" Foreground="#3C3C3C" FontFamily="Montserrat Regular" VerticalAlignment="Top">
-            <Button.Resources>
-                <Style TargetType="Border">
-                    <Setter Property="CornerRadius" Value="5"/>
-                </Style>
-            </Button.Resources>
-        </Button>
-            <Button Content="Confirm" Click="Button_ConfirmOnClick" HorizontalAlignment="Center" BorderThickness="0" Width="130" Height="26" Background="#FF5858" Foreground="White" FontFamily="Montserrat Regular" VerticalAlignment="Top">
+            <Button
+                Content="Cancel"
+                Margin="0,0,30,0"
+                Click="Button_CancelOnClick"
+                HorizontalAlignment="Center"
+                BorderBrush="#FFDBDBDB"
+                Width="130"
+                Height="26"
+                Background="#FFF1F1F1"
+                Foreground="#3C3C3C"
+                FontFamily="Montserrat Regular"
+                VerticalAlignment="Top">
                 <Button.Resources>
-                    <Style TargetType="Border">
-                        <Setter Property="CornerRadius" Value="5"/>
+                    <Style
+                        TargetType="Border">
+                        <Setter
+                            Property="CornerRadius"
+                            Value="5" />
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Button
+                Content="Confirm"
+                Click="Button_ConfirmOnClick"
+                HorizontalAlignment="Center"
+                BorderThickness="0"
+                Width="130"
+                Height="26"
+                Background="#FF5858"
+                Foreground="White"
+                FontFamily="Montserrat Regular"
+                VerticalAlignment="Top">
+                <Button.Resources>
+                    <Style
+                        TargetType="Border">
+                        <Setter
+                            Property="CornerRadius"
+                            Value="5" />
                     </Style>
                 </Button.Resources>
             </Button>

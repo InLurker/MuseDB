@@ -1,40 +1,57 @@
-﻿<UserControl x:Class="MuseDB_Desktop.Controls.UserComment"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:MuseDB_Desktop.Controls"
-             mc:Ignorable="d">
-    <DockPanel LastChildFill="False">
-        <Image Source="/img/profile_icon.png" Height="47" Width="47" VerticalAlignment="Top"/>
-        <StackPanel Margin="5,0,0,0">
-            <TextBlock Text="Username" Margin="10,0,0,1"  FontFamily="Montserrat Medium" FontSize="13" Foreground="#585858"/>
-            <StackPanel Orientation="Horizontal"
+﻿<UserControl
+    x:Class="MuseDB_Desktop.Controls.UserComment"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:MuseDB_Desktop.Controls"
+    mc:Ignorable="d">
+    <DockPanel
+        LastChildFill="False">
+        <Image
+            Source="/img/profile_icon.png"
+            Height="47"
+            Width="47"
+            VerticalAlignment="Top" />
+        <StackPanel
+            Margin="5,0,0,0">
+            <TextBlock
+                Name="TextBlock_Username"
+                Text="Username"
+                Margin="10,0,0,1"
+                FontFamily="Montserrat Medium"
+                FontSize="13"
+                Foreground="#585858" />
+            <StackPanel
+                Orientation="Horizontal"
                 VerticalAlignment="Center"
                 HorizontalAlignment="Left">
-                <Polygon Points="0,0 10,0 10,18"
-                    Fill="LightGray"
-                    Margin="0,10,0,0"/>
-                <Border Background="LightGray"
-                    CornerRadius="3"
-                    Padding="6"
+                <Polygon
+                    Points="0,0 10,0 10,22"
+                    Fill="#efefef"
+                    Margin="0,10,0,0" />
+                <Border
+                    Background="#eeeeee"
+                    CornerRadius="7"
+                    Padding="10"
                     VerticalAlignment="Top">
-                    <TextBlock 
+                    <TextBlock
                         Foreground="#353535"
                         Name="TextBlock_Comment"
                         Text="Sample Text"
                         TextWrapping="Wrap"
                         FontFamily="Montserrat Regular"
                         FontSize="15"
-                        MaxWidth="600"/>
+                        MaxWidth="600" />
                 </Border>
             </StackPanel>
             <TextBlock
+                Name="TextBlock_CommentTime"
                 Margin="10,0,0,0"
                 Text="DateTime"
                 FontFamily="Montserrat Regular"
-                FontSize="9"
-                Foreground="#707070"/>
+                FontSize="10"
+                Foreground="#707070" />
         </StackPanel>
     </DockPanel>
 </UserControl>
