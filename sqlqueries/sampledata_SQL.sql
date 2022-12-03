@@ -436,5 +436,5 @@ INSERT INTO track (track_name, track_order, track_duration, album_id) --Sample d
 		(N'キメラ -instrumental-', 2, 162, 100076),
 		(N'ヴァンパイア', 1, 179, 100077),
 		(N'愛言葉Ⅳ feat. 初音ミク', 1, 218, 100078),
-		(N'愛言葉Ⅳ -instrumental-', 1, 218, 100078);
+		(N'愛言葉Ⅳ -instrumental-', 2, 218, 100078);
 		
