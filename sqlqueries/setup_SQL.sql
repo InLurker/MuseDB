@@ -34,7 +34,7 @@ CREATE TABLE album_submission (
 	username VARCHAR(20) NOT NULL FOREIGN KEY REFERENCES users(username) ON DELETE CASCADE,
 	album_name NVARCHAR(40) NOT NULL,
 	artist_id INT NOT NULL FOREIGN KEY REFERENCES artist(artist_id) ON DELETE CASCADE
-)
+);
 
 CREATE TABLE track_submission (
 	track_s_id INT IDENTITY(1000001,1) NOT NULL PRIMARY KEY CLUSTERED, -- 7 digits ID
@@ -42,7 +42,7 @@ CREATE TABLE track_submission (
 	track_order TINYINT NOT NULL,
 	track_duration SMALLINT NOT NULL,
 	album_s_id INT NOT NULL FOREIGN KEY REFERENCES album_submission(album_s_id) ON DELETE CASCADE
-)
+);
 
 CREATE TABLE album_comment (
 	comment_id INT IDENTITY(100000001,1) NOT NULL PRIMARY KEY CLUSTERED, -- 8 digits ID

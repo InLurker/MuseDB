@@ -20,10 +20,12 @@ namespace MuseDB_Desktop.Controls
     /// </summary>
     public partial class UserComment : UserControl
     {
-        public UserComment(string Comment)
+        public UserComment(string Username, string Comment, string CommentTime)
         {
             InitializeComponent();
+            this.TextBlock_Username.Text = Username;
             this.TextBlock_Comment.Text = Comment;
+            this.TextBlock_CommentTime.Text = CommentTime;
         }
     }
 }

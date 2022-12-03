@@ -35,7 +35,6 @@
             CornerRadius="15"
             Name="Float_TrackCount"
             Visibility="Visible"
-            MouseDown="Delete_OnClick"
             Width="30"
             Height="30"
             Padding="0,0,0,0"

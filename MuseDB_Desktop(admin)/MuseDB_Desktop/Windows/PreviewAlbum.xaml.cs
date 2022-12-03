@@ -70,6 +70,25 @@ namespace MuseDB_Desktop.Windows
             this.Image_Profile.Source = imgTemp;
             this.Image_Background.Source = imgTemp;
             LoadTracks();
+            using (SqlConnection SQLConnection = new SqlConnection(SqlHelper.CnnVal("database")))
+            {
+                SQLConnection.Open();
+                using (SqlCommand command = new SqlCommand($"SELECT * FROM album_comment WHERE album_id = {AlbumID} ORDER BY comment_id DESC", SQLConnection))
+                {
+                    using (SqlDataReader SQLDataReader = command.ExecuteReader())
+                    {
+                        while (SQLDataReader.Read())
+                            ListBox_Comments.Items.Add(
+                                new UserComment(
+                                    SQLDataReader["username"].ToString(),
+                                    SQLDataReader["comment_details"].ToString(),
+                                    SQLDataReader["comment_time"].ToString()
+                                ));
+                    }
+                }
+            }
+            if (ListBox_Comments.Items.Count > 0)
+                this.TextBlock_NoComments.Visibility = Visibility.Collapsed;
         }
 
         private void LoadTracks()

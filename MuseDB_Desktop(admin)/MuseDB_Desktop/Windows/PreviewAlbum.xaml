@@ -258,6 +258,56 @@
                         </ItemsPanelTemplate>
                     </ListBox.ItemsPanel>
                 </ListBox>
+                <TextBlock
+                    Margin="38,20,38,20"
+                    Text="Comments"
+                    FontFamily="Montserrat Semibold"
+                    Foreground="#696969"
+                    FontSize="26" />
+                <TextBlock
+                    Name="TextBlock_NoComments"
+                    Text="No comments yet."
+                    HorizontalAlignment="Center"
+                    FontSize="15"
+                    FontFamily="Montserrat Regular"
+                    Foreground="#646464" />
+                <ListBox
+                    Name="ListBox_Comments"
+                    ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                    ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                    BorderBrush="#00000000"
+                    Background="Transparent"
+                    Margin="35,15,20,40"
+                    HorizontalAlignment="Stretch">
+                    <ListBox.Template>
+                        <ControlTemplate>
+                            <ItemsPresenter />
+                        </ControlTemplate>
+                    </ListBox.Template>
+                    <ListBox.ItemContainerStyle>
+                        <Style
+                            TargetType="ListBoxItem">
+                            <Setter
+                                Property="Padding"
+                                Value="0" />
+                            <Setter
+                                Property="Margin"
+                                Value="0,10,10,0" />
+                            <Setter
+                                Property="HorizontalAlignment"
+                                Value="Stretch" />
+                            <Setter
+                                Property="IsEnabled"
+                                Value="False" />
+                        </Style>
+                    </ListBox.ItemContainerStyle>
+                    <ListBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel
+                                Orientation="Vertical" />
+                        </ItemsPanelTemplate>
+                    </ListBox.ItemsPanel>
+                </ListBox>
             </StackPanel>
             <Grid
                 Panel.ZIndex="0"
