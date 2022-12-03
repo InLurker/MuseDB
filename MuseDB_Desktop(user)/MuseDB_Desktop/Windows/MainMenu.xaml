@@ -7,7 +7,7 @@
     xmlns:local="clr-namespace:MuseDB_Desktop.Windows"
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d"
-    Title="MuseDB - Administrator Main Menu"
+    Title="MuseDB - User Main Menu"
     Height="940"
     Width="1200"
     Icon="/img/app_icon_mini.png"
