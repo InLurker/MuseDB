@@ -25,7 +25,9 @@
             FontFamily="Montserrat Medium"
             Foreground="#3C3C3C"
             TextWrapping="Wrap" />
-        <DockPanel>
+        <DockPanel
+            LastChildFill="False"
+            HorizontalAlignment="Center">
             <Button
                 Content="Cancel"
                 Margin="0,0,30,0"

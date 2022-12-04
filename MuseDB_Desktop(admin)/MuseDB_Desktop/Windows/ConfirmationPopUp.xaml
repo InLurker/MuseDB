@@ -10,8 +10,10 @@
         Title="MuseDB - Confirmation Pop Up" Height="200" Width="500">
     <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
         <TextBlock Name="TextBlock_Text" MaxWidth="400" TextAlignment="Center" Text="Text" HorizontalAlignment="Center" Margin="0,0,0,15" FontSize="19" FontFamily="Montserrat Medium" Foreground="#3C3C3C" TextWrapping="Wrap"/>
-        <DockPanel>
-        <Button Content="Cancel" Margin="0,0,30,0" Click="Button_CancelOnClick" HorizontalAlignment="Center" BorderBrush="#FFDBDBDB" Width="130" Height="26" Background="#FFF1F1F1" Foreground="#3C3C3C" FontFamily="Montserrat Regular" VerticalAlignment="Top">
+        <DockPanel
+            LastChildFill="False"
+            HorizontalAlignment="Center">
+            <Button Content="Cancel" Margin="0,0,30,0" Click="Button_CancelOnClick" HorizontalAlignment="Center" BorderBrush="#FFDBDBDB" Width="130" Height="26" Background="#FFF1F1F1" Foreground="#3C3C3C" FontFamily="Montserrat Regular" VerticalAlignment="Top">
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="5"/>
