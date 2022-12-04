@@ -259,11 +259,20 @@
                     </ListBox.ItemsPanel>
                 </ListBox>
                 <TextBlock
-                    Margin="38,20,38,0"
+                    Margin="38,20,38,25"
                     Text="Comments"
                     FontFamily="Montserrat Semibold"
                     Foreground="#696969"
                     FontSize="26" />
+
+
+                <TextBlock
+                    Name="TextBlock_NoComments"
+                    Text="No comments yet."
+                    HorizontalAlignment="Center"
+                    FontSize="15"
+                    FontFamily="Montserrat Regular"
+                    Foreground="#646464" />
                 <ListBox
                     Name="ListBox_Comments"
                     ScrollViewer.VerticalScrollBarVisibility="Disabled"
@@ -301,14 +310,6 @@
                         </ItemsPanelTemplate>
                     </ListBox.ItemsPanel>
                 </ListBox>
-
-                <TextBlock
-                    Name="TextBlock_NoComments"
-                    Text="No comments yet."
-                    HorizontalAlignment="Center"
-                    FontSize="15"
-                    FontFamily="Montserrat Regular"
-                    Foreground="#646464" />
             </StackPanel>
             <Grid
                 Panel.ZIndex="0"
